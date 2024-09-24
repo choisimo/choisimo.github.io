@@ -26,7 +26,7 @@ cascade:
 
 defaultContentLanguage: en
 hasCJKLanguage: true  # 한국어 설정하기 위해 true
-defaultContentLanguageInSubdir: false
+defaultContentLanguageInSubdir: true
 removePathAccents: true
 
 [languages]
