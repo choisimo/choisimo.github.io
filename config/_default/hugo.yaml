@@ -13,7 +13,7 @@ baseURL: "https://choisimo.github.io" # Website URL
 cascade:
   # Blog post options
   - _target:
-      path: /posts/**
+      path: /post/**
     editable: true
     reading_time: true
     commentable: true
@@ -54,6 +54,7 @@ permalinks:
   authors: '/author/:slug/'
   tags: '/tag/:slug/'
   categories: '/category/:slug/'
+  post: '/post/:slug/'
 disableAliases: true
 outputs:
   home: [HTML, RSS, JSON, WebAppManifest, headers, redirects]
