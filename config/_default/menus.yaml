@@ -7,11 +7,15 @@ main:
   - name: Home
     url: /
     weight: 10
+    
   - name: 소개
     url: about/
     weight: 20
-  - contents: 게시글
+
+  - name: 게시글
     url: posts/
-    wight: 30 
-  - contents: 채팅
+    weight: 30 
+
+  - name: 채팅
     url: chat/
+    weight: 40
