@@ -13,3 +13,5 @@ main:
   - contents: 게시글
     url: posts/
     wight: 30 
+  - contents: 채팅
+    url: chat/
