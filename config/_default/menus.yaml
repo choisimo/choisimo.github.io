@@ -5,17 +5,17 @@
 
 main:
   - name: Home
-    url: /
+    url: "/"
     weight: 10
 
   - name: 소개
-    url: /about/
+    url: "/about/"
     weight: 20
 
   - name: 게시글
-    url: /post/
+    url: "/post/"
     weight: 30 
 
   - name: 채팅
-    url: /chat/
+    url: "/chat/"
     weight: 40
