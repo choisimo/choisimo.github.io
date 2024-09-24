@@ -13,7 +13,7 @@ baseURL: "https://choisimo.github.io" # Website URL
 cascade:
   # Blog post options
   - _target:
-      path: /post/**
+      path: /posts/**
     editable: true
     reading_time: true
     commentable: true
