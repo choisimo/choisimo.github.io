@@ -24,19 +24,10 @@ cascade:
 ## LANGUAGE
 ############################
 
-defaultContentLanguage: en
+defaultContentLanguage: ko
 hasCJKLanguage: true  # 한국어 설정하기 위해 true
 defaultContentLanguageInSubdir: true
 removePathAccents: true
-
-[languages]
-[languages.en]
-  languageName = "English"
-  weight = 1
-
-[languages.ko]
-  languageName = "한국어"
-  weight = 2
 
 
 ############################
