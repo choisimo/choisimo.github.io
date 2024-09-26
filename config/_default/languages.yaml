@@ -8,11 +8,6 @@ ko:
   languageName: Korean  
   contentDir: content/ko
   weight: 1
-  menu:
-    - name: post
-    - url: ko/post
-    - weight: 1
-    - contentDir: content/ko/post
 
 
 en:
