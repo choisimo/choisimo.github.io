@@ -10,8 +10,9 @@ ko:
   weight: 1
   menu:
     - name: post
-    - url: post
+    - url: ko/post
     - weight: 1
+    - contentDir: content/ko/post
 
 
 en:
