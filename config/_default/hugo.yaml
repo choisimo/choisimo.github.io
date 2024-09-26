@@ -11,13 +11,8 @@ baseURL: "https://choisimo.github.io" # Website URL
 ############################
 
 defaultContentLanguage: ko
-<<<<<<< HEAD
-hasCJKLanguage: false
-defaultContentLanguageInSubdir: false
-=======
 hasCJKLanguage: true  # 한국어 설정하기 위해 true
 defaultContentLanguageInSubdir: true
->>>>>>> e061055156b3722f86a8d2a40c50c247bda29488
 removePathAccents: true
 
 
