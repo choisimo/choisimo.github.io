@@ -4,16 +4,22 @@
 # This file is formatted using YAML syntax - learn more at https://learnxinyminutes.com/docs/yaml/
 
 title: nodove blog # Website name
-baseURL: 'https://choisimo.github.io' # Website URL
+baseURL: "https://choisimo.github.io" # Website URL
 
 ############################
 ## LANGUAGE
 ############################
 
 defaultContentLanguage: ko
+<<<<<<< HEAD
 hasCJKLanguage: false
 defaultContentLanguageInSubdir: false
+=======
+hasCJKLanguage: true  # 한국어 설정하기 위해 true
+defaultContentLanguageInSubdir: true
+>>>>>>> e061055156b3722f86a8d2a40c50c247bda29488
 removePathAccents: true
+
 
 ############################
 ## ADVANCED
@@ -30,6 +36,7 @@ permalinks:
   authors: '/author/:slug/'
   tags: '/tag/:slug/'
   categories: '/category/:slug/'
+  post: '/post/:slug/'
 disableAliases: true
 outputs:
   home: [HTML, RSS, JSON, WebAppManifest, headers, redirects]
