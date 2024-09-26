@@ -17,8 +17,10 @@ main:
     weight: 30
   - parent: posts
     name: status
-    url: post
+    url: post/status
     wight: 31
+  - parent: posts
+    url:
 
 
   - name: contacts
