@@ -7,9 +7,19 @@ main:
   - name: Home
     url: /
     weight: 10
+
   - name: 소개
     url: about/
     weight: 20
-  - contents: 게시글
-    url: posts/
-    wight: 30 
+    
+  - name: posts
+    url: post
+    weight: 30
+  - parent: posts
+    name: status
+    url: post
+    wight: 31
+
+  - name: contacts
+    url: contact
+    weight: 40

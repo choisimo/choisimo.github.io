@@ -7,24 +7,10 @@ title: nodove blog # Website name
 baseURL: 'https://choisimo.github.io' # Website URL
 
 ############################
-## PAGE OPTIONS
-############################
-
-cascade:
-  # Blog post options
-  - _target:
-      path: /post/**
-    editable: true
-    reading_time: true
-    commentable: true
-    show_related: true
-    show_breadcrumb: true
-
-############################
 ## LANGUAGE
 ############################
 
-defaultContentLanguage: en
+defaultContentLanguage: ko
 hasCJKLanguage: false
 defaultContentLanguageInSubdir: false
 removePathAccents: true
