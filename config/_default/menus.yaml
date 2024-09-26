@@ -5,11 +5,11 @@
 
 main:
   - name: Home
-    url: "/"
+    url: /
     weight: 10
 
-  - name: 소개
-    url: "/about/"
+  - name: About
+    url: about
     weight: 20
     
   - name: posts
@@ -19,6 +19,7 @@ main:
     name: status
     url: post
     wight: 31
+
 
   - name: contacts
     url: contact
