@@ -12,7 +12,7 @@ baseURL: 'https://choisimo.github.io/' # Website URL
 
 defaultContentLanguage: ko
 hasCJKLanguage: false
-defaultContentLanguageInSubdir: false
+defaultContentLanguageInSubdir: true
 removePathAccents: true
 
 
