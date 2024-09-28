@@ -3,43 +3,16 @@
 #   Documentation: https://docs.hugoblox.com/reference/language/
 
 
-main:
-  - name: Home
-    url: /ko/
-    weight: 10
-  - name: About
-    url: /ko/about/
-    weight: 20
-  - name: Posts
-    url: /ko/post/
-    weight: 30
-  - parent: Posts
-    name: First Post
-    url: /ko/post/first-post/
-    weight: 31
-  - parent: Posts
-    name: Second Post
-    url: /ko/post/second-post/
-    weight: 32
-  - name: Contacts
-    url: /ko/contact/
-    weight: 40
-
 
 # Default language
-languages:
-  ko:
-    languageCode: ko
-    languageName: Korean  
-    contentDir: content/ko
-    weight: 1
-
-
-  en:
-    languageCode: en-us
-    languageName: English
-    contentDir: content/en
-    weight: 2
+ko:
+  languageCode: ko
+  languageName: Korean
+  weight: 1
+en:
+  languageCode: en
+  languageName: English
+  weight: 2
 
 
 # Uncomment the lines below to configure your website in a second language.

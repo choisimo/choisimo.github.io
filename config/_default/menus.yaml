@@ -5,24 +5,24 @@
 
 main_ko:
   - name: Home
-    url: /ko/
+    url: ko/
     weight: 10
   - name: About
-    url: /ko/about/
+    url: ko/about/
     weight: 20
   - name: Posts
-    url: /ko/post/
+    url: ko/post/
     weight: 30
   - parent: Posts
     name: First Post
-    url: /ko/post/first-post/
+    url: ko/post/first-post/
     weight: 31
   - parent: Posts
     name: Second Post
-    url: /ko/post/second-post/
+    url: ko/post/second-post/
     weight: 32
   - name: Contacts
-    url: /ko/contact/
+    url: ko/contact/
     weight: 40
 
 main_en:
