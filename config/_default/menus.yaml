@@ -9,22 +9,22 @@ main:
     weight: 10
 
   - name: About
-    url: about
+    url: /about/
     weight: 20
     
   - name: posts
-    url: post
+    url: /post/
     weight: 30
   - parent: posts
     name: status
-    url: post/status
+    url: /post/status/
     weight: 31
   - parent: posts
     name: newPosts
-    url: post/new
+    url: /post/new/
     weight: 32
 
 
   - name: contacts
-    url: contact
+    url: /contact/
     weight: 40
