@@ -15,6 +15,16 @@ hasCJKLanguage: false
 defaultContentLanguageInSubdir: true
 removePathAccents: true
 
+languages:
+  ko:
+    languageCode: ko
+    languageName: Korean
+    weight: 1
+  en:
+    languageCode: en
+    languageName: English
+    weight: 2
+
 
 ############################
 ## ADVANCED
@@ -22,7 +32,8 @@ removePathAccents: true
 
 enableGitInfo: false
 summaryLength: 30
-paginate: 10
+pagination:
+  paperSize: 10
 enableEmoji: true
 enableRobotsTXT: true
 footnotereturnlinkcontents: <sup>^</sup>

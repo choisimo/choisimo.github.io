@@ -3,46 +3,11 @@
   #     desired widget in your `content/home/` folder.
   #   The weight parameter defines the order that the links will appear in.
 
-main_ko:
-  - name: Home
-    url: ko/
-    weight: 10
-  - name: About
-    url: ko/about/
-    weight: 20
-  - name: Posts
-    url: ko/post/
-    weight: 30
-  - parent: Posts
-    name: First Post
-    url: ko/post/first-post/
-    weight: 31
-  - parent: Posts
-    name: Second Post
-    url: ko/post/second-post/
-    weight: 32
-  - name: Contacts
-    url: ko/contact/
-    weight: 40
-
-main_en:
-  - name: Home
-    url: /en/
-    weight: 10
-  - name: About
-    url: /en/about/
-    weight: 20
-  - name: Posts
-    url: /en/post/
-    weight: 30
-  - parent: Posts
-    name: First Post
-    url: /en/post/first-post/
-    weight: 31
-  - parent: Posts
-    name: Second Post
-    url: /en/post/second-post/
-    weight: 32
-  - name: Contacts
-    url: /en/contact/
-    weight: 40
+menus:
+  main:
+    - name: "홈"
+      url: "/ko/"
+      weight: 1
+    - name: "Home"
+      url: "/en/"
+      weight: 1

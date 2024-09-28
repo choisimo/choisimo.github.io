@@ -5,14 +5,15 @@
 
 
 # Default language
-ko:
-  languageCode: ko
-  languageName: Korean
-  weight: 1
-en:
-  languageCode: en
-  languageName: English
-  weight: 2
+languages:
+  ko:
+    languageCode: ko
+    languageName: Korean
+    weight: 1
+  en:
+    languageCode: en
+    languageName: English
+    weight: 2
 
 
 # Uncomment the lines below to configure your website in a second language.
