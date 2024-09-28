@@ -1,0 +1,16 @@
+{
+  "menus": {
+    "main": [
+      {
+        "name": "홈",
+        "url": "/ko/",
+        "weight": 1
+      },
+      {
+        "name": "Home",
+        "url": "/en/",
+        "weight": 1
+      }
+    ]
+  }
+}
