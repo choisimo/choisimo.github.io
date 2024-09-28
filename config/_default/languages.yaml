@@ -10,10 +10,23 @@ languages:
     languageCode: ko
     languageName: Korean
     weight: 1
+    params:
+      menu:
+        main:
+          - name: "홈"
+            url: "/ko/"
+            weight: 1
   en:
     languageCode: en
     languageName: English
     weight: 2
+    params:
+      menu:
+        main:
+          - name: "Home"
+            url: "/en/"
+            weight: 1
+
 
 
 # Uncomment the lines below to configure your website in a second language.
