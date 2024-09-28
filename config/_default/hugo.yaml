@@ -31,7 +31,6 @@ permalinks:
   authors: '/author/:slug/'
   tags: '/tag/:slug/'
   categories: '/category/:slug/'
-  post: '/post/:slug/'
 disableAliases: true
 outputs:
   home: [HTML, RSS, JSON, WebAppManifest, headers, redirects]
