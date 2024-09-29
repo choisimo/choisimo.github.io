@@ -21,13 +21,15 @@ marketing:
     description: 'A highly-customizable Hugo blog theme powered by Wowchemy website builder.'
     twitter: 'GetResearchDev'
   analytics:
-    google_analytics: ''
     baidu_tongji: ''
     google_tag_manager: ''
     microsoft_clarity: ''
   verification:
     google: ''
     baidu: ''
+services:
+  googleAnalytics:
+    id: "UA-XXXXXXXXX-X"  # 여기에 Google Analytics 추적 ID를 입력하세요
 
 # Site header
 
