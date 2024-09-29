@@ -10,10 +10,10 @@ ko:
     weight: 3
 en:
   - name: "Home"
-    url: "en/"
+    url: "/en/"
     weight: 1
   - name: "About"
-    url: "en/about/"
+    url: "/en/about/"
     weight: 2
   - name: "author"
     url: "/en/authors/admin"
