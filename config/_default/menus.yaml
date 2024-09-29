@@ -5,6 +5,9 @@ ko:
   - name: "소개"
     url: "/about/"
     weight: 2
+  - name: "저자"
+    url: "/ko/authors/admin/"
+    weight: 3
 en:
   - name: "Home"
     url: "en/"
@@ -12,4 +15,7 @@ en:
   - name: "About"
     url: "en/about/"
     weight: 2
+  - name: "author"
+    url: "/en/authors/admin"
+    weight: 3
     
