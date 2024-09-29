@@ -12,18 +12,8 @@ baseURL: 'https://choisimo.github.io/' # Website URL
 
 defaultContentLanguage: ko
 hasCJKLanguage: false
-defaultContentLanguageInSubdir: true
+defaultContentLanguageInSubdir: false
 removePathAccents: true
-
-languages:
-  ko:
-    languageCode: ko
-    languageName: Korean
-    weight: 1
-  en:
-    languageCode: en
-    languageName: English
-    weight: 2
 
 
 ############################

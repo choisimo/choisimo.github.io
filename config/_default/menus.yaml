@@ -1,0 +1,15 @@
+ko:
+  - name: "홈"
+    url: "ko/"
+    weight: 1
+  - name: "소개"
+    url: "ko/about/"
+    weight: 2
+en:
+  - name: "Home"
+    url: "en/"
+    weight: 1
+  - name: "About"
+    url: "en/about/"
+    weight: 2
+    

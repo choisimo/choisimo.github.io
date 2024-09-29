@@ -5,28 +5,25 @@
 
 
 # Default language
-languages:
-  ko:
-    languageCode: ko
-    languageName: Korean
-    weight: 1
-    params:
-      menu:
-        main:
-          - name: "홈"
-            url: "/ko/"
-            weight: 1
-  en:
-    languageCode: en
-    languageName: English
-    weight: 2
-    params:
-      menu:
-        main:
-          - name: "Home"
-            url: "/en/"
-            weight: 1
+ko:
+  languageCode: ko
+  languageName: Korean
+  contentDir: content/ko
+  params:
+    description: korean
+  menu:
+    main:
+      - name: 메인
+        url: '#main'
+  weight: 1
 
+en:
+  languageCode: en-us
+  languageName: English
+  contentDir: content/en
+  params:
+    description: english-us
+  weight: 2
 
 
 # Uncomment the lines below to configure your website in a second language.
