@@ -5,7 +5,6 @@
 
 title: nodove blog # Website name
 baseURL: 'https://choisimo.github.io' # Website URL
-theme: "hugo1"
 
 ############################
 ## LANGUAGE
