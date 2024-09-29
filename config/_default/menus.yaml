@@ -1,9 +1,9 @@
 ko:
   - name: "홈"
-    url: "ko/"
+    url: "/"
     weight: 1
   - name: "소개"
-    url: "ko/about/"
+    url: "/about/"
     weight: 2
 en:
   - name: "Home"
