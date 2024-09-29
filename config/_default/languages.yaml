@@ -9,22 +9,13 @@ ko:
   languageCode: ko
   languageName: Korean
   contentDir: content/ko
-  params:
-    description: korean
-  menu:
-    main:
-      - name: 메인
-        url: '#main'
   weight: 1
-
+  
 en:
   languageCode: en-us
   languageName: English
   contentDir: content/en
-  params:
-    description: english-us
   weight: 2
-
 
 # Uncomment the lines below to configure your website in a second language.
 #zh:
