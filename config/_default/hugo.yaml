@@ -10,6 +10,19 @@ baseURL: 'https://choisimo.github.io' # Website URL
 ## LANGUAGE
 ############################
 
+languages:
+  ko:
+    languageCode: ko
+    languageName: Korean
+    contentDir: content/ko
+    weight: 1
+    
+  en:
+    languageCode: en-us
+    languageName: English
+    contentDir: content/en
+    weight: 2
+    
 defaultContentLanguage: ko
 hasCJKLanguage: false
 defaultContentLanguageInSubdir: false

@@ -5,18 +5,7 @@
 
 
 # Default language
-languages:
-  ko:
-    languageCode: ko
-    languageName: Korean
-    contentDir: content/ko
-    weight: 1
-    
-  en:
-    languageCode: en-us
-    languageName: English
-    contentDir: content/en
-    weight: 2
+
 
 # Uncomment the lines below to configure your website in a second language.
 #zh:
