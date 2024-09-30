@@ -1,6 +1,6 @@
 ---
 widget: post
-title: "My First Post"
+title: "첫 게시글"
 date: "2024-09-21T12:00:00Z"
 draft: false
 description: "This is my first post on my blog."
