@@ -10,7 +10,7 @@ tags:
 categories:
   - "general"
   - "stack"
-image: "./images/main.jpg"
+image: "/images/post/1/main.jpg"
 ---
 
 
