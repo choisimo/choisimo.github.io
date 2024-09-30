@@ -11,7 +11,7 @@
         {{ range .Pages }}
         <li>
             <a href="{{ .Permalink }}">{{ .Title }}</a>
-            <p>{{ .Render "summary" }}</p> <!-- 요약된 내용만 표시 -->
+            <p>{{ .Summary }}</p> 
         </li>
         {{ end }}
     </ul>
