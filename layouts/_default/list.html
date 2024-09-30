@@ -10,6 +10,7 @@
         {{ range .Pages }}
         <li>
             <a href="{{ .Permalink }}">{{ .Title }}</a>
+            <p>{{ .Summary }}</p> <!-- 요약된 내용만 표시 -->
         </li>
         {{ end }}
     </ul>
