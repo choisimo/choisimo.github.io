@@ -2,7 +2,7 @@
 # Display name
 title: 최시몬
 
-author: "admin"
+author: admin
 
 # Is this the primary user of the site?
 superuser: true
