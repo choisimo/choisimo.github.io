@@ -1,0 +1,10 @@
+<div class="about-widget">
+    <h2>{{ .Title }}</h2>
+    <p>{{ .Params.bio }}</p>
+    {{ if .Params.author }}
+        <div class="author-info">
+            <h3>{{ with .Site.GetPage (printf "authors/%s" .Params.author) }}{{ .Title }}{{ end }}</h3>
+            <p>{{ with .Site.GetPage (printf "authors/%s" .Params.author) }}{{ .Params.bio }}{{ end }}</p>
+        </div>
+    {{ end }}
+</div>
