@@ -2,7 +2,7 @@
 title: "Home"
 date: 2024-09-29
 draft: false
-type: widget_page
+type: home
 ---
 
 widget_page type test

@@ -1,7 +1,7 @@
 ---
 widget: post
-title: "My First Post"
-date: "2024-09-21T12:00:00Z"
+title: "기술 스택 및 활동 내용"
+date: "2024-09-30T12:00:00Z"
 draft: false
 description: "This is my first post on my blog."
 tags:
@@ -9,6 +9,8 @@ tags:
   - "first-post"
 categories:
   - "general"
+  - "stack"
+image: "./images/main.jpg"
 ---
 
 

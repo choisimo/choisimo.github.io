@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ .Title }}</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>{{ .Title }}</h1>
+
+    <div class="grid-container">
+        {{ range .Pages 9 (where .Site.Pages "Section" "post")}}
+        <div class="card">
+            <h2>{{ .Title }}</h2>
+            <img src="{{ .Params.image }}" alt="{{ .Title }}">
+            <a href="{{ .Permalink }}">Read more</a>
+        </div>
+        {{ end }}
+    </div>
+
+</body>
+</html>
