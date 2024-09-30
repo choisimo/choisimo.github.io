@@ -11,7 +11,7 @@ categories:
   - "general"
 ---
 
-
+```
 ## 소개 및 기술 스택
     HTML, CSS, Javascript, jQuery, JPA(Hibernate), SprintBoot(Java), JDBC, JSP, react, Redis 개발 경험이 있음
     Oracle, mysql, maria Database Server 구축 및 
@@ -56,3 +56,4 @@ categories:
 
 ## 기타
     정보처리산업기사 
+```
