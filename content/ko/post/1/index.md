@@ -17,6 +17,7 @@ categories:
     Oracle, mysql, maria Database Server 구축 및 
     데이터 처리,
     RESTful Api 이해 및 개발 경험
+<!--more-->
     리눅스 파일 시스템, 권한 관리 등
     TCP, UDP, SFTP, SSH, vpn server 구축, 도메인 관리, DNS, HTTP 등 네트워크 이해 및 개발 경험
     서비스 운영 위한 로그 수집, 서버 모니터링, 캐싱,
