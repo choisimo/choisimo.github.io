@@ -8,10 +8,10 @@
     <h1>{{ .Title }}</h1>
 
     <div class="grid-container">
-        {{ range .Pages 9 (where .Site.Pages "Section" "post")}}
+        {{ range .Pages }}
         <div class="card">
             <h2>{{ .Title }}</h2>
-            <img src="{{ .Params.image }}" alt="{{ .Title }}">
+            <img src="{{ .Params.image }}" alt="main_image">
             <a href="{{ .Permalink }}">Read more</a>
         </div>
         {{ end }}
