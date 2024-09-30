@@ -2,7 +2,7 @@
 widget: post
 title: "My First Post"
 date: "2024-09-21T12:00:00Z"
-draft: true
+draft: false
 description: "This is my first post on my blog."
 tags:
   - "intro"
