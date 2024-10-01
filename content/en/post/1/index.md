@@ -9,6 +9,7 @@ tags:
   - "first-post"
 categories:
   - "general"
+type: post
 ---
 
 ```

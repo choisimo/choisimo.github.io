@@ -11,6 +11,7 @@ categories:
   - "general"
   - "stack"
 image: "/images/post/1/main.jpg"
+type: post
 ---
 
 
