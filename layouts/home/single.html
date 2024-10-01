@@ -11,9 +11,9 @@
         {{ range .Pages }}
         <div class="card">
             <h2>{{ .Title }}</h2>
-            {{ with .Params.image }}
+            <!-- {{.Params.image }}
                 <img src="{{ . }}" alt="{{ $.Title }}">
-            {{ end }}
+            {{ end }} -->
             <a href="{{ .Permalink }}">Read more</a>
         </div>
         {{ end }}
