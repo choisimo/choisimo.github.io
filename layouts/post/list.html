@@ -10,7 +10,8 @@
     {{ range .Site.Taxonomies.categories }}
     <div class="category-block">
         <h2 id="category_name">
-            <a href="{{ .Page.Permalink }}"></a>{{ .Page.Title }}</h2> <!-- 카테고리 제목 -->
+            <a href="{{ .Page.Permalink }}">{{ .Page.Title }}</a>
+        </h2> <!-- 카테고리 제목 -->
         <div class="grid-container">
             {{ range first 9 .Pages }} <!-- 최대 9개의 게시글만 표시 -->
             <div class="card">
