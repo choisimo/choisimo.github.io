@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <title>{{ .Title }}</title>
@@ -11,13 +11,10 @@
         {{ range .Pages }}
         <div class="card">
             <h2>{{ .Title }}</h2>
-                {{ with .Params.image }}
-                    <img src="{{ . | absURL }}" alt="{{ $.Title }}">
-                {{ end }}
             <a href="{{ .Permalink }}">Read more</a>
         </div>
         {{ end }}
     </div>
 
 </body>
-</html> -->
+</html>
