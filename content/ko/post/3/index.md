@@ -14,6 +14,9 @@ categories:
 type: post
 ---
 
+컴공 총론 정리 (ch4)
+<!--more-->
+
 ## 프로세스 상태
     프로세스가 생성되어 종료될 때까지 거치는 상태
 ![process 상태](https://github.com/user-attachments/assets/4682dcc7-88b0-4d63-832a-8cf561be9a82)
