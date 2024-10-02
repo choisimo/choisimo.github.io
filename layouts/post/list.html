@@ -2,18 +2,18 @@
 <html>
 <head>
     <title>{{ .Title }}</title>
-    <link rel="stylesheet" href=""/>
+    <link rel="stylesheet" href="/css/post/list.css"/>
 </head>
 <body>
     <h2 id="post_title">{{ .Title }}</h2> 
 
-    <ul>
+    <div class="grid-container">
         {{ range .Pages }}
-        <li>
-            <a href="{{ .Permalink }}">{{ .Title }}</a>
-            <p>{{ .Summary }}</p> 
-        </li>
+        <div>
+            <h3><a href="{{ .Permalink }}">{{ .Title }}</h3>
+            <p>{{ .Summary }}</p></a>
+        </div>
         {{ end }}
-    </ul>
+    </div>
 </body>
 </html>
