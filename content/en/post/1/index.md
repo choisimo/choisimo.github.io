@@ -10,8 +10,10 @@ tags:
 categories:
   - "general"
 type: post
+featured: "featured.jpg"
 ---
 
+![원숭이 이미지](https://github.com/user-attachments/assets/0d015341-f5c1-4749-a6d0-7579427380c9)
 ```
 ## 소개 및 기술 스택
     HTML, CSS, Javascript, jQuery, JPA(Hibernate), SprintBoot(Java), JDBC, JSP, react, Redis 개발 경험이 있음

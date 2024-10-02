@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <title>{{ .Title }}</title>
@@ -11,13 +11,13 @@
         {{ range .Pages }}
         <div class="card">
             <h2>{{ .Title }}</h2>
-                {{ with .Params.image }}
-                    <img src="{{ . | absURL }}" alt="{{ $.Title }}">
-                {{ end }}
+            {{ with .Params.image }}  <!-- Check if the post has an image -->
+                <img src="{{ . }}" alt="{{ .Title }}" style="width:100%; height:auto;">
+            {{ end }}
+            <p>{{ .Summary }}</p>
             <a href="{{ .Permalink }}">Read more</a>
         </div>
         {{ end }}
     </div>
-
 </body>
-</html> -->
+</html>

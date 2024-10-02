@@ -1,7 +1,7 @@
 ---
 widget: post
-title: "기술 스택 및 활동 내용"
-date: "2024-09-30T12:00:00Z"
+title: "첫 게시글"
+date: "2024-09-21T12:00:00Z"
 draft: false
 description: "This is my first post on my blog."
 tags:
@@ -9,18 +9,17 @@ tags:
   - "first-post"
 categories:
   - "general"
-  - "stack"
-image: "/images/post/1/main.jpg"
 type: post
+featured: "featured.jpg"
 ---
 
-
+![원숭이 이미지](https://github.com/user-attachments/assets/0d015341-f5c1-4749-a6d0-7579427380c9)
+```
 ## 소개 및 기술 스택
     HTML, CSS, Javascript, jQuery, JPA(Hibernate), SprintBoot(Java), JDBC, JSP, react, Redis 개발 경험이 있음
     Oracle, mysql, maria Database Server 구축 및 
     데이터 처리,
     RESTful Api 이해 및 개발 경험
-<!--more-->
     리눅스 파일 시스템, 권한 관리 등
     TCP, UDP, SFTP, SSH, vpn server 구축, 도메인 관리, DNS, HTTP 등 네트워크 이해 및 개발 경험
     서비스 운영 위한 로그 수집, 서버 모니터링, 캐싱,
@@ -60,3 +59,4 @@ type: post
 
 ## 기타
     정보처리산업기사 
+```
