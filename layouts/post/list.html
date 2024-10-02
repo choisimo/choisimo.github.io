@@ -14,7 +14,7 @@
             {{ range first 9 .Pages }} <!-- 최대 9개의 게시글만 표시 -->
             <div class="card">
                 {{ if .Params.featured }}
-                    <img src=" .Params.featured " alt="{{ .Title }}">
+                    <img src="{{ .Params.featured }}" alt="{{ .Title }}">
                 {{ end }}
                 <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
                 <p>{{ .Summary }}</p>
