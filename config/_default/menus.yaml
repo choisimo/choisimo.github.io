@@ -1,0 +1,8 @@
+main:
+  - name: post
+    url: post
+    weight: 500
+  - parent: post
+    name: lastestPost
+    url: post/latest
+  
