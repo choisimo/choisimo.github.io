@@ -63,3 +63,8 @@
     border-radius: 8px;
     display: block;
 }
+
+#category_name {
+    font-size: 15px;
+    margin: 0 50%;
+}
