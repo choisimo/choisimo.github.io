@@ -16,7 +16,7 @@ featured: "featured.jpg"
 ---
 
 In Hugo library, show only the portion of the content
- by using ```<!--more-->``` on it's own content.
+ by using <code><!--more--></code> on it's own content.
  
 <!--more-->
 ![.Summary 사용](https://github.com/user-attachments/assets/42e76be2-9749-47c2-92a4-a14ea5f91237)
