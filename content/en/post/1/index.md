@@ -12,7 +12,7 @@ tags:
 categories:
   - "hugo"
 type: post
-featured: "featured.jpg"
+featured: "/images/post/1/featured.jpg"
 ---
 
 In Hugo library, show only the portion of the content

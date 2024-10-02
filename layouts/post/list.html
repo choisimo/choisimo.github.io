@@ -5,15 +5,25 @@
     <link rel="stylesheet" href="/css/post/list.css"/>
 </head>
 <body>
-    <h2 id="post_title">{{ .Title }}</h2> 
+    <h3 id="post_title">{{ .Title }}</h3> 
 
-    <div class="grid-container">
-        {{ range .Pages }}
-        <div class="card">
-            <h3><a href="{{ .Permalink }}">{{ .Title }}</h3>
-            <p>{{ .Summary }}</p></a>
+    {{ range .Site.Taxonomies.categories }}
+    <div class="category-block">
+        <h2>{{ .Page.Title }}</h2> <!-- 카테고리 제목 -->
+        <div class="grid-container">
+            {{ range first 9 .Pages }} <!-- 최대 9개의 게시글만 표시 -->
+            <div class="card">
+                {{ if .Params.featured }}
+                    <img src=" .Params.featured " alt="{{ .Title }}">
+                {{ end }}
+                <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+                <p>{{ .Summary }}</p>
+                <a href="{{ .Permalink }}">Read More</a>
+            </div>
+            {{ end }}
         </div>
-        {{ end }}
     </div>
+    {{ end }}
+
 </body>
 </html>
