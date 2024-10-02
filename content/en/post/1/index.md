@@ -16,17 +16,17 @@ featured: "featured.jpg"
 ---
 
 In Hugo library, show only the portion of the content
- by using <!--more--> on it's own content.
+ by using ```<!--more-->``` on it's own content.
  
 <!--more-->
 ![.Summary 사용](https://github.com/user-attachments/assets/42e76be2-9749-47c2-92a4-a14ea5f91237)
 
 
-```
- In Hugo, when you use <!--more--> in the body of a post, the content before this marker is used as the summary. 
+```code
+ In Hugo, when you use "<!--more-->" in the body of a post, the content before this marker is used as the summary. 
 
 You can display this summary in a list view by using 
-{{ .Summary }} in the HTML template.
+"{{ .Summary }}" in the HTML template.
 
 Only the portion of the content before the <!--more--> marker will be shown.
 ```

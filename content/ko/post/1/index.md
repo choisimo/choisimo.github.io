@@ -15,12 +15,12 @@ type: post
 featured: "featured.jpg"
 ---
 
-Hugo library 에서 MD 파일에 <!--more--> 사용하여 요약문 보여주기
+Hugo library 에서 MD 파일에 ```<!--more-->``` 사용하여 요약문 보여주기
 <!--more-->
 ![.Summary 사용](https://github.com/user-attachments/assets/42e76be2-9749-47c2-92a4-a14ea5f91237)
 
 
 ```
-본문에서 <!--more--> 지정한 부분 직전까지만 출력된다.
-HTML에서 {{ .Summary }} 를 사용하여 리스트 상에 보여줄 수 있다.
+본문에서 "<!--more-->" 지정한 부분 직전까지만 출력된다.
+HTML에서 "{{ .Summary }}" 를 사용하여 리스트 상에 보여줄 수 있다.
 ```
