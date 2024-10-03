@@ -1,3 +1,0 @@
----
-email: 'nodove@nodove.com'
----

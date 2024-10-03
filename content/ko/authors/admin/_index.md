@@ -9,61 +9,46 @@ authors:
 superuser: true
 
 # Role/position
-role: ''
+role: '대학생     '
 
 # Status emoji
 #status:
 #  icon: 
 
 # Organizations/Affiliations
-#organizations:
-#- name: 腾讯
-#  url: ""
+organizations:
+- name: 전북대학교 
+  url: "https://www.jbnu.ac.kr/"                                                   
 
 # Short bio (displayed in user profile at end of posts)
-bio: My research interests include distributed robotics, mobile computing and programmable matter.
+bio: 서버, 자동화, 네트워크에 관심이 있습니다.
 
-#interests:
-#- Artificial Intelligence
-#- Computational Linguistics
-#- Information Retrieval
+interests:
+- Network
+- Distributed Systems
+- Running
 
-#education:
-#  courses:
-#  - course: PhD in Artificial Intelligence
-#    institution: Stanford University
-#    year: 2012
-#  - course: MEng in Artificial Intelligence
-#    institution: Massachusetts Institute of Technology
-#    year: 2009
-#  - course: BSc in Artificial Intelligence
-#    institution: Massachusetts Institute of Technology
-#    year: 2008
+education:
+  courses:
+  - course: cs에 관해 공부 중 입니다.
+    institution: 전북대학교
+    year: 2024
+
 
 # Social/Academic Networking
 # For available icons, see: https://docs.hugoblox.com/getting-started/page-builder/#icons
 #   For an email link, use "fas" icon pack, "envelope" icon, and a link in the
 #   form "mailto:your-email@example.com" or "#contact" for contact widget.
 social:
-#  - icon: envelope
-#  icon_pack: fas
-#    link: 'about/#contact' # For a direct email link, use "mailto:test@example.org".
-#  - icon: twitter
-#    icon_pack: fab
-#    link: https://twitter.com/wowchemy
-#  - icon: instagram
-#    icon_pack: fab
-#    link: https://instagram.com/geocushen
-# Uncomment below for Github link
   - icon: github
     icon_pack: fab
     link: https://github.com/choisimo
 
 # Link to a PDF of your resume/CV from the About widget.
 # To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
-# - icon: cv
-#   icon_pack: ai
-#   link: files/cv.pdf
+- icon: cv
+  icon_pack: ai
+  link: files/linux.pdf
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
 email: "admin@nodove.com"
@@ -71,4 +56,4 @@ email: "admin@nodove.com"
 
 
 {{< icon name="download" pack="fas" >}} {{< staticref "uploads/resume.pdf" "newtab" >}}Download{{< /staticref >}} my resumé as a PDF.
-{{< figure src="images/home/1.jpg" title="admin_index image">}}
+{{< figure src="/images/home/1.jpg" title="admin_index image">}}
