@@ -1,0 +1,8 @@
+{{ define "main" }}
+  <h1>Latest Posts</h1>
+  <ul>
+    {{ range first 5 (where .Pages "Type" "post") }}
+      <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+    {{ end }}
+  </ul>
+{{ end }}

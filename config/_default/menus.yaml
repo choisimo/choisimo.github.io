@@ -7,3 +7,17 @@ main:
     url: /post/latest
     weight: 501
   
+  - name: about
+    url: /about
+    weight: 600
+  - name: detail
+    parent: about
+    url: /about/detail
+    weight: 601
+  - name: contact
+    parent: about
+    url: /about/contact
+    weight: 602
+
+  - name: category
+  
