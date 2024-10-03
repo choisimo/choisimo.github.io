@@ -1,25 +1,23 @@
 # Essentially Minimal theme but with constant home section bg color.
 name = "Starter Blog"
 
+
 [light]
-  # Primary
-  primary = "#2962ff"
-
-  # Menu
-  menu_primary = "rgb(247, 250, 252)"
-  menu_text = "#34495e"
-  menu_text_active = "#2962ff"
-  menu_title = "#2b2b2b"
-
-  # Home sections
-  home_section_odd = "rgb(247, 250, 252)"
-  home_section_even = "rgb(247, 250, 252)"
+  # Primary color for light mode
+  primary = "#2962ff"              # 기본 주요 색상
+  menu_primary = "rgb(247, 250, 252)"  # 메뉴 배경색
+  menu_text = "#34495e"              # 메뉴 텍스트 색상
+  menu_text_active = "#2962ff"       # 메뉴에서 활성화된 항목의 색상
+  menu_title = "#2b2b2b"             # 메뉴 제목의 색상
+  home_section_odd = "rgb(230, 240, 252)" # 짝수 섹션 배경색
+  home_section_even = "rgb(214, 240, 252)" # 홀수 섹션 배경색
 
 [dark]
-  primary = "#bbdefb"
-  link = "#bbdefb"
-  link_hover = "#bbdefb"
-  background = "rgb(26, 32, 44)"
-  home_section_odd = "rgb(26, 32, 44)"
-  home_section_even = "rgb(26, 32, 44)"
-  menu_primary = "rgb(26, 32, 44)"
+  # Primary color for dark mode
+  primary = "#bbdefb"               # 어두운 모드의 주요 색상
+  link = "#99afc2"                  # 링크 색상
+  link_hover = "#bbdefb"            # 링크에 마우스를 올렸을 때의 색상
+  background = "rgb(26, 32, 44)"    # 배경색
+  home_section_odd = "rgb(26, 32, 44)" # 짝수 섹션 배경색
+  home_section_even = "rgb(26, 32, 44)" # 홀수 섹션 배경색
+  menu_primary = "rgb(26, 32, 44)"      # 메뉴 배경색
