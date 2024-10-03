@@ -32,11 +32,11 @@ languages:
           weight: 600
         - name: "세부내역"
           parent: "저자"
-          url: "/about/detail"
+          url: "/user/detail"
           weight: 601
         - name: "연락방법"
           parent: "저자"
-          url: "/about/contact"
+          url: "/user/contact"
           weight: 602
         - name: "카테고리"
           url: "/category"
@@ -62,18 +62,18 @@ languages:
           weight: 600
         - name: "detail"
           parent: "about"
-          url: "/about/detail"
+          url: "/user/detail"
           weight: 601
         - name: "contact"
           parent: "about"
-          url: "/about/contact"
+          url: "/user/contact"
           weight: 602
         - name: "category"
           url: "/category"
           weight: 700    
     
 
-    
+
 defaultContentLanguage: ko
 hasCJKLanguage: false
 defaultContentLanguageInSubdir: false
