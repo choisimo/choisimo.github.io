@@ -18,14 +18,60 @@ languages:
     contentDir: content/ko
     weight: 1
     title: "nodove 블로그"
-    
+    menu:
+      main:
+        - name: "게시글"
+          url: "/post"
+          weight: 500
+        - name: "최신"
+          parent: "게시글"
+          url: "/post/latest"
+          weight: 501
+        - name: "저자"
+          url: "/about"
+          weight: 600
+        - name: "세부내역"
+          parent: "저자"
+          url: "/user/detail"
+          weight: 601
+        - name: "연락방법"
+          parent: "저자"
+          url: "/user/contact"
+          weight: 602
+        - name: "카테고리"
+          url: "/category"
+          weight: 700
+          
   en:
     languageCode: en-us
     languageName: English
     contentDir: content/en
     weight: 2
     title: "nodove blog"
-
+    menu:
+      main:
+        - name: "post"
+          url: "/post"
+          weight: 500
+        - name: "latestPost"
+          parent: "post"
+          url: "/post/latest"
+          weight: 501
+        - name: "about"
+          url: "/about"
+          weight: 600
+        - name: "detail"
+          parent: "about"
+          url: "/user/detail"
+          weight: 601
+        - name: "contact"
+          parent: "about"
+          url: "/user/contact"
+          weight: 602
+        - name: "category"
+          url: "/category"
+          weight: 700    
+    
 
 
 defaultContentLanguage: ko
