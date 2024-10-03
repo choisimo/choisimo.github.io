@@ -8,15 +8,6 @@ baseURL: 'https://choisimo.github.io' # Website URL
 
 
 ############################
-## SiteMap
-############################
-sitemap:
-  changefreq: weekly
-  disable: false
-  priority: 0.8
-title: map
-
-############################
 ## LANGUAGE
 ############################
 

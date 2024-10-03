@@ -1,23 +1,65 @@
-main:
-  - name: post
-    url: /post
-    weight: 500
-  - name: lastestPost
-    parent: post    
-    url: /post/latest
-    weight: 501
-  
-  - name: about
-    url: /about
-    weight: 600
-  - name: detail
-    parent: about
-    url: /about/detail
-    weight: 601
-  - name: contact
-    parent: about
-    url: /about/contact
-    weight: 602
+languages:
 
-  - name: category
+  ko:
+    languageCode: ko
+    languageName: Korean
+    contentDir: content/ko
+    weight: 1
+    title: "nodove 블로그"
+    menu:
+      main:
+        - name: 게시글
+          url: /post
+          weight: 500
+        - name: 최신
+          parent: post    
+          url: /post/latest
+          weight: 501
+        
+        - name: 저자
+          url: /about
+          weight: 600
+        - name: 세부내역
+          parent: about
+          url: /about/detail
+          weight: 601
+        - name: 연락방법
+          parent: about
+          url: /about/contact
+          weight: 602
+
+        - name: 카테고리
+          url: /category
+          weight: 700
+
+  en:
+    languageCode: en-us
+    languageName: English
+    contentDir: content/en
+    weight: 2
+    title: "nodove blog"
+    menu: 
+      main:
+        - name: post
+          url: /post
+          weight: 500
+        - name: lastestPost
+          parent: post    
+          url: /post/latest
+          weight: 501
+        
+        - name: about
+          url: /about
+          weight: 600
+        - name: detail
+          parent: about
+          url: /about/detail
+          weight: 601
+        - name: contact
+          parent: about
+          url: /about/contact
+          weight: 602
+
+        - name: category
+
   
