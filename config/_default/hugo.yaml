@@ -21,22 +21,24 @@ languages:
     menu:
       main:
         - name: "게시글"
-          url: "/post"
           weight: 500
         - name: "최신"
           parent: "게시글"
-          url: "/post/latest"
+          url: "/post/latest/"
           weight: 501
+        - name: "리스트"
+          parent: "post"
+          url: "/post/"
+          weight: 502
         - name: "저자"
-          url: "/about"
           weight: 600
         - name: "세부내역"
           parent: "저자"
-          url: "/user/detail"
+          url: "/about/"
           weight: 601
         - name: "연락방법"
           parent: "저자"
-          url: "/user/contact"
+          url: "/about/#contact"
           weight: 602
         - name: "카테고리"
           url: "/category"
@@ -51,22 +53,24 @@ languages:
     menu:
       main:
         - name: "post"
-          url: "/post"
           weight: 500
         - name: "latestPost"
           parent: "post"
           url: "/post/latest"
           weight: 501
+        - name: "list"
+          url: "/post/"
+          weight: 502
+
         - name: "about"
-          url: "/about"
           weight: 600
-        - name: "detail"
+        - name: "author"
           parent: "about"
-          url: "/user/detail"
+          url: "/about/"
           weight: 601
         - name: "contact"
           parent: "about"
-          url: "/user/contact"
+          url: "/about/#contact"
           weight: 602
         - name: "category"
           url: "/category"
