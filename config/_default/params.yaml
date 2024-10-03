@@ -37,7 +37,7 @@ header:
   navbar:
     enable: true
     align: r
-    show_logo: false
+    show_logo: true
     show_language: false
     show_day_night: true
     show_search: true
@@ -95,11 +95,15 @@ features:
       app_id: ''
       api_key: ''
       index_name: ''
-      show_logo: false
+      show_logo: true
   map:
-    provider: ''
+    provider: 'mapnik'
     api_key: ''
     zoom: 15
+    content:
+      coordinates:
+        latitude: '35.4949'
+        longitude: '127.0811'
 
 extensions:
   cms:
