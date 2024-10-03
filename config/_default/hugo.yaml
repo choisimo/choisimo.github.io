@@ -27,9 +27,10 @@ languages:
           url: "/post/latest/"
           weight: 501
         - name: "리스트"
-          parent: "post"
+          parent: "게시글"
           url: "/post/"
           weight: 502
+          
         - name: "저자"
           weight: 600
         - name: "세부내역"
@@ -40,6 +41,7 @@ languages:
           parent: "저자"
           url: "/about/#contact"
           weight: 602
+
         - name: "카테고리"
           url: "/category"
           weight: 700
@@ -72,6 +74,7 @@ languages:
           parent: "about"
           url: "/about/#contact"
           weight: 602
+
         - name: "category"
           url: "/category"
           weight: 700    

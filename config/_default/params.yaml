@@ -88,7 +88,9 @@ features:
       repo: 'choisimo/choisimo.github.io'
       repo_id: 'R_kgDOM0z7Dw'
       category: 'Announcements'
-      category_id: DIC_kwDOM0z7D84CjBQC'
+      category_id: 'DIC_kwDOM0z7D84CjBQC'
+      theme: preferred_color_scheme
+      language_code: ko
   search:
     provider: ''
     algolia:
