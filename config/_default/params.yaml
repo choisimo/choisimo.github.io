@@ -100,10 +100,7 @@ features:
     provider: 'mapnik'
     api_key: ''
     zoom: 15
-    content:
-      coordinates:
-        latitude: '35.4949'
-        longitude: '127.0811'
+
 
 extensions:
   cms:

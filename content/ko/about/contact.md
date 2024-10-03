@@ -27,4 +27,10 @@ content:
 
 design:
   columns: '1'
+
+
+content:
+  coordinates:
+    latitude: '35.4949'
+    longitude: '127.0811'
 ---
