@@ -78,17 +78,17 @@ features:
     gravatar: false
     shape: circle
   comment:
-    provider: ''
+    provider: 'giscus'
     disqus:
       shortname: ''
       show_count: true
     commento:
       url: ''
     giscus:
-      repo: ''
-      repo_id: ''
-      category: ''
-      category_id: ''
+      repo: 'choisimo/choisimo.github.io'
+      repo_id: 'R_kgDOM0z7Dw'
+      category: 'Announcements'
+      category_id: DIC_kwDOM0z7D84CjBQC'
   search:
     provider: ''
     algolia:

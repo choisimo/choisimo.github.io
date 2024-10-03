@@ -13,6 +13,7 @@ categories:
   - "hugo"
 type: post
 featured: "/images/post/1/featured.jpg"
+commentable: true
 ---
 w
 Hugo library 에서 MD 파일에  &lt;!--more--&gt;  사용하여 요약문 보여주기
