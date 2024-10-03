@@ -74,6 +74,7 @@ languages:
           parent: "about"
           url: "/about/#contact"
           weight: 602
+          icon: "contact-icon"
 
         - name: "category"
           url: "/category"
