@@ -1,7 +1,7 @@
 ---
 # An instance of the About widget.
 # Documentation: https://docs.hugoblox.com/page-builder/
-widget: about
+widget: user
 
 # Activate this widget? true/false
 active: true
