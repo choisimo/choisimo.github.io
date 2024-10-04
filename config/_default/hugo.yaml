@@ -60,8 +60,8 @@ languages:
           url: "/tags"
           parent: "구분"
           weight: 702
-        - name: "저자"
-          url: "/author"
+        - name: "저자들"
+          url: "/authors"
           parent: "구분"
           weight: 703
 
@@ -138,8 +138,8 @@ languages:
           url: "/tags"
           parent: "category"
           weight: 702
-        - name: "author"
-          url: "/author"
+        - name: "authors"
+          url: "/authors"
           parent: "category"
           weight: 703
 
