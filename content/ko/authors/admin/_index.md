@@ -55,5 +55,5 @@ email: "admin@nodove.com"
 ---
 
 
-{{< icon name="download" pack="fas" >}} {{< staticref "uploads/resume.pdf" "newtab" >}}Download{{< /staticref >}} my resumé as a PDF.
-{{< figure src="/images/home/1.jpg" title="admin_index image">}}
+{{< icon name="download" pack="fas" >}} {{% staticref "/files/linux.pdf" "newtab" %}} 다운로드 {{% /staticref %}} PDF
+{{< figure src="/images/home/1.jpg">}}
