@@ -12,6 +12,7 @@ author: admin
 design:
     background:
         color: '#F5F5F5'
+    css_class: fullscreen
         
 #design:
 #  background:
