@@ -178,6 +178,13 @@ removePathAccents: true
 ## CASCADE | 타겟에 대해 전체 설정 지정하기   
 ############################################
 
+cascade:
+  - _target:
+      path: /**
+    banner:
+      image: 'header.jpg'
+
+
 cascade: 
   # Configure blog posts
   - _target:
