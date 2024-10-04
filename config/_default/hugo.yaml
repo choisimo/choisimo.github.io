@@ -86,6 +86,10 @@ languages:
           url: "/entertainment/game"
           parent: "엔터"
           weight: 902
+        - name: "영화"
+          url: "/entertainment/movie"
+          parent: "엔터"
+          weight: 903
         
         
           
@@ -165,6 +169,10 @@ languages:
           url: "/entertainment/game"
           parent: "play"
           weight: 902
+        - name: "movie"
+          url: "/entertainment/movie"
+          parent: "play"
+          weight: 903
         
             
 
