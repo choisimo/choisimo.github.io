@@ -2,4 +2,7 @@
 title: 연락
 ---
 
-연락 방법? 
+<hr/>
+![email](/icons/envelope-at.svg)
+![](/icons/)
+<hr/>
