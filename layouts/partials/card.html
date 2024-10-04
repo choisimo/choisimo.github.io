@@ -1,0 +1,13 @@
+<div class="card">
+    <a href="{{ .Permalink }}">
+      <div class="card-image">
+        <img src="{{ with .Params.featured_image }}{{ . }}{{ else }}default-image.jpg{{ end }}" alt="{{ .Title }}">
+      </div>
+      <div class="card-content">
+        <h3>{{ .Title }}</h3>
+        <p>{{ .Summary }}</p>
+        <p><small>{{ .Date.Format "January 2, 2006" }}</small></p>
+      </div>
+    </a>
+  </div>
+  

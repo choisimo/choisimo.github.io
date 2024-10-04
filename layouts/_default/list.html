@@ -1,8 +1,6 @@
-{{ define "main" }}
-  <h1></h1>
-  <ul>
-    {{ range first 5 .Pages }}
-      <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+<div class="cards-container">
+    {{ range .Paginator.Pages }}
+      {{ partial "card.html" . }}
     {{ end }}
-  </ul>
-{{ end }}
+</div>
+  
