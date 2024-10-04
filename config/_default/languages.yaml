@@ -1,6 +1,5 @@
 languages:
   ko:
-    languageCode: ko
     languageName: Korean
     contentDir: content/ko
     weight: 1
