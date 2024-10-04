@@ -180,7 +180,7 @@ removePathAccents: true
 
 cascade:
   - _target:
-      path: /**
+      path: '**'
     banner:
       image: 'header.jpg'
 
