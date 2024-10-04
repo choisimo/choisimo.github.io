@@ -12,19 +12,17 @@ tags:
 categories:
   - "hugo"
 type: post
-#featured: "/images/post/1/featured.jpg"
+#featured: "/images/post/1/featured.jpg" # 자동 적용
 commentable: true # 댓글 허용 여부
-bannner: 
-  image: "/images/post/1/banner.jpg"
 image:
-  placement: 1 
-  focal_point: 'Left' # 
-  preview_only: true # 썸네일에만 적용
-show_related: true # 관련 컨텐츠 추천 표시
+  placement: 1        # 이미지 위치 (1 = 전체 너비, 2 = 외부 배치, 3 = 화면 너비)
+  focal_point: 'BottomLeft' # 이미지 초점 (Center, Top, BottomRight...) 
+  preview_only: true # 썸네일에만 적용 여부 
+  show_related: true # 관련 컨텐츠 추천 표시
+# filename : assets/media/ 에서 특정 이미지 로드하기
 #profile: true # 작성자 프로필 표시 
 #reading_time: true # 읽는 시간 표시
 #show_date: true # 게시 날짜 표시
-
 ---
 
 Hugo library 에서 MD 파일에  &lt;!--more--&gt;  사용하여 요약문 보여주기

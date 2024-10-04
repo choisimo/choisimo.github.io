@@ -1,9 +1,0 @@
-{{ range .Pages }}
-  <div class="post-item">
-    <img src="{{ .Params.featured_image }}" alt="{{ .Title }}" class="post-image">
-    <div class="post-content">
-      <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
-      <p>{{ .Summary }}</p>
-    </div>
-  </div>
-{{ end }}
