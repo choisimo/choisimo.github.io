@@ -18,8 +18,7 @@ marketing:
     site_type: Person
     local_business_type: ''
     org_name: ''
-    description: 'A highly-customizable Hugo blog theme powered by Wowchemy website builder.'
-     'GetResearchDev'
+    description: ''
   analytics:
     baidu_tongji: ''
     google_tag_manager: ''
