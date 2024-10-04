@@ -76,20 +76,17 @@ languages:
           parent: "자료"
           weight: 802
 
-        - name: "엔터"
-          weight: 900
         - name: "여가"
           url: "/entertainment"
-          parent: "엔터"
-          weight: 901
+          weight: 900
         - name: "게임"
           url: "/entertainment/game"
-          parent: "엔터"
-          weight: 902
+          parent: "여가"
+          weight: 901
         - name: "영화"
           url: "/entertainment/movie"
-          parent: "엔터"
-          weight: 903
+          parent: "여가"
+          weight: 902
         
         
           
@@ -161,18 +158,15 @@ languages:
 
         - name: "play"
           weight: 900
-        - name: "entertainment"
           url: "/entertainment"
-          parent: "play"
-          weight: 901
         - name: "game"
           url: "/entertainment/game"
           parent: "play"
-          weight: 902
+          weight: 901
         - name: "movie"
           url: "/entertainment/movie"
           parent: "play"
-          weight: 903
+          weight: 902
         
             
 
