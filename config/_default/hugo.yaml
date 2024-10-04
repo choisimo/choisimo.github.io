@@ -43,8 +43,12 @@ languages:
           weight: 601
         - name: "연락방법"
           parent: "저자"
-          url: "/about/#contact"
+          url: "/contact"
           weight: 602
+        - name: "맵"
+          parent: "저자"
+          url: "/about/#contact"
+          weight: 603
 
         - name: "구분"
           weight: 700
@@ -116,10 +120,13 @@ languages:
           weight: 601
         - name: "contact"
           parent: "about"
-          url: "/about/#contact"
+          url: "/contact"
           weight: 602
           icon: "contact-icon"
-
+        - name: "map"
+          parent: "about"
+          url: "/about/#contact"
+          weight: 603
 
         - name: "category"
           weight: 700
