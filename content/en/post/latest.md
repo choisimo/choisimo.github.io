@@ -3,4 +3,4 @@ title: "Latest Posts"
 ---
 
 
-{{ < latest-posts > }}
+{{< latest-posts >}}
