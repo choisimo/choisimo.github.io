@@ -46,9 +46,43 @@ languages:
           url: "/about/#contact"
           weight: 602
 
-        - name: "카테고리"
-          url: "/category"
+        - name: "구분"
           weight: 700
+        - name: "카테고리"
+          url: "/categories"
+          parent: "구분"
+          weight: 701
+        - name: "태그"
+          url: "/tag"
+          parent: "구분"
+          weight: 702
+        - name: "저자"
+          url: "/author"
+          parent: "구분"
+          weight: 703
+
+        - name: "자료"
+          weight: 800
+        - name: "프로그램"
+          url: "/document/program"
+          parent: "자료"
+          weight: 801
+        - name: "문서"
+          url: "/document"
+          parent: "자료"
+          weight: 802
+
+        - name: "엔터"
+          weight: 900
+        - name: "여가"
+          url: "/entertainment"
+          parent: "엔터"
+          weight: 901
+        - name: "게임"
+          parent: "엔터"
+          weight: 902
+        
+        
           
   en:
     languageCode: en-us
@@ -70,6 +104,7 @@ languages:
           weight: 501
         - name: "list"
           url: "/post/"
+          parent: "post"
           weight: 502
 
         - name: "about"
@@ -84,10 +119,46 @@ languages:
           weight: 602
           icon: "contact-icon"
 
+
         - name: "category"
-          url: "/category"
-          weight: 700    
-    
+          weight: 700
+        - name: "categories"
+          url: "/categories"
+          parent: "category"
+          weight: 701
+        - name: "tag"
+          url: "/tag"
+          parent: "category"
+          weight: 702
+        - name: "author"
+          url: "/author"
+          parent: "category"
+          weight: 703
+
+        - name: "document"
+          weight: 800
+        - name: "program"
+          parent: "document"
+          url: "/document/program"
+          weight: 801
+        - name: "documentation"
+          url: "/document"
+          parent: "document"
+          weight: 802
+
+
+        - name: "play"
+          weight: 900
+        - name: "entertainment"
+          url: "/entertainment"
+          parent: "play"
+          weight: 901
+        - name: "game"
+          url: "/game"
+          parent: "play"
+          weight: 902
+        
+            
 
 
 defaultContentLanguage: ko
