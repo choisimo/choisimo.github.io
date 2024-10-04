@@ -92,7 +92,7 @@ features:
       theme: preferred_color_scheme
       language_code: ko
   search:
-    provider: wowchemy
+    provider: 'wowchemy'
     algolia:
       app_id: ''
       api_key: ''
