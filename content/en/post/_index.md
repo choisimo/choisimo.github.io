@@ -1,8 +1,6 @@
 ---
 title: "post list"
 type: post
-banner:
-    image: './featured.jpg'         # default 배너 위치 : assets/media/header.jpg
 # design:
 #   background:
 #     image: "featured.jpg"     # 배경으로 사용할 이미지 파일 경로
@@ -14,4 +12,7 @@ banner:
 #     color: '#F5F5F5'                        # 배경 이미지가 없을 때 기본 색상
 #     parallax: true                          # fixed background effect on desktop
 #     text_color_light: true                  
+image: 
+    placement: 3
+    focal_point: 'Center'
 ---

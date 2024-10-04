@@ -17,8 +17,8 @@ type: post
 #     text_color_light: true                  
 
 image:
-    placement: 2
-    focal_point: 'Left'
+    placement: 3
+    focal_point: 'Center'
     preview_only: false
     
 
