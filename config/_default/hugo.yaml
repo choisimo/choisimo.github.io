@@ -18,6 +18,10 @@ languages:
     contentDir: content/ko
     weight: 1
     title: "nodove 블로그"
+    pagination:
+      disaableAliases: true
+      pagerSize: 10          # Returns the number of pages per pager
+      path: page
     menu:
       main:
         - name: "게시글"
@@ -52,6 +56,10 @@ languages:
     contentDir: content/en
     weight: 2
     title: "nodove blog"
+    pagination:
+      disaableAliases: true
+      pagerSize: 10          # Returns the number of pages per pager
+      path: page
     menu:
       main:
         - name: "post"
