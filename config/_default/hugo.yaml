@@ -181,7 +181,7 @@ removePathAccents: true
 ############################################
 cascade: 
   - _target:
-      path: **
+      path: '*'
     show_breadcrumb: true
     banner:
       image: 'header.jpg'
