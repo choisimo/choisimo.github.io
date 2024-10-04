@@ -53,7 +53,7 @@ languages:
           parent: "구분"
           weight: 701
         - name: "태그"
-          url: "/tag"
+          url: "/tags"
           parent: "구분"
           weight: 702
         - name: "저자"
@@ -79,6 +79,7 @@ languages:
           parent: "엔터"
           weight: 901
         - name: "게임"
+          url: "/entertainment/game"
           parent: "엔터"
           weight: 902
         
@@ -126,8 +127,8 @@ languages:
           url: "/categories"
           parent: "category"
           weight: 701
-        - name: "tag"
-          url: "/tag"
+        - name: "tags"
+          url: "/tags"
           parent: "category"
           weight: 702
         - name: "author"
@@ -154,7 +155,7 @@ languages:
           parent: "play"
           weight: 901
         - name: "game"
-          url: "/game"
+          url: "/entertainment/game"
           parent: "play"
           weight: 902
         
