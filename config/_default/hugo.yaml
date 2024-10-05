@@ -46,7 +46,7 @@ cascade:
 
 cascade:
   - _target:
-      path: /projects/**
+      path: /project/**
     draft: false
     pager: true
     commentable: true
