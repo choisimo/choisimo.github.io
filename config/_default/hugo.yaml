@@ -21,11 +21,7 @@ languages:
     pagination:
       disaableAliases: true
       pagerSize: 10          # Returns the number of pages per pager
-      path: page
-    menu:
-      main: []        
-        
-          
+      path: page        
   en:
     languageCode: en-us
     languageName: English
@@ -36,8 +32,6 @@ languages:
       disaableAliases: true
       pagerSize: 10          # Returns the number of pages per pager
       path: page
-    menu:
-      main: []    
 
 
 defaultContentLanguage: ko

@@ -1,135 +1,203 @@
-ko:
-  main:
-    - name: "게시글"
-      weight: 500
-    - name: "최신"
-      parent: "게시글"
-      url: "/post/latest/"
-      weight: 501
-    - name: "리스트"
-      parent: "게시글"
-      url: "/post/"
-      weight: 502
+# ko:
+#   main:
+#     - name: "게시글"
+#       weight: 500
+#     - name: "최신"
+#       parent: "게시글"
+#       url: "/post/latest/"
+#       weight: 501
+#     - name: "리스트"
+#       parent: "게시글"
+#       url: "/post/"
+#       weight: 502
       
-    - name: "저자"
-      weight: 600
-    - name: "세부내역"
-      parent: "저자"
-      url: "/about/"
-      weight: 601
-    - name: "연락방법"
-      parent: "저자"
-      url: "/contact"
-      weight: 602
-    - name: "맵"
-      parent: "저자"
-      url: "/about/#contact"
-      weight: 603
+#     - name: "저자"
+#       weight: 600
+#     - name: "세부내역"
+#       parent: "저자"
+#       url: "/about/"
+#       weight: 601
+#     - name: "연락방법"
+#       parent: "저자"
+#       url: "/contact"
+#       weight: 602
+#     - name: "맵"
+#       parent: "저자"
+#       url: "/about/#contact"
+#       weight: 603
 
-    - name: "구분"
-      weight: 700
-    - name: "카테고리"
-      url: "/categories"
-      parent: "구분"
-      weight: 701
-    - name: "태그"
-      url: "/tags"
-      parent: "구분"
-      weight: 702
-    - name: "저자들"
-      url: "/authors"
-      parent: "구분"
-      weight: 703
+#     - name: "구분"
+#       weight: 700
+#     - name: "카테고리"
+#       url: "/categories"
+#       parent: "구분"
+#       weight: 701
+#     - name: "태그"
+#       url: "/tags"
+#       parent: "구분"
+#       weight: 702
+#     - name: "저자들"
+#       url: "/authors"
+#       parent: "구분"
+#       weight: 703
 
-    - name: "자료"
-      weight: 800
-    - name: "프로그램"
-      url: "/document/program"
-      parent: "자료"
-      weight: 801
-    - name: "문서"
-      url: "/document"
-      parent: "자료"
-      weight: 802
+#     - name: "자료"
+#       weight: 800
+#     - name: "프로그램"
+#       url: "/document/program"
+#       parent: "자료"
+#       weight: 801
+#     - name: "문서"
+#       url: "/document"
+#       parent: "자료"
+#       weight: 802
 
-    - name: "여가"
-      url: "/entertainment"
-      weight: 900
-    - name: "게임"
-      url: "/entertainment/game"
-      parent: "여가"
-      weight: 901
-    - name: "영화"
-      url: "/entertainment/movie"
-      parent: "여가"
-      weight: 902
+#     - name: "여가"
+#       url: "/entertainment"
+#       weight: 900
+#     - name: "게임"
+#       url: "/entertainment/game"
+#       parent: "여가"
+#       weight: 901
+#     - name: "영화"
+#       url: "/entertainment/movie"
+#       parent: "여가"
+#       weight: 902
     
     
       
-en:
-  main:
-    - name: "post"
-      weight: 500
-    - name: "latestPost"
-      parent: "post"
-      url: "/post/latest"
-      weight: 501
-    - name: "list"
-      url: "/post/"
-      parent: "post"
-      weight: 502
+# en:
+#   main:
+#     - name: "post"
+#       weight: 500
+#     - name: "latestPost"
+#       parent: "post"
+#       url: "/post/latest"
+#       weight: 501
+#     - name: "list"
+#       url: "/post/"
+#       parent: "post"
+#       weight: 502
 
-    - name: "about"
-      weight: 600
-    - name: "author"
-      parent: "about"
-      url: "/about/"
-      weight: 601
-    - name: "contact"
-      parent: "about"
-      url: "/contact"
-      weight: 602
-      icon: "contact-icon"
-    - name: "map"
-      parent: "about"
-      url: "/about/#contact"
-      weight: 603
+#     - name: "about"
+#       weight: 600
+#     - name: "author"
+#       parent: "about"
+#       url: "/about/"
+#       weight: 601
+#     - name: "contact"
+#       parent: "about"
+#       url: "/contact"
+#       weight: 602
+#       icon: "contact-icon"
+#     - name: "map"
+#       parent: "about"
+#       url: "/about/#contact"
+#       weight: 603
 
-    - name: "category"
-      weight: 700
-    - name: "categories"
-      url: "/categories"
-      parent: "category"
-      weight: 701
-    - name: "tags"
-      url: "/tags"
-      parent: "category"
-      weight: 702
-    - name: "authors"
-      url: "/authors"
-      parent: "category"
-      weight: 703
+#     - name: "category"
+#       weight: 700
+#     - name: "categories"
+#       url: "/categories"
+#       parent: "category"
+#       weight: 701
+#     - name: "tags"
+#       url: "/tags"
+#       parent: "category"
+#       weight: 702
+#     - name: "authors"
+#       url: "/authors"
+#       parent: "category"
+#       weight: 703
 
-    - name: "document"
-      weight: 800
-    - name: "program"
-      parent: "document"
-      url: "/document/program"
-      weight: 801
-    - name: "documentation"
-      url: "/document"
-      parent: "document"
-      weight: 802
+#     - name: "document"
+#       weight: 800
+#     - name: "program"
+#       parent: "document"
+#       url: "/document/program"
+#       weight: 801
+#     - name: "documentation"
+#       url: "/document"
+#       parent: "document"
+#       weight: 802
 
 
-    - name: "play"
-      weight: 900
-      url: "/entertainment"
-    - name: "game"
-      url: "/entertainment/game"
-      parent: "play"
-      weight: 901
-    - name: "movie"
-      url: "/entertainment/movie"
-      parent: "play"
-      weight: 902
+#     - name: "play"
+#       weight: 900
+#       url: "/entertainment"
+#     - name: "game"
+#       url: "/entertainment/game"
+#       parent: "play"
+#       weight: 901
+#     - name: "movie"
+#       url: "/entertainment/movie"
+#       parent: "play"
+#       weight: 902
+
+
+main:
+  - name: "post"
+    weight: 500
+  - name: "latestPost"
+    parent: "post"
+    url: "/post/latest"
+    weight: 501
+  - name: "list"
+    url: "/post/"
+    parent: "post"
+    weight: 502
+
+  - name: "about"
+    weight: 600
+  - name: "author"
+    parent: "about"
+    url: "/about/"
+    weight: 601
+  - name: "contact"
+    parent: "about"
+    url: "/contact"
+    weight: 602
+    icon: "contact-icon"
+  - name: "map"
+    parent: "about"
+    url: "/about/#contact"
+    weight: 603
+
+  - name: "category"
+    weight: 700
+  - name: "categories"
+    url: "/categories"
+    parent: "category"
+    weight: 701
+  - name: "tags"
+    url: "/tags"
+    parent: "category"
+    weight: 702
+  - name: "authors"
+    url: "/authors"
+    parent: "category"
+    weight: 703
+
+  - name: "document"
+    weight: 800
+  - name: "program"
+    parent: "document"
+    url: "/document/program"
+    weight: 801
+  - name: "documentation"
+    url: "/document"
+    parent: "document"
+    weight: 802
+
+
+  - name: "play"
+    weight: 900
+    url: "/entertainment"
+  - name: "game"
+    url: "/entertainment/game"
+    parent: "play"
+    weight: 901
+  - name: "movie"
+    url: "/entertainment/movie"
+    parent: "play"
+    weight: 902
