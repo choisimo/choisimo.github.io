@@ -1,8 +1,8 @@
 ---
-title: "호숫가 옆의 나무로 지은 집"
+title: "텍스트 정렬"
 date: "2024-10-05"
 draft: false
-description: "호숫가 옆의 나무로 지은 집"
+description: "텍스트 정렬"
 tags:
   - "study"
   - "align"
@@ -13,10 +13,10 @@ categories:
 type: post
 ---
 
-호숫가 옆의 나무로 지은 집
+hugo text justify align 하는 방법
 
 <!--more-->
-
-![house](/images/post/7/house.jpg)
-
-<div style="text-align: justify"> 호숫가 옆에 서 있는 오두막은, 나지막한 소나무들에 반쯤 가려진 채 고요히 자리하고 있었다. 사라는 이곳에 오는 것을 좋아했다—물살이 바위를 부드럽게 때리는 소리 외에는 아무것도 들리지 않는 곳, 해 질 녘 호수 위로 황금빛 물결이 드리워지는 광경을 보는 곳. 어느 저녁, 그녀가 현관에 앉아 있을 때, 가벼운 비가 내리기 시작했다. 젖은 소나무 향기가 공기 중에 퍼졌다. 그 순간, 그녀는 이 오두막이 자신의 일부가 되는 것을 느꼈다. 그 고요함이 그녀의 마음과 어우러져 진정한 평화를 이루었다. </div>
+```text
+일반적인 MARKDOWN 파일은 불가능 하므로 인라인 사용..
+```
+<div style="text-align: justify"> 양쪽 정렬 하는 방법 </div>

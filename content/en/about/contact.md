@@ -9,7 +9,7 @@ headless: true
 # Order that this section appears on the page.
 weight: 50
 
-title: 찾아 오시는 길..
+title: Get in touch
 subtitle:
 
 content:

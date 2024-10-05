@@ -17,7 +17,6 @@ type: post
 hugo section 사용법 기본 정리
 <!--more-->
 
-<div style="text-align: justify">
 # Page title
 title: My page
 # Page type - we want a landing page (such as a homepage)
