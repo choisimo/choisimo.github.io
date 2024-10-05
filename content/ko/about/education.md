@@ -22,8 +22,8 @@ date_format: Jan 2006
 #   Leave `date_end` empty if it's your current employer.
 #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
 experience:
-  - title: MEng Electronic Engineering
-    company: University X
+  - title: C-lang, C++-lang study
+    company: University JBNU
     company_url: ''
     company_logo: ''
     location: Jeonju-si
@@ -31,15 +31,13 @@ experience:
     date_end: ''
     description: |2-
         * Dissertation on Y
-        * Basketball team
-        * DJ club
-
-  - title: BEng Electronic Engineering
-    company: University X
+        
+  - title: python study
+    company: University JBNU
     company_url: ''
     company_logo: ''
     location: Jeonju-si
-    date_start: '2020-03-02'
+    date_start: '2019-03-02'
     date_end: ''
     description: |2-
         * Developed data analysis and automation scripts using Python
@@ -51,7 +49,7 @@ experience:
     company_url: ''
     company_logo: ''
     location: Jeonju-si
-    date_start: '2020-09-01'
+    date_start: '2022-09-01'
     date_end: ''
     description: |2-
         * Created Linux shell scripts and automated system management tasks
@@ -63,7 +61,7 @@ experience:
     company_url: ''
     company_logo: ''
     location: Jeonju-si
-    date_start: '2021-03-02'
+    date_start: '2023-05-02'
     date_end: ''
     description: |2-
         * Studied JavaScript from basics to React.js
@@ -75,7 +73,7 @@ experience:
     company_url: ''
     company_logo: ''
     location: Jeonju-si
-    date_start: '2021-09-01'
+    date_start: '2023-05-02'
     date_end: ''
     description: |2-
         * Developed web applications using Spring Boot
@@ -88,7 +86,7 @@ experience:
     company_url: ''
     company_logo: ''
     location: Jeonju-si
-    date_start: '2022-03-02'
+    date_start: '2022-11-14'
     date_end: ''
     description: |2-
         * Developed web applications using JSP (Java Server Pages)
