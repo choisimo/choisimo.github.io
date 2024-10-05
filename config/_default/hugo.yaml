@@ -98,6 +98,7 @@ summaryLength: 30
 pagination:
   paperSize: 10
 enableEmoji: true
+# robots.txt for SEO
 enableRobotsTXT: true
 footnotereturnlinkcontents: <sup>^</sup>
 ignoreFiles: [\.ipynb$, .ipynb_checkpoints$, \.Rmd$, \.Rmarkdown$, _cache$]
@@ -133,5 +134,10 @@ security:
   _merge: deep
 sitemap:
   _merge: deep
+  changefreq: daily
+  filename: sitemap.xml
+  priority: 0.5
 minify:
   _merge: deep
+
+
