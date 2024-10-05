@@ -1,0 +1,10 @@
+{{ if .Site.RegularPages }}
+  {{ range where .Site.RegularPages ".Params.type" "post" }}
+    <div class="recent-post">
+      <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+      <p>{{ .Summary }}</p>
+    </div>
+  {{ end }}
+{{ else }}
+  <p>게시물이 없습니다.</p>
+{{ end }}
