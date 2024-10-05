@@ -18,7 +18,7 @@ marketing:
     site_type: Person
     local_business_type: ''
     org_name: 'nodove blog'
-    org_image: 'https://github.com/user-attachments/assets/df16a64b-bf7a-4529-9130-e67d51d461df'
+    og_image: 'https://github.com/user-attachments/assets/df16a64b-bf7a-4529-9130-e67d51d461df'
     description: 'Personal blog by simon'
   analytics:
     baidu_tongji: ''
