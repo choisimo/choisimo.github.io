@@ -1,6 +1,6 @@
 User-agent: *
 Disallow: /private/
-Allow: /public/
+Allow: /content/post/
 Sitemap: https://choisimo.github.io/sitemap.xml
 
 
