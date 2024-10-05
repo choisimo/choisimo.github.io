@@ -33,3 +33,5 @@ content:
     latitude: '35.4949'
     longitude: '127.0811'
 ---
+
+[contact](https://choisimo.github.io/contact/)
