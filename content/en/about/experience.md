@@ -25,7 +25,7 @@ experience:
   - title: Military Service
     company: Republic of Korea Army
     company_url: ''
-    company_logo: org-army
+    company_logo: ''
     location: South Korea
     date_start: '2018-06-01'
     date_end: '2020-05-31'
@@ -36,7 +36,7 @@ experience:
   - title: Parking Management System
     company: Personal Project
     company_url: ''
-    company_logo: org-parking
+    company_logo: ''
     location: South Korea
     date_start: '2021-05-01'
     date_end: '2021-08-31'
@@ -47,7 +47,7 @@ experience:
   - title: File Management System
     company: Personal Project
     company_url: ''
-    company_logo: org-filemgmt
+    company_logo: ''
     location: South Korea
     date_start: '2021-09-01'
     date_end: '2021-12-31'
@@ -58,7 +58,7 @@ experience:
   - title: Linux Socket Programming
     company: Personal Project
     company_url: ''
-    company_logo: org-linux
+    company_logo: ''
     location: South Korea
     date_start: '2022-01-01'
     date_end: '2022-03-31'
@@ -69,7 +69,7 @@ experience:
   - title: Kiosk Program Development
     company: Personal Project
     company_url: ''
-    company_logo: org-kiosk
+    company_logo: ''
     location: South Korea
     date_start: '2022-04-01'
     date_end: '2022-07-31'
