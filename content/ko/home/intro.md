@@ -7,6 +7,7 @@ weight: 10
 
 author: admin
 
+layout: intro
 
 design:
   background:
