@@ -1,7 +1,8 @@
 ---
-title: "slider"
+title: 
 weight: 15
 type: landing
+
 sections:
   - block: slider
     id: slider-section
@@ -16,3 +17,4 @@ sections:
       background:
         color: "#f5f5f5"
 ---
+asdasdasdasdasdasdasd
