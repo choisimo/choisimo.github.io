@@ -7,7 +7,7 @@ sections:
     id: slider-section
     content:
       title: "슬라이더 섹션"
-      images:
+      slides:
         - filename: "/images/home/slider1.jpg"
           caption: "첫 번째 이미지 설명"
         - filename: "/images/home/slider2.jpg"
