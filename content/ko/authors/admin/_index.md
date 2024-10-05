@@ -9,7 +9,7 @@ authors:
 superuser: true
 
 # Role/position
-role: '대학생     '
+role: '대학생'
 
 # Status emoji
 #status:

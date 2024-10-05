@@ -52,6 +52,10 @@ social:
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
 email: "admin@nodove.com"
+
+tags: ["전북대", "전북대학교", "JBNU", "작성자", "최시몬", "CHOI", "CHOI SI MON", "CHOISIMON", "SIMON", "choi", "choi si mon", "simon", "choi simon", "전북", "전주", "대학교", "academy", "Jeonbuk", "Jeonbuk National", "Jeonbuk National University", "National University", "Jeonbuk University", "university", "student", "author", "admin", "nodove", "writer", "nodove.com", "nodove@nodove.com", "email", "admin main"]
+
+keyword: ["전북대", "전북대학교", "JBNU", "작성자", "최시몬", "CHOI", "CHOI SI MON", "CHOISIMON", "SIMON", "choi", "choi si mon", "simon", "choi simon", "전북", "전주", "대학교", "academy", "Jeonbuk", "Jeonbuk National", "Jeonbuk National University", "National University", "Jeonbuk University", "university", "student", "author", "admin", "nodove", "writer", "nodove.com", "nodove@nodove.com", "email", "admin main"]
 ---
 
 {{< icon name="download" pack="fas" >}} {{% staticref "/files/linux.pdf" %}} download {{% /staticref %}} PDF
