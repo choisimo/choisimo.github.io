@@ -1,5 +1,5 @@
 {{ if .Site.RegularPages }}
-  {{ range where .Site.RegularPages "Type" "post" }}
+  {{ range where .Site.RegularPages "type" "post" }}
     {{ if eq .Lang "en" }}
       <div class="recent-post">
         <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
