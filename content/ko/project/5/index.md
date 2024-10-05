@@ -1,11 +1,12 @@
 ---
 title: "유저 경력 관리 웹 프로젝트"
+type: project
 date: 2024-10-06
 description: "Java, Spring Boot, React, MongoDB 등을 사용하여 개발 중인 유저 경력 관리 웹 프로젝트입니다."
 tags: ["Java", "Spring Boot", "React", "MongoDB", "Redis", "MariaDB"]
 ---
 
-<center>
+<div>
     <h1>기술 스택</h1>
     <h2>프론트엔드</h2>
     <h3>언어</h3>
@@ -16,7 +17,7 @@ tags: ["Java", "Spring Boot", "React", "MongoDB", "Redis", "MariaDB"]
     Recoil <img src="https://image.wanted.co.kr/optimize?src=https://static.codenary.co.kr/framework_logo/recoil.png&w=720&q=90" width = '32px' height='32px'><br><br>
     <h3>데이터통신</h3>
     Axios <img src="https://blog.kakaocdn.net/dn/yx608/btqF3Gtw2U6/942Qv3pHCRUhfj2RF66Hxk/img.png" width = '32px' height='32px'><br><br>
-</center>
+</div>
 
 <center>
     <h2>백엔드</h2>

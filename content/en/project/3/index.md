@@ -1,5 +1,6 @@
 ---
 title: "Robot Pathfinding Program"
+type: project
 date: 2024-10-06
 description: "A robot pathfinding program built using Bee-up, C, and Arduino."
 tags: ["C", "Arduino", "Robotics"]

@@ -1,5 +1,6 @@
 ---
 title: "User Career Management Web Project"
+type: project
 date: 2024-10-06
 description: "An ongoing web project for user career management using Java, Spring Boot, React, MongoDB, and more."
 tags: ["Java", "Spring Boot", "React", "MongoDB", "Redis", "MariaDB"]

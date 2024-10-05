@@ -1,5 +1,6 @@
 ---
 title: "Parking Management Program"
+type: project
 date: 2024-10-06
 description: "A parking management system developed using Java."
 tags: ["Java", "Parking Management"]

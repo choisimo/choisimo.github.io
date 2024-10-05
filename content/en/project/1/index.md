@@ -1,5 +1,6 @@
 ---
 title: "File Management System"
+type: project
 date: 2024-10-06
 description: "A file management system developed using Go and Java."
 tags: ["Go", "Java", "File Management"]

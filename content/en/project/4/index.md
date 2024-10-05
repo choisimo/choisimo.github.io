@@ -1,5 +1,6 @@
 ---
 title: "Linux Real-Time Locker Management System"
+type: project
 date: 2024-10-06
 description: "A real-time locker management system developed for Linux."
 tags: ["Linux", "System Programming", "Real-Time"]

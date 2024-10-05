@@ -1,5 +1,6 @@
 ---
 title: "파일 관리 시스템"
+type: project
 date: 2024-10-06
 description: "Go와 Java를 사용하여 개발된 파일 관리 시스템입니다."
 tags: ["Go", "Java", "파일 관리"]
