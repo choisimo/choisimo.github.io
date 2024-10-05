@@ -1,4 +1,4 @@
-{{ range where .Site.Pages "Section" "post" }}
+{{ range (where .Site.AllPages "Section" "post") }}
   {{ if eq .Lang "ko" }}
     <div class="recent-post">
       <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
