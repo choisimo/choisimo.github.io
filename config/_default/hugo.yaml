@@ -51,28 +51,28 @@ languages:
           weight: 603
 
         - name: "구분"
-          url: "/categories"
-          identifier: "category"
           weight: 700
+        - name: "카테고리"
+          url: "/categories"
+          parent: "구분"
+          weight: 701
         - name: "태그"
           url: "/tags"
           parent: "구분"
-          weight: 701
+          weight: 702
         - name: "저자들"
           url: "/authors"
           parent: "구분"
-          weight: 702
+          weight: 703
 
         - name: "자료"
-          url: "/document"
-          identifier: "document"
           weight: 800
         - name: "프로그램"
           url: "/document/program"
           parent: "자료"
           weight: 801
-        - name: "서문"
-          url: "/document/text"
+        - name: "문서"
+          url: "/document"
           parent: "자료"
           weight: 802
 
@@ -130,36 +130,35 @@ languages:
           weight: 603
 
         - name: "category"
-          url: "/categories"
-          identifier: "category"
           weight: 700
+        - name: "categories"
+          url: "/categories"
+          parent: "category"
+          weight: 701
         - name: "tags"
           url: "/tags"
           parent: "category"
-          weight: 701
+          weight: 702
         - name: "authors"
           url: "/authors"
           parent: "category"
-          weight: 702
+          weight: 703
 
         - name: "document"
-          url: "/document"
-          identifier: "document"
           weight: 800
         - name: "program"
           parent: "document"
           url: "/document/program"
           weight: 801
-        - name: "text"
+        - name: "documentation"
+          url: "/document"
           parent: "document"
-          url: "/document/text"
           weight: 802
 
 
         - name: "play"
-          url: "/entertainment"
-          identifier: "play"
           weight: 900
+          url: "/entertainment"
         - name: "game"
           url: "/entertainment/game"
           parent: "play"
