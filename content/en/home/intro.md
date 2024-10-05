@@ -21,6 +21,9 @@ design:
     color: '#e6ffc7'                        # 배경 이미지가 없을 때 기본 색상
     parallax: true                          # fixed background effect on desktop
     #text_color_light: true                 
+
+
+
 ---
 
 {style="font-size: 1.2rem; background: #FFB76B; background: linear-gradient(to right, #FFB76B 0%, #FFA73D 30%, #FF7C00 60%, #FF7F04 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"}
