@@ -1,6 +1,0 @@
-{{ $filter := images.Filters (dict "brightness" 0.5) }}
-{{ with resources.Get "image/background/main.jpg" }}
-  {{ with . | images.Filter $filter }}
-    <img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="">
-  {{ end }}
-{{ end }}
