@@ -184,8 +184,8 @@ main:
     parent: "document"
     url: "/document/program"
     weight: 801
-  - name: "documentation"
-    url: "/document"
+  - name: "project"
+    url: "/project"
     parent: "document"
     weight: 802
 
