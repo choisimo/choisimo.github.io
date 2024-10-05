@@ -201,7 +201,17 @@ cascade:
     share: true                   # 공유 여부
     header:
       navbar:
+      # display the navigation bar
         enable: true
+      # choose a built-in navigation blox 
+      blox: "navbar"
+      align: "center"
+      fixed_to_top: true 
+      logo:
+        # Logo text
+        text: ""
+        # Logo filename in `assets/media/` folder
+        filename: "logo.png"
     image:
       placement: 3                # 이미지 위치 (1 = 전체 너비, 2 = 외부 배치, 3 = 화면 너비)
       focal_point: 'BottomLeft'   # 이미지 초점 (Center, Top, BottomLeft, Bottom ... 등등)
