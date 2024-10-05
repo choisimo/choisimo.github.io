@@ -10,7 +10,7 @@ author: admin
 
 design:
   background:
-    # image: "/image/background/main.jpg"     # 배경으로 사용할 이미지 파일 경로
+    image: "/image/background/main.jpg"     # 배경으로 사용할 이미지 파일 경로
     filters:
         brightness: 0.6                     # Range 0 - 1 : 1 is transparent and 0 is opaque
     position: center                        # 배경 이미지의 위치 (center, contain, actual)
@@ -27,7 +27,7 @@ sections:
   - block: slider
     content: 
       slides:
-      
+
         - title: 11223344
           content: 1234
           align: center
