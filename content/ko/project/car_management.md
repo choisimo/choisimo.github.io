@@ -4,6 +4,7 @@ type: project
 date: 2024-10-06
 description: "Java를 사용하여 개발된 주차 관리 시스템입니다."
 tags: ["Java", "주차 관리"]
+weight: 20
 ---
 
 ## 개요

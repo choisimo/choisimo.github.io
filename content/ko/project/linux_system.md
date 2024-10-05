@@ -4,6 +4,7 @@ type: project
 date: 2024-10-06
 description: "리눅스를 기반으로 개발된 실시간 사물함 관리 시스템입니다."
 tags: ["Linux", "시스템 프로그래밍", "실시간"]
+weight: 40
 ---
 
 ## 개요

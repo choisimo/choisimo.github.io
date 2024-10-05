@@ -4,6 +4,7 @@ type: project
 date: 2024-10-06
 description: "Java, Spring Boot, React, MongoDB 등을 사용하여 개발 중인 유저 경력 관리 웹 프로젝트입니다."
 tags: ["Java", "Spring Boot", "React", "MongoDB", "Redis", "MariaDB"]
+weight: 50
 ---
 
 <div>

@@ -4,6 +4,7 @@ type: project
 date: 2024-10-06
 description: "Bee-up, C, Arduino를 사용하여 구축된 로봇 길 찾기 프로그램입니다."
 tags: ["C", "Arduino", "로봇공학"]
+weight: 30
 ---
 
 ## 개요
