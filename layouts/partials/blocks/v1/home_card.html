@@ -1,22 +1,20 @@
 <div class="card-container">
-    {{ range $index, $element := first 9 (where .Site.RegularPages ".Params.type" "post") }}
-      <div class="card">
-        <div class="card-image">
-          {{ with $element.Params.image }}
-            <img src="{{ . }}" alt="{{ $element.Title }}">
-          {{ else }}
-            <img src="https://via.placeholder.com/400" alt="Placeholder">
-          {{ end }}
-        </div>
-        <div class="card-content">
-          <h3 class="card-title"><a href="{{ $element.Permalink }}">{{ $element.Title }}</a></h3>
-          <p class="card-summary">{{ $element.Summary }}</p>
-        </div>
+  {{ range $index, $element := first 9 (where (where .Site.RegularPages "Section" "post") "Lang" "ko") }}
+    <div class="card">
+      <div class="card-image">
+        {{ with $element.Params.image }}
+          <img src="{{ . }}" alt="{{ $element.Title }}">
+        {{ else }}
+          <img src="https://via.placeholder.com/400" alt="Placeholder">
+        {{ end }}
       </div>
-      {{ if eq (mod (add $index 1) 3) 0 }}
-        <div class="card-row-separator"></div>
-      {{ end }}
+      <div class="card-content">
+        <h3 class="card-title"><a href="{{ $element.Permalink }}">{{ $element.Title }}</a></h3>
+        <p class="card-summary">{{ $element.Summary }}</p>
+      </div>
+    </div>
+    {{ if eq (mod (add $index 1) 3) 0 }}
+      <div class="card-row-separator"></div>
     {{ end }}
-  </div>
-  
-  
+  {{ end }}
+</div>
