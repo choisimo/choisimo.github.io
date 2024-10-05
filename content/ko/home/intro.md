@@ -19,6 +19,81 @@ design:
     color: '#e6ffc7'                        # 배경 이미지가 없을 때 기본 색상
     parallax: true                          # fixed background effect on desktop
     #text_color_light: true                  
+
+      
+# image filename : default :: static/
+sections:  
+  
+  - block: slider
+    content: 
+      slides:
+      
+        - title: 11223344
+          content: 1234
+          align: center
+          background:
+            image:
+              filename: /images/home/slider1.jpg
+              filters:
+                brightness: 0.5
+            position: center
+            color: '#000'
+
+
+        - title: 11223344
+          content: 1234
+          align: center
+          background:
+            image:
+              filename: /images/home/slider2.jpg
+              filters:
+                brightness: 0.5
+            position: center
+            #color
+
+
+        - title: 11223344
+          content: 1234
+          align: center
+          background:
+            image:
+              filename: /images/home/slider3.jpg
+              filters:
+                brightness: 0.5
+            position: center
+            #color
+
+
+        - title: 11223344
+          content: 1234
+          align: center
+          background:
+            image:
+              filename: /images/home/slider4.jpg
+              filters:
+                brightness: 0.5
+            position: center
+            #color
+
+
+        - title: 11223344
+          content: 1234
+          align: center
+          background:
+            image:
+              filename: /images/home/slider5.jpg
+              filters:
+                brightness: 0.5
+            position: center
+            #color
+
+
+    design: 
+      slide_height: "500px"
+      slide_width: "100px"
+      is_fullscreen: false
+      loop: true
+      interval: 2000
 ---
 
 {style="font-size: 1.2rem; background: #FFB76B; background: linear-gradient(to right, #FFB76B 0%, #FFA73D 30%, #FF7C00 60%, #FF7F04 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"}
