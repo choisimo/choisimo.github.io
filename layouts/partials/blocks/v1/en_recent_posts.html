@@ -1,9 +1,12 @@
-<ul>
-    {{ range first 10 (where .Site.RegularPages "Type" "post") }}
-      <li>
-        <a href="{{ .Permalink }}">{{ .Title }}</a>
-        <p>{{ .Date.Format "2006-01-02" }}</p>
-      </li>
+{{ if .Site.RegularPages }}
+  {{ range where .Site.RegularPages "Type" "post" }}
+    {{ if eq .Lang "en" }}
+      <div class="recent-post">
+        <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+        <p>{{ .Summary }}</p>
+      </div>
     {{ end }}
-  </ul>
-  
+  {{ end }}
+{{ else }}
+  <p>게시물이 없습니다.</p>
+{{ end }}
