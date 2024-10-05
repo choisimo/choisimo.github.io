@@ -25,7 +25,7 @@ experience:
   - title: C-lang study
     company: University JBNU
     company_url: ''
-    company_logo: ''
+    company_logo: org-x
     location: Jeonju-si
     date_start: '2019-03-02'
     date_end: ''
@@ -36,7 +36,7 @@ experience:
   - title: Python Programming Study
     company: University JBNU
     company_url: ''
-    company_logo: ''
+    company_logo: org-x
     location: Jeonju-si
     date_start: '2020-03-02'
     date_end: ''
@@ -48,7 +48,7 @@ experience:
   - title: Shell Scripting Study
     company: University JBNU
     company_url: ''
-    company_logo: ''
+    company_logo: org-x
     location: Jeonju-si
     date_start: '2020-09-01'
     date_end: ''
@@ -60,7 +60,7 @@ experience:
   - title: JavaScript & Frontend Development Study
     company: University JBNU
     company_url: ''
-    company_logo: ''
+    company_logo: org-x
     location: Jeonju-si
     date_start: '2021-03-02'
     date_end: ''
@@ -72,7 +72,7 @@ experience:
   - title: Spring Boot & Web Development Study
     company: University JBNU
     company_url: ''
-    company_logo: ''
+    company_logo: org-x
     location: Jeonju-si
     date_start: '2021-09-01'
     date_end: ''
@@ -85,7 +85,7 @@ experience:
   - title: JSP & Backend Development Study
     company: University JBNU
     company_url: ''
-    company_logo: ''
+    company_logo: org-x
     location: Jeonju-si
     date_start: '2022-03-02'
     date_end: ''
@@ -97,7 +97,7 @@ experience:
   - title: Database Management & SQL Study
     company: University JBNU
     company_url: ''
-    company_logo: ''
+    company_logo: org-x
     location: Jeonju-si
     date_start: '2022-09-01'
     date_end: ''
