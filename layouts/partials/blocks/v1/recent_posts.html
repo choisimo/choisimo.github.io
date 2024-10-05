@@ -1,6 +1,0 @@
-{{ range (where .Site.RegularPages "Section" "post") }}
-  <div class="post">
-    <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
-    <p>{{ .Summary }}</p>
-  </div>
-{{ end }}

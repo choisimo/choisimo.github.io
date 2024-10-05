@@ -1,6 +1,6 @@
 ---
-widget: recent_posts
+widget: en_recent_posts
 weight: 30
 ---
 
-{{ partial "recent_posts.html" . }}
+{{ partial "en_recent_posts.html" . }}

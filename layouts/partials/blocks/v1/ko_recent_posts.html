@@ -1,0 +1,8 @@
+{{ range where .Site.Pages "Section" "post" }}
+  {{ if eq .Lang "ko" }}
+    <div class="recent-post">
+      <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+      <p>{{ .Summary }}</p>
+    </div>
+  {{ end }}
+{{ end }}

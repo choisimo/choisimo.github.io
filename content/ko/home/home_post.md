@@ -1,6 +1,6 @@
 ---
-widget: recent_posts
+widget: ko_recent_posts
 weight: 30
 ---
 
-{{ partial "recent_posts.html" . }}
+{{ partial "ko_recent_posts.html" . }}
