@@ -18,7 +18,7 @@ design:
     repeat: no-repeat                       # 배경 이미지가 반복되지 않도록 설정
     color: '#e6ffc7'                        # 배경 이미지가 없을 때 기본 색상
     parallax: true                          # fixed background effect on desktop
-    text_color_light: true                  
+    #text_color_light: true                  
 
 #design:
 #  background:

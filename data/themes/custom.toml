@@ -15,9 +15,9 @@ name = "Starter Blog"
 
 [dark]
   # Primary color for dark mode
-  primary = "#bbdefb"               # 어두운 모드의 주요 색상
-  link = "#99afc2"                  # 링크 색상
-  link_hover = "#bbdefb"            # 링크에 마우스를 올렸을 때의 색상
+  primary = "#bcdefe"               # 어두운 모드의 주요 색상
+  link = "#99bfc4"                  # 링크 색상
+  link_hover = "#bcdefb"            # 링크에 마우스를 올렸을 때의 색상
   background = "rgb(26, 32, 44)"    # 배경색
   home_section_odd = "rgb(26, 32, 44)" # 짝수 섹션 배경색
   home_section_even = "rgb(26, 32, 44)" # 홀수 섹션 배경색
