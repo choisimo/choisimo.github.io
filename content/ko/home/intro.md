@@ -37,6 +37,6 @@ design:
 |**소속**|전북대학교 &ensp;[링크](https://www.jbnu.ac.kr/kor/)|
 |**전공**|컴퓨터 공학부 &ensp;[링크](https://csai.jbnu.ac.kr/csai/index.do)|
 |**관심**|서버, 네트워크, 자동화 등|
-|**연락**|[![](/assets/media/icons/envelope-at.svg)](mailto:nodove@nodove.com) &ensp; [![](/assets/media/icons/box-arrow-up-right.svg)](nodove.com) &ensp; [![](/assets/media/icons/chat-left.svg)](chat.career-block.com?receiver=nodove) &ensp; [![](/assets/media/icons/iconmonstr-github-1.svg)](https://choisimo.github.com)|
-|**스택**|[![](/assets/media/icons/code.svg)]()|
+|**연락**|[![](/icons/envelope-at.svg)](mailto:nodove@nodove.com) &ensp; [![](/icons/box-arrow-up-right.svg)](nodove.com) &ensp; [![](/icons/chat-left.svg)](chat.career-block.com?receiver=nodove) &ensp; [![](/icons/iconmonstr-github-1.svg)](https://choisimo.github.com)|
+|**스택**|[![](/icons/code.svg)]()|
 ||
