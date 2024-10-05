@@ -5,7 +5,8 @@ description: "A tale of time, redemption, and an hourglass that controls the fut
 tags: ["Fantasy", "Time Travel"]
 ---
 
-<div style="text-align: justify">
+{{< justify >}}
+
 In the heart of the desert, where the sands stretched endlessly towards the horizon, there existed a legend—one of an hourglass that could bend time to its master's will. It was said that whoever held the hourglass could reverse the past, pause the present, or glimpse the future. But with such power came a price.
 
 Aric had heard the stories all his life, passed down through generations. They were tales meant to frighten children, or so he thought, until he found it. The hourglass was buried deep beneath the sands, hidden away from those who sought to abuse its power. Aric's fingers trembled as he unearthed it, the glass shimmering under the harsh desert sun.
@@ -19,4 +20,6 @@ Time itself seemed to ripple. The wind halted mid-gust, the sun froze in the sky
 There she was, just as he remembered, standing at the crossroads with a look of sorrow in her eyes. Aric ran towards her, calling out her name. But as he approached, the sand in the hourglass fell faster, and he realized the truth: time could not be changed without consequence.
 
 With each grain that fell, a part of his future vanished. The more he tried to fix the past, the more of himself he lost. And as the last grain of sand dropped, Aric stood alone in the desert, his past corrected, but his future forever erased.
-</div>
+
+{{< /justify >}}
+

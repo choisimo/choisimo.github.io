@@ -5,7 +5,8 @@ description: "A historical look at the Intel 486, the microprocessor that change
 tags: ["Intel", "486", "Computing History"]
 ---
 
-<div style="text-align: justify">
+{{< justify >}}
+
 In the late 1980s, the world of personal computing was on the brink of a revolution. Intel, already a leading name in microprocessor technology, was about to launch what would become one of the most significant advancements in computer hardware—the Intel 486 microprocessor. Released in 1989, the Intel 486 was not just a faster chip; it was a leap forward in the architecture of personal computers, offering improved performance, multitasking, and power efficiency that reshaped the industry.
 
 Prior to the 486, Intel's processors, such as the 386, had already established a foundation for modern computing. However, the 486 introduced a number of groundbreaking features that set it apart. For the first time, an Intel chip integrated the floating-point unit (FPU) directly onto the same die as the central processing unit (CPU). This integration allowed for faster mathematical calculations, particularly in scientific and engineering applications, where floating-point operations were essential.
@@ -17,4 +18,6 @@ The Intel 486 came in various models, with clock speeds ranging from 20 MHz to 1
 By the mid-1990s, the Intel 486 had become the standard in home and office computing. Its ability to run software more smoothly, handle multitasking, and perform advanced calculations made it a favorite among both enthusiasts and professionals alike. Though it has long since been replaced by faster and more powerful processors, the legacy of the Intel 486 endures as a cornerstone in the history of computing.
 
 Today, the 486 is remembered not just as a piece of hardware, but as a symbol of technological progress—a time when computers became faster, more reliable, and accessible to a wider audience. It was a processor that changed the world, laying the foundation for the high-performance, multitasking machines we rely on today.
-</div>
+
+{{< /justify >}}
+

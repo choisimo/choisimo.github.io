@@ -5,7 +5,8 @@ description: "A short story about the mysterious whispers in a forgotten village
 tags: ["Fiction", "Mystery"]
 ---
 
-<div style="text-align: justify">
+{{< justify >}}
+
 In the small, forgotten village of Eldershade, silence was more than just an absence of sound—it was a presence. The villagers had grown accustomed to the eerie quiet that draped over the town like a heavy fog, but none dared to speak of the whispers that occasionally broke the stillness. They weren't voices of the living, nor the wind's gentle hum, but something far more ancient.
 
 One night, young Elara stood at the edge of the forest, her heart pounding in sync with the soft rustling of leaves. The whispers came again, this time clearer, more insistent. She couldn't understand the words, but their tone was unmistakable—a call, a beckoning from deep within the woods. 
@@ -19,4 +20,6 @@ And then, as suddenly as they began, the whispers stopped. Elara found herself i
 "Welcome, Elara. We've been waiting for you."
 
 The forest fell silent once more, but this time, the silence felt alive.
-</div>
+
+{{< /justify >}}
+
