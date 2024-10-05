@@ -1,8 +1,8 @@
-{{ range (where .Site.AllPages "Section" "post") }}
-  {{ if eq .Lang "ko" }}
-    <div class="recent-post">
-      <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
-      <p>{{ .Summary }}</p>
-    </div>
+<ul>
+  {{ range first 10 (where .Site.RegularPages "Type" "post") }}
+    <li>
+      <a href="{{ .Permalink }}">{{ .Title }}</a>
+      <p>{{ .Date.Format "2006-01-02" }}</p>
+    </li>
   {{ end }}
-{{ end }}
+</ul>
