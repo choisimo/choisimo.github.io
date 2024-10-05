@@ -1,5 +1,4 @@
 ---
-widget: "home_card"
 weight: 40
 ---
 
