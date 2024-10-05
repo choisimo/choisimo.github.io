@@ -13,6 +13,6 @@ type: post
 #     parallax: true                          # fixed background effect on desktop
 #     text_color_light: true                  
 image: 
-    placement: 3
+    placement: 1
     focal_point: 'Center'
 ---

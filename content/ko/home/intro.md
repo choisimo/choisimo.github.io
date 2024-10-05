@@ -19,7 +19,7 @@ design:
     color: '#F5F5F5'                        # 배경 이미지가 없을 때 기본 색상
     parallax: true                          # fixed background effect on desktop
     text_color_light: true                  
-    
+
 #design:
 #  background:
 #    color: '#090a0b'
@@ -29,6 +29,14 @@ design:
 #  css_class: fullscreen
 ---
 
-
 {style="font-size: 1.2rem; background: #FFB76B; background: linear-gradient(to right, #FFB76B 0%, #FFA73D 30%, #FF7C00 60%, #FF7F04 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"}
 
+### 최시몬
+||||
+|--|--|--|
+|**소속**|전북대학교 &ensp;[링크](https://www.jbnu.ac.kr/kor/)|
+|**전공**|컴퓨터 공학부 &ensp;[링크](https://csai.jbnu.ac.kr/csai/index.do)|
+|**관심**|서버, 네트워크, 자동화 등|
+|**연락**|[![](/assets/media/icons/envelope-at.svg)](mailto:nodove@nodove.com) &ensp; [![](/assets/media/icons/box-arrow-up-right.svg)](nodove.com) &ensp; [![](/assets/media/icons/chat-left.svg)](chat.career-block.com?receiver=nodove) &ensp; [![](/assets/media/icons/iconmonstr-github-1.svg)](https://choisimo.github.com)|
+|**스택**|[![](/assets/media/icons/code.svg)]()|
+||

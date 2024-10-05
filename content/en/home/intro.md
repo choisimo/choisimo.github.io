@@ -24,3 +24,19 @@ design:
 
 {style="font-size: 1.2rem; background: #FFB76B; background: linear-gradient(to right, #FFB76B 0%, #FFA73D 30%, #FF7C00 60%, #FF7F04 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"}
 
+
+### CHOI SI MON
+||||
+|--|--|--|
+|**Affiliation**|Jeonbuk National University &ensp;[link](https://www.jbnu.ac.kr/kor/)|
+|**Major**|Department of Computer Engineering &ensp;[link](https://csai.jbnu.ac.kr/csai/index.do)|
+|**Interests**|Server, Network, Automation, etc.|
+|**Contact**|[![](/assets/media/icons/envelope-at.svg)](mailto:nodove@nodove.com) &ensp; [![](/assets/media/icons/box-arrow-up-right.svg)](nodove.com) &ensp; [![](/assets/media/icons/chat-left.svg)](chat.career-block.com?receiver=nodove) &ensp; [![](/assets/media/icons/iconmonstr-github-1.svg)](https://choisimo.github.com)|
+|**Tech Stack**|[![](/assets/media/icons/code.svg)]()|
+||
+
+
+
+
+
+

@@ -54,5 +54,5 @@ social:
 email: "admin@nodove.com"
 ---
 
-![pdf](/icons/file-earmark-pdf.svg)
+![pdf](/assets/media/icons/file-earmark-pdf.svg)
 {{< icon name="download" pack="fas" >}} {{% staticref "/files/linux.pdf" %}} 다운로드 {{% /staticref %}} PDF
