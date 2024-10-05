@@ -27,6 +27,82 @@ design:
   flip_alt_rows: true
   background: {}
   spacing: {padding: [0, 0, 0, 0]}
+
+
+# image filename : default :: static/
+section:  
+  - block: slider
+    content: 
+      slides:
+        - title: 11223344
+          content: 1234
+          align: center
+          background:
+            image:
+              filename: /images/home/slider1.jpg
+              filters:
+                brightness: 0.5
+            position: center
+            #color
+
+
+        - title: 11223344
+          content: 1234
+          align: center
+          background:
+            image:
+              filename: /images/home/slider2.jpg
+              filters:
+                brightness: 0.5
+            position: center
+            #color
+
+
+
+        - title: 11223344
+          content: 1234
+          align: center
+          background:
+            image:
+              filename: /images/home/slider3.jpg
+              filters:
+                brightness: 0.5
+            position: center
+            #color
+
+
+
+        - title: 11223344
+          content: 1234
+          align: center
+          background:
+            image:
+              filename: slider1.jpg
+              filters:
+                brightness: 0.5
+            position: center
+            #color
+
+
+
+
+        - title: 11223344
+          content: 1234
+          align: center
+          background:
+            image:
+              filename: slider1.jpg
+              filters:
+                brightness: 0.5
+            position: center
+            #color
+
+
+    design: 
+      slide_height: "500px"
+      slide_width: "100px"
+      is_fullscreen: false
+      loop: true
+      interval: 2000
 ---
 
-portfolio
