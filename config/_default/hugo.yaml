@@ -18,21 +18,16 @@ languages:
     contentDir: content/ko
     weight: 1
     title: "nodove 블로그"
-    pagination:
-      disaableAliases: true
-      pagerSize: 10          # Returns the number of pages per pager
-      path: page        
+    params:
+      pagination: 10
   en:
     languageCode: en-us
     languageName: English
     contentDir: content/en
     weight: 2
     title: "nodove blog"
-    pagination:
-      disaableAliases: true
-      pagerSize: 10          # Returns the number of pages per pager
-      path: page
-
+    params:
+      pagination: 10
 
 defaultContentLanguage: ko
 hasCJKLanguage: false

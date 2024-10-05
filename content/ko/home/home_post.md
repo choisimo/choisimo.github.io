@@ -1,5 +1,5 @@
 ---
-widget: home_post
+widget: recent_posts
 weight: 30
 ---
 
