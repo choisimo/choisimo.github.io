@@ -1,10 +1,10 @@
 ---
-title: "텍스트 정렬"
+title: "삶의 균형"
 date: "2024-10-05"
 draft: false
-description: "텍스트 정렬"
+description: "삶의 균형"
 tags:
-  - "study"
+  - "dream"
   - "align"
   - "hugo"
   - "blog"
@@ -13,10 +13,9 @@ categories:
 type: post
 ---
 
-hugo text justify align 하는 방법
+삶의 균형 - 창작물 
 
 <!--more-->
-```text
-일반적인 MARKDOWN 파일은 불가능 하므로 인라인 사용..
-```
-<div style="text-align: justify"> 양쪽 정렬 하는 방법 </div>
+<div style="text-align: justify"> 
+삶에서 균형을 찾는 것은 호수에서 배를 조종하는 법을 배우는 것과 같습니다. 고요한 날에는 물결을 따라 부드럽게 미끄러지며 물 밑에서 느껴지는 부드러운 리듬을 느낄 수 있습니다. 폭풍이 몰아치는 날에는 꽉 붙잡고 돛을 조정하며 넘어지지 않기 위해 싸워야 합니다. 두 가지 경험 모두 필요합니다. 이들은 우리에게 회복력과 고요한 순간에 대한 감사함을 가르쳐 줍니다. 인생은 파도를 따라 조정하고 혼란 속에서도 평화를 찾는 과정입니다. 균형은 한 번 이루는 것이 아니라, 날마다 끊임없이 노력해야 하는 것입니다.
+ </div>

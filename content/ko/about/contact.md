@@ -9,7 +9,7 @@ headless: true
 # Order that this section appears on the page.
 weight: 50
 
-title: 연락 방법
+title: way to follow..
 subtitle:
 
 content:
