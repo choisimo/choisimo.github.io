@@ -13,73 +13,19 @@ draft: false
 
 ## 기술 스택
 
-### 프론트엔드
-
-#### 언어
-- **JavaScript**  
-  ![JavaScript](https://image.wanted.co.kr/optimize?src=https://static.codenary.co.kr/framework_logo/javascript.png&w=720&q=90){ width=150 height=150 }
-  
-- **TypeScript**  
-  ![TypeScript](https://image.wanted.co.kr/optimize?src=https://static.codenary.co.kr/framework_logo/typescript.png&w=720&q=90){ width=150 height=150 }
-
-#### 라이브러리
-- **React**  
-  ![React](https://image.wanted.co.kr/optimize?src=https://static.codenary.co.kr/framework_logo/reactjs.png&w=720&q=90){ width=150 height=150 }
-
-- **Recoil**  
-  ![Recoil](https://image.wanted.co.kr/optimize?src=https://static.codenary.co.kr/framework_logo/recoil.png&w=720&q=90){ width=150 height=150 }
-
-#### 데이터 통신
-- **Axios**  
-  ![Axios](https://blog.kakaocdn.net/dn/yx608/btqF3Gtw2U6/942Qv3pHCRUhfj2RF66Hxk/img.png){ width=150 height=150 }
-
-### 백엔드
-
-#### 언어
-- **Java 17**  
-  ![Java](https://logowik.com/content/uploads/images/731_java.jpg){ width=150 height=150 }
-
-#### 라이브러리
-- **Spring Boot 3.2.4**  
-  ![Spring Boot](https://image.wanted.co.kr/optimize?src=https://static.codenary.co.kr/framework_logo/spring.png&w=720&q=90){ width=150 height=150 }
-
-- **Spring Data JPA**  
-  ![Spring Data JPA](https://blog.retrotv.dev/content/images/2022/08/spring-data-logo.png){ width=150 height=150 }
-
-- **JWT**  
-  ![JWT](https://cdn.worldvectorlogo.com/logos/jwt-3.svg){ width=150 height=150 }
-
-#### 데이터베이스
-- **MariaDB**  
-  ![MariaDB](https://image.wanted.co.kr/optimize?src=https://static.codenary.co.kr/framework_logo/awsmariadb.png&w=150&q=90){ width=150 height=150 }
-
-- **Redis**  
-  ![Redis](https://image.wanted.co.kr/optimize?src=https://static.codenary.co.kr/framework_logo/redis.png&w=150&q=90){ width=150 height=150 }
-
-#### 서버 기반
-- **GCP**  
-  ![GCP](https://cyclr.com/wp-content/uploads/2022/05/ext-2.png){ width=150 height=150 }
-
-### 기타
-
-#### 버전 관리
-- **GitHub**  
-  ![GitHub](https://upload.wikimedia.org/wikipedia/commons/c/c2/GitHub_Invertocat_Logo.svg){ width=150 height=150 }
-
-#### 운영체제
-- **Linux(Ubuntu)**  
-  ![Linux](https://i.namu.wiki/i/dtAcheXR2vN0JVNQ7mXFsIx_ciRBGYu-DJBnBwtJOV8r_-Y_sDTtyt67TGEFlh_pYjMm3da0qxXpUq4ehtgUcA.svg){ width=150 height=150 }
-
-#### 서버 관리
-- **Docker**  
-  ![Docker](https://blog.kakaocdn.net/dn/bfqk0W/btsrDfiXt8f/Z4I2xyUAo80onGkNtxqfk0/img.webp){ width=150 height=150 }
-
-#### 테스트
-- **Postman**  
-  ![Postman](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgPT5cgE3Wofm3b-FoCwySaAZ6iL3uYkeuOrB-WKJSTg&s){ width=150 height=150 }
-
-- **JUnit 5**  
-  ![JUnit](https://blog.kakaocdn.net/dn/N9nlJ/btrmSxa0CyX/xRAX5RqQAABDEQzavCujN0/img.png){ width=150 height=150 }
+| **분야**          | **기술 스택**                                                   |
+|-------------------|-----------------------------------------------------------------|
+| **프론트엔드**     | JavaScript, TypeScript                                          |
+| **라이브러리**     | React, Recoil                                                   |
+| **데이터 통신**    | Axios                                                           |
+| **백엔드 언어**    | Java 17                                                         |
+| **백엔드 라이브러리** | Spring Boot 3.2.4, Spring Data JPA, JWT                         |
+| **데이터베이스**   | MariaDB, Redis                                                  |
+| **서버 기반**      | GCP                                                             |
+| **버전 관리**      | GitHub                                                          |
+| **운영체제**       | Linux(Ubuntu)                                                   |
+| **서버 관리**      | Docker                                                          |
+| **테스트 도구**    | Postman, JUnit 5                                                |
 
 ## 주요 작업 내용
 
@@ -110,4 +56,3 @@ draft: false
 ### SSE 프로토콜을 활용한 실시간 알림 시스템 개발 중
 - SSE 프로토콜을 사용하여 실시간 알림 시스템 구현 중.
 - Redis PUB/SUB과 연동하여 시스템 효율성 향상 작업 중.
-
