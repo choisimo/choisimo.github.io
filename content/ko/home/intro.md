@@ -103,8 +103,8 @@ design:
 ### 최시몬
 ||||
 |--|--|--|
-|**소속**|전북대학교 &ensp;[링크](https://www.jbnu.ac.kr/kor/)|
-|**전공**|컴퓨터 공학부 &ensp;[링크](https://csai.jbnu.ac.kr/csai/index.do)|
+|**소속**|전북대학교 &ensp;{{< cta cta_text="JBNU" cta_link="https://www.jbnu.ac.kr/kor" cta_new_tab="false" >}}|
+|**전공**|컴퓨터 공학부 &ensp;{{< cta cta_text="CS" cta_link="https://csai.jbnu.ac.kr/csai/index.do" cta_new_tab="false" >}}|
 |**관심**|서버, 네트워크, 자동화 등|
 |**연락**|[![이메일](/icons/envelope-at.svg)](mailto:nodove@nodove.com) &ensp; [![사이트](/icons/box-arrow-up-right.svg)](nodove.com) &ensp; [![채팅](/icons/chat-left.svg)](chat.career-block.com?receiver=nodove) &ensp; [![깃허브](/icons/iconmonstr-github-1.svg)](https://choisimo.github.com)|
 |**스택**|[![](/icons/code.svg)]()|
@@ -113,15 +113,22 @@ design:
 
 
 
-{{< cta cta_text="JBNU" cta_link="https://www.jbnu.ac.kr/kor" cta_new_tab="false" >}}
+
+{{ < youtube e4we18zEv-k > }}
+{{< audio src="/files/sound1.mp3" >}}
+{{< video src="https://videos.pexels.com/video-files/27878573/12253181_1440_2560_25fps.mp4" controls="yes" >}}
+
+
+
+
+
+
+
+
+
+
 
 
 {{% callout warning %}}
-callout note!!
+무단 배포 금지!!
 {{% /callout %}}
-
-
-
-{{ < youtube e4we18zEv-k > }}
-{{< audio src="static/files/sound1.mp3" >}}
-{{< video src="https://videos.pexels.com/video-files/27878573/12253181_1440_2560_25fps.mp4" controls="yes" >}}

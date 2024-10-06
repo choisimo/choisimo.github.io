@@ -32,23 +32,32 @@ design:
 ### CHOI SI MON
 ||||
 |--|--|--|
-|**Affiliation**|Jeonbuk National University &ensp;[link](https://www.jbnu.ac.kr/kor/)|
-|**Major**|Department of Computer Engineering &ensp;[link](https://csai.jbnu.ac.kr/csai/index.do)|
+|**Affiliation**|Jeonbuk National University &ensp;{{< cta cta_text="JBNU" cta_link="https://www.jbnu.ac.kr/kor" cta_new_tab="false" >}}|
+|**Major**|Department of Computer Engineering &ensp;{{< cta cta_text="CS" cta_link="https://csai.jbnu.ac.kr/csai/index.do" cta_new_tab="false" >}}|
 |**Interests**|Server, Network, Automation, etc.|
 |**Contact**|[![email](/icons/envelope-at.svg)](mailto:nodove@nodove.com) &ensp; [![site](/icons/box-arrow-up-right.svg)](nodove.com) &ensp; [![chat](/icons/chat-left.svg)](chat.career-block.com?receiver=nodove) &ensp; [![github](/icons/iconmonstr-github-1.svg)](https://choisimo.github.com)|
 |**Tech Stack**|[![](/icons/code.svg)]()|
 ||
 
 
-{{< cta cta_text="JBNU" cta_link="https://www.jbnu.ac.kr/kor" cta_new_tab="false" >}}
-
-
-{{% callout warning %}}
-callout note!!
-{{% /callout %}}
 
 
 
 {{ < youtube e4we18zEv-k > }}
-{{< audio src="static/files/sound1.mp3" >}}
+{{< audio src="/files/sound1.mp3" >}}
 {{< video src="https://videos.pexels.com/video-files/27878573/12253181_1440_2560_25fps.mp4" controls="yes" >}}
+
+
+
+
+
+
+
+
+
+
+
+
+{{% callout warning %}}
+warn!
+{{% /callout %}}
