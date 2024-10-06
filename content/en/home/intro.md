@@ -40,7 +40,15 @@ design:
 ||
 
 
+{{< cta cta_text="JBNU" cta_link="https://www.jbnu.ac.kr/kor" cta_new_tab="false" >}}
+
+
+{{% callout warning %}}
+callout note!!
+{{% /callout %}}
 
 
 
-
+{{ < youtube e4we18zEv-k > }}
+{{< audio src="static/files/sound1.mp3" >}}
+{{< video src="https://videos.pexels.com/video-files/27878573/12253181_1440_2560_25fps.mp4" controls="yes" >}}
