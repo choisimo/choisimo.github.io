@@ -35,4 +35,7 @@ content:
     longitude: '127.0811'
 ---
 
+
+
 [연락](https://choisimo.github.io/contact/)
+[연락]({{< relref "/contact" >}})

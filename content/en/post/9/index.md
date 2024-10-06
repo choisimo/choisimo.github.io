@@ -20,6 +20,9 @@ By default, the Nginx configuration file is located at `/etc/nginx/nginx.conf`, 
 ```
 
 ### configuration of File Structure
+
+{{< spoiler text="click to see code" >}}
+
 ```code
 # Main context
 user www-data;
@@ -37,15 +40,15 @@ http {
     sendfile on;
     keepalive_timeout 65;
 
-    # Gzip configuration
+    # Gzip 설정
     gzip on;
 
     # Server block
     server {
-        listen 80;  # HTTP port
+        listen 80;  # HTTP 포트
         server_name example.com www.example.com;
 
-        # Log file paths
+        # 로그 파일 경로
         access_log /var/log/nginx/example.access.log;
         error_log /var/log/nginx/example.error.log;
 
@@ -55,12 +58,12 @@ http {
             index index.html index.htm;
         }
 
-        # Custom configuration for a specific path
+        # 특정 경로에 대한 설정
         location /images/ {
             alias /var/www/images/;
         }
 
-        # Reverse proxy configuration
+        # 리버스 프록시 설정
         location /api/ {
             proxy_pass http://localhost:3000;
             proxy_set_header Host $host;
@@ -72,6 +75,7 @@ http {
 }
 
 ```
+{{< /spoiler >}}
 
 
 

@@ -35,3 +35,4 @@ content:
 ---
 
 [contact](https://choisimo.github.io/contact/)
+[contact]({{< relref "/contact" >}})
