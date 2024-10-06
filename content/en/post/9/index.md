@@ -5,7 +5,6 @@ description: "A guide to the structure and writing methods of the Nginx configur
 tags: ["Nginx", "Configuration", "Web Server"]
 ---
 
-# Nginx Configuration File Structure and How to Write It
 
 Nginx is a high-performance web server, and the server's behavior can be finely controlled through its configuration file (`nginx.conf`). This document covers the basic structure and writing methods for the Nginx configuration file.
 

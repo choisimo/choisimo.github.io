@@ -5,7 +5,6 @@ description: "Nginx 설정 파일(conf)의 구조와 작성 방법에 대한 가
 tags: ["Nginx", "Configuration", "Web Server"]
 ---
 
-# Nginx 설정 파일 구조 및 작성 방법
 
 Nginx는 고성능 웹 서버로, 서버 설정 파일(`nginx.conf`)을 통해 서버의 동작을 세밀하게 제어할 수 있습니다. 이 문서에서는 Nginx 설정 파일의 기본 구조와 작성 방법을 다룹니다.
 

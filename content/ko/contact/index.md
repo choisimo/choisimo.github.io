@@ -2,6 +2,11 @@
 title: 연락
 ---
 
+
+{{< video src="https://videos.pexels.com/video-files/18239063/18239063-sd_640_360_24fps.mp4" controls="yes" >}}
+
+
+
 ||||
 |--|--|--|
 |**Affiliation**|Jeonbuk National University &ensp;[link](https://www.jbnu.ac.kr/kor/)|
