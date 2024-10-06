@@ -81,6 +81,8 @@ http {
 
 ### SSL 설정
 
+{{< spoiler text="클릭해서 SSL 설정 코드 보기" >}}
+
 ```code
 server {
     listen 443 ssl;
@@ -98,10 +100,13 @@ server {
     }
 }
 ```
+{{< /spoiler >}}
 
 
 
 ### Redirect 설정
+
+{{< spoiler text="클릭해서 Redirect 설정 보기" >}}
 ```code
 server {
     listen 80;
@@ -109,9 +114,13 @@ server {
     return 301 https://$host$request_uri;
 }
 ```
+{{< /spoiler >}}
 
 
 ### Nginx 설정 파일 적용
+
+{{< spoiler text="클릭해서 Nginx 설정 파일 적용 방법 보기" >}}
+
 ```code
 # 설정 파일 문법 확인
 sudo nginx -t
@@ -123,3 +132,5 @@ sudo systemctl reload nginx
 sudo systemctl restart nginx
 
 ```
+
+{{< /spoiler >}}

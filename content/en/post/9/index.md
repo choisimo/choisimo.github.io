@@ -80,6 +80,9 @@ http {
 
 
 ### SSL configuration
+
+{{< spoiler text="click to see SSL configuration" >}}
+
 ```code
 server {
     listen 443 ssl;
@@ -98,12 +101,16 @@ server {
 }
 
 ```
+{{< /spoiler >}}
 
 
 
 
 
 ### Redirect configuration
+
+{{< spoiler text="click to see Redirect configuration" >}}
+
 ```code
 server {
     listen 80;
@@ -111,6 +118,7 @@ server {
     return 301 https://$host$request_uri;
 }
 ```
+{{< /spoiler >}}
 
 
 
