@@ -114,7 +114,6 @@ design:
 
 
 
-{{ < youtube e4we18zEv-k > }}
 {{< audio src="/files/sound1.mp3" >}}
 {{< video src="https://videos.pexels.com/video-files/28371212/12369246_640_360_30fps.mp4" controls="yes" >}}
 
