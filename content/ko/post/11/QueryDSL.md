@@ -3,7 +3,7 @@ title: "SpringBoot 3.x.x + QueryDSL 6.x.x 사용기"
 date: 2025-01-16
 description: "스프링부트 3.x.x 버전에 QueryDSL 6.x.x 최신 버전 사용 방법"
 tags: ["QueryDSL","스프링부트","springboot+queryDSL","쿼리DSL",openfeign.querydsl","querydsl fork", "queryDSL openfeign",
-"io.github.openfeign.querydsl","최신 queryDSL 사용하는 방법","https://github.com/OpenFeign/querydsl"
+"io.github.openfeign.querydsl","최신 queryDSL 사용하는 방법","https://github.com/OpenFeign/querydsl"]
 ---
 
 ### [OpenFeign querydsl 깃허브 주소](https://github.com/OpenFeign/querydsl)
