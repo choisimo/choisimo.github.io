@@ -6,9 +6,9 @@ tags: ["QueryDSL","스프링부트","springboot+queryDSL","쿼리DSL",openfeign.
 "io.github.openfeign.querydsl","최신 queryDSL 사용하는 방법","https://github.com/OpenFeign/querydsl"]
 ---
 
-### [OpenFeign querydsl 깃허브 주소](https://github.com/OpenFeign/querydsl)
+### link
+#### [OpenFeign querydsl](https://github.com/OpenFeign/querydsl)
 
-![github image](./images/1.png)
 
 ```text
 필자는 Java 17, SpringBoot 3.3.7,
@@ -52,7 +52,6 @@ public class QueryDslConfig {
 ```
 
 ### 기존 UserRepository
-![UserRepository](./images/2.png)
 ```java
 public interface UserRepository extends JpaRepository<User, Long> {}
 ```
@@ -69,6 +68,5 @@ UserRepository에서 상속 받을 수 있게 하자
 UserRepositoryCustom interface 를 구현하자
 ```
 
-![UserRepositoryCustomImpl](./images/3.png)
 
 
