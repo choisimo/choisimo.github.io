@@ -136,68 +136,62 @@
 
 
 main:
-  - name: "post"
+  - name: "게시글"
     weight: 500
-  - name: "latestPost"
+  - name: "최근 게시글"
     parent: "post"
     url: "/post/latest"
     weight: 501
-  - name: "list"
+  - name: "게시글 리스트"
     url: "/post/"
-    parent: "post"
+    parent: "게시글"
     weight: 502
 
-  - name: "about"
+  - name: "정보"
     weight: 600
-  - name: "author"
-    parent: "about"
+  - name: "저자"
+    parent: "정보"
     url: "/about/"
     weight: 601
-  - name: "contact"
-    parent: "about"
+  - name: "연락"
+    parent: "정보"
     url: "/contact"
     weight: 602
     icon: "contact-icon"
-  - name: "map"
-    parent: "about"
+  - name: "찾아오는 길"
+    parent: "정보"
     url: "/about/#contact"
     weight: 603
 
-  - name: "category"
+  - name: "카테고리"
     weight: 700
   - name: "categories"
     url: "/categories"
-    parent: "category"
+    parent: "카테고리"
     weight: 701
-  - name: "tags"
+  - name: "태그"
     url: "/tags"
-    parent: "category"
+    parent: "카테고리"
     weight: 702
-  - name: "authors"
+  - name: "저자들"
     url: "/authors"
-    parent: "category"
+    parent: "카테고리"
     weight: 703
 
-  - name: "document"
+  - name: "문서"
     weight: 800
-  - name: "program"
-    parent: "document"
+  - name: "프로그램"
+    parent: "문서"
     url: "/document/program"
     weight: 801
-  - name: "project"
+  - name: "프로젝트"
     url: "/project"
-    parent: "document"
+    parent: "문서"
     weight: 802
 
-
-  - name: "play"
+  - name: "취미"
     weight: 900
-    url: "/entertainment"
-  - name: "game"
-    url: "/entertainment/game"
-    parent: "play"
-    weight: 901
-  - name: "movie"
+  - name: "영화"
     url: "/entertainment/movie"
-    parent: "play"
-    weight: 902
+    parent: "취미"
+    weight: 901
