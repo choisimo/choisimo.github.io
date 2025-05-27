@@ -1,0 +1,87 @@
+# Absolute path to your local Hugo project directory.
+# This is where the importer will place the content files.
+hugo_project_path: "/path/to/your/hugo/blog"
+
+# Temporary directory for cloning the source repository and other operations.
+# Defaults to /tmp/hugo_importer if not specified.
+tmp_dir: "/tmp/hugo_importer_project"
+
+# Logging configuration
+# Log level for the application. Options: DEBUG, INFO, WARNING, ERROR, CRITICAL
+log_level: "INFO"
+# Optional: Path to a log file. If commented out or null, logs to standard output.
+# log_file: "importer.log"
+
+# Notification settings (currently a placeholder)
+# Future versions will allow configuring email, Slack, etc. for import summaries or errors.
+notifications:
+  enabled: false
+  # Example for future:
+  # email_to: "user@example.com"
+  # slack_webhook_url: "https://hooks.slack.com/services/YOUR/SLACK/HOOK"
+
+# Configuration for the content source (initially supporting only one source)
+source:
+  # URL of the Git repository containing the Hugo content.
+  # Can be SSH (git@github.com:user/repo.git) or HTTPS (https://github.com/user/repo.git).
+  repo_url: "git@github.com:user/external-hugo-content.git"
+
+  # Branch to clone from the repository.
+  branch: "main"
+
+  # Path within the repository where the relevant content is located.
+  # Use "." if the content is at the root of the repository.
+  path_in_repo: "documentation"
+
+  # Subdirectory within 'path_in_repo' that is the actual Hugo content directory (e.g., "content" or "content/posts").
+  hugo_content_dir: "content"
+
+  # List of markdown file extensions to process.
+  markdown_extensions:
+    - ".md"
+    - ".markdown"
+    - ".mdown"
+
+  # Action to take for files that exist in the Hugo project but not in the source repository.
+  # Options:
+  #   "delete": Permanently delete the file from the Hugo project.
+  #   "mark_draft": Change the file's frontmatter to "draft: true". (Requires frontmatter parsing)
+  #   "ignore": Take no action.
+  deleted_files_action: "delete"
+
+# Scheduler information (for documentation and user convenience when setting up cron)
+scheduler:
+  intended_schedule: "hourly"
+  command_to_run: "python3 /path/to/your/hugo-importer/main.py --config /path/to/your/hugo-importer/config.yaml"
+
+# Webhook Trigger Configuration
+# This section allows the importer to be triggered by an HTTP POST request,
+# typically from a Git hosting service like GitHub or GitLab.
+webhook:
+  # Set to true to enable the webhook server.
+  enabled: false
+
+  # Host address for the webhook server to listen on.
+  # "0.0.0.0" makes it accessible from other machines (use with caution and firewall).
+  # "127.0.0.1" (localhost) restricts access to the machine running the importer.
+  host: "0.0.0.0"
+
+  # Port for the webhook server to listen on.
+  port: 5000
+
+  # The specific URL path for the webhook endpoint (e.g., "/webhook/sync").
+  # This should be a hard-to-guess string if not further secured.
+  endpoint_path: "/webhook/sync"
+
+  # Name of the environment variable that holds the webhook secret.
+  # The importer will read the secret from this environment variable.
+  # Example: If set to "HUGO_IMPORTER_WEBHOOK_SECRET", you must set this env var.
+  # For GitHub, this secret is used to verify the HMAC-SHA256 signature.
+  # For GitLab, this is the "Secret token" you configure in the webhook settings.
+  secret_env_var: "HUGO_IMPORTER_WEBHOOK_SECRET" # IMPORTANT: Set this environment variable!
+
+  # Optional: Specify a branch to restrict triggers.
+  # If set, the importer will only run if the push event is for this specific branch.
+  # Example: "main", "develop". If null or empty, any push to any branch (that passes signature validation) will trigger.
+  allowed_branch: "main"
+```
