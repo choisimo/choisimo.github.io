@@ -1,0 +1,43 @@
+backend:
+  name: git-gateway
+  branch: main  # Branch to update
+  repo: choisimo/choisimo.github.io  # Your GitHub repository
+  site_domain: choisimo.github.io  # Your GitHub Pages domain
+  
+  # Authentication settings
+  auth_scope: public_repo  # Scope for GitHub OAuth
+  open_authoring: true  # Enable for GitHub fork workflow
+  
+  # Commit settings
+  commit: true
+  commit_messages:
+    create: "docs: create {{collection}} {{slug}}"
+    update: "docs: update {{collection}} {{slug}}"
+    delete: "docs: delete {{collection}} {{slug}}"
+    uploadMedia: "docs: upload {{path}}"
+    deleteMedia: "docs: delete {{path}}"
+  commit_message: "{{status}} {{path}}"
+  commit_author: "{{author_name}} <{{author_email}}>"
+  commit_date: "{{date 'YYYY-MM-DD HH:mm'}}"
+
+# Site settings
+publish_mode: editorial_workflow
+media_folder: "static/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "docs"
+    label: "Documentation"
+    label_singular: "Document"
+    folder: "content/docs"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Last Modified", name: "lastmod", widget: "datetime", required: false }
+      - { label: "Draft", name: "draft", widget: "boolean", default: true, required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
+    publish: true
+    editor:
+      preview: false
