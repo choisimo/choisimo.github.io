@@ -53,6 +53,9 @@ jobs:
         env:
           HUGO_ENV: production
 
+      - name: Generate Pagefind search index
+        run: npx pagefind --source "./public"
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -69,15 +72,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-      - name: Build with Hugo
-        env:
-          HUGO_ENVIRONMENT: production
-        run: |
-          echo "Hugo Cache Dir: $(hugo config | grep cachedir)"
-          hugo --minify --baseURL "${{ steps.deployment.outputs.page_url }}/"
-      - name: Generate Pagefind search index
-        run: npx pagefind --source "public"
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./public
