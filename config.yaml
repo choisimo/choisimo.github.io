@@ -84,4 +84,3 @@ webhook:
   # If set, the importer will only run if the push event is for this specific branch.
   # Example: "main", "develop". If null or empty, any push to any branch (that passes signature validation) will trigger.
   allowed_branch: "main"
-```
