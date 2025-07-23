@@ -1,0 +1,11 @@
+# Task ID: 5
+# Title: Refactor Main Page Layout and Sections
+# Status: pending
+# Dependencies: 2, 3, 4
+# Priority: medium
+# Description: Refactor the Main Page layout and content according to the new design system, including hero, featured blog posts, 'About Me', and project showcase sections.
+# Details:
+Update the HTML structure of the main page. Implement the hero section with H1 headline and a button styled with secondary color. Create a section for featured blog posts using a card-based layout. Add an 'About Me' section with a brief text and a link. Build the project showcase section with thumbnails and descriptions, utilizing the grid system.
+
+# Test Strategy:
+Visually inspect the main page on different devices to ensure all sections are present, correctly styled according to the design system, and responsive. Verify links and buttons are functional.

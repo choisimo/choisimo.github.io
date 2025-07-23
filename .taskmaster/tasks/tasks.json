@@ -1,0 +1,739 @@
+{
+  "master": {
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Setup Project and Integrate CSS Framework",
+        "description": "Initialize the project repository and integrate a modern CSS framework (Bootstrap or Tailwind CSS) as specified in the technical requirements to ensure consistency and responsiveness.",
+        "details": "Choose either Bootstrap or Tailwind CSS based on team preference and project needs. Set up the project structure, install the chosen framework via npm/yarn, and configure it for use in the project's build process (e.g., include CSS/JS files, configure PostCSS/Webpack if needed). Ensure the framework's basic styles are applied correctly.",
+        "testStrategy": "Verify that the chosen CSS framework is correctly installed and its base styles are applied to simple HTML elements (e.g., headings, paragraphs, buttons). Check console for errors during build/runtime.",
+        "priority": "high",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 2,
+        "title": "Implement Global Design System (Colors, Typography)",
+        "description": "Implement the global design system including the specified color palette, typography (fonts and sizes), and base styles across the website.",
+        "details": "Define CSS variables or use the chosen framework's configuration (e.g., Tailwind config, Bootstrap SASS variables) to implement the color palette (#3498db, #2ecc71, #f1c40f, #333333, #ffffff). Import and apply the 'Roboto Slab' and 'Open Sans' fonts from a reliable source like Google Fonts. Set base font sizes (H1: 2.5rem, H2: 2rem, H3: 1.75rem, Body: 1rem) and apply them to the appropriate HTML elements.",
+        "testStrategy": "Visually inspect various text elements (headings, body text) to confirm correct font families and sizes are applied. Use browser developer tools to verify computed styles match the specified colors and font properties.",
+        "priority": "high",
+        "dependencies": [
+          1
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 3,
+        "title": "Develop Responsive Layout and Sticky Navigation",
+        "description": "Develop the responsive grid system, ensure consistent spacing and alignment using the chosen framework, and implement the global sticky navigation bar.",
+        "details": "Utilize the grid system provided by Bootstrap or Tailwind CSS to create a responsive layout structure. Define and apply consistent margin and padding values (e.g., using spacing utility classes or CSS variables). Create the navigation bar component, ensure it remains fixed at the top of the viewport on scroll (sticky), and includes clear, concise menu items linking to main pages.",
+        "testStrategy": "Resize the browser window or use device emulation in developer tools to verify the grid layout is responsive. Check multiple pages to ensure consistent spacing. Scroll pages to confirm the navigation bar remains sticky at the top. Verify navigation links are functional.",
+        "priority": "high",
+        "dependencies": [
+          1,
+          2
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 4,
+        "title": "Develop Main Page Layout and Sections",
+        "description": "Implement the structure and content for the Main Page, including the hero section, featured blog posts, 'About Me' section, and project showcase, using the established design system and layout.",
+        "details": "Create the HTML structure for the main page. Implement the hero section with a headline and CTA button. Develop a card-based layout for featured blog posts. Create the 'About Me' section with a brief intro and link. Build the project showcase section with thumbnails and descriptions. Apply global styles and spacing.",
+        "testStrategy": "Visually inspect the main page layout on different screen sizes to ensure responsiveness and correct component placement. Verify content is displayed correctly and links/buttons are functional.",
+        "priority": "medium",
+        "dependencies": [
+          3
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 5,
+        "title": "Develop Blog Post Page Template",
+        "description": "Create the template for displaying individual blog posts, focusing on a clean, readable layout with features like a table of contents, author info, social sharing, and related posts.",
+        "details": "Design the layout for a single blog post. Implement a mechanism to generate a table of contents for long articles (can be client-side JS or server-side). Include placeholders or actual components for author information, social sharing buttons (using standard icons/links), and a section for related posts (requires logic to fetch related content). Ensure focus on content readability with appropriate line height and text spacing.",
+        "testStrategy": "Test the blog post template with varying content lengths to check TOC generation. Verify author info and social sharing placeholders/components are present. Check layout readability and responsiveness. Ensure related posts section displays correctly.",
+        "priority": "medium",
+        "dependencies": [
+          3
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 6,
+        "title": "Develop Project Page Template",
+        "description": "Create the template for displaying individual project pages, including detailed descriptions, images, videos, links, and a clear call to action.",
+        "details": "Design the layout for a single project page. Include areas for detailed text descriptions, embedding images and videos. Add sections for relevant links (e.g., GitHub, live demo). Implement a prominent call-to-action button for each project. Ensure a consistent layout structure that can be reused for all projects.",
+        "testStrategy": "Test the project page template with different types of content (text, images, videos). Verify links and CTA buttons are correctly displayed and functional. Check layout consistency and responsiveness.",
+        "priority": "medium",
+        "dependencies": [
+          3
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 7,
+        "title": "Develop About Page Layout and Content",
+        "description": "Implement the structure and content for the About Page, including the author's narrative, timeline of accomplishments, contact information, and social media links.",
+        "details": "Create the HTML structure for the about page. Write or include placeholder text for the engaging narrative. Design and implement a timeline component to display accomplishments. Include contact information (email, form if applicable) and links to social media profiles. Apply global styles and spacing.",
+        "testStrategy": "Visually inspect the about page layout and content. Verify the timeline component displays correctly. Check that contact information and social media links are present and functional. Ensure responsiveness.",
+        "priority": "medium",
+        "dependencies": [
+          3
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 8,
+        "title": "Implement Global UX Enhancements",
+        "description": "Implement global user experience enhancements, including smooth animations, hover effects on interactive elements, and ensuring the design is mobile-friendly with a focus on touch interactions.",
+        "details": "Add subtle CSS transitions and animations for elements like section reveals or scrolling effects. Apply hover effects to links, buttons, and interactive cards using CSS. Review all pages on mobile devices and test touch interactions (e.g., navigation toggles, scrolling, button presses) to ensure they are intuitive and responsive.",
+        "testStrategy": "Interact with the website on desktop and mobile devices. Verify animations and transitions are smooth. Test hover effects on all interactive elements. Use touch gestures on a mobile device to confirm responsiveness and usability.",
+        "priority": "medium",
+        "dependencies": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 9,
+        "title": "Optimize Website Performance",
+        "description": "Optimize images and other assets across the website to ensure fast loading times as per technical requirements.",
+        "details": "Use image optimization tools (e.g., ImageMagick, online compressors, build process plugins) to reduce file sizes without significant quality loss. Consider using modern image formats like WebP. Implement lazy loading for images outside the initial viewport. Minify CSS and JavaScript files. Review asset loading waterfall in browser developer tools to identify bottlenecks.",
+        "testStrategy": "Use browser developer tools (Network tab) or online tools like Google PageSpeed Insights or GTmetrix to measure page load times and identify performance issues. Verify optimized assets are being served.",
+        "priority": "medium",
+        "dependencies": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 10,
+        "title": "Ensure Website Accessibility (WCAG Compliance)",
+        "description": "Ensure the website is accessible to all users by reviewing and implementing WCAG guidelines.",
+        "details": "Check for sufficient color contrast ratios. Ensure proper semantic HTML structure. Add ARIA attributes where necessary for complex components. Provide alternative text for images. Ensure keyboard navigation is fully functional. Test with screen readers if possible. Review form elements for accessibility.",
+        "testStrategy": "Use automated accessibility checkers (e.g., Lighthouse in Chrome DevTools, axe DevTools extension). Manually test keyboard navigation (using Tab key). Check image alt text. Verify color contrast using online tools. If possible, test with a screen reader.",
+        "priority": "medium",
+        "dependencies": [
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "status": "pending",
+        "subtasks": []
+      }
+    ],
+    "metadata": {
+      "created": "2025-06-30T21:26:58.138Z",
+      "updated": "2025-06-30T21:26:58.138Z",
+      "description": "Tasks for master context"
+    }
+  },
+  "refactoring-design": {
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Project Setup and CSS Framework Integration",
+        "description": "Initialize the project repository, set up the development environment, and integrate the chosen CSS framework (Bootstrap or Tailwind CSS) as per technical requirements.",
+        "details": "Create a new Git repository. Set up necessary build tools (e.g., Webpack, Parcel, or integrate with existing build process). Install and configure either Bootstrap or Tailwind CSS. Create base HTML structure and link CSS files. Establish a basic file/folder structure for styles and components.",
+        "testStrategy": "Verify that the CSS framework is correctly installed and applied by testing basic utility classes or components on a test page. Check console for errors during build/serve.",
+        "priority": "high",
+        "dependencies": [],
+        "status": "in-progress",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Initialize Git Repository and Basic Project Structure",
+            "description": "Create a new Git repository for the project and establish a foundational directory structure including a root, source folder (e.g., `src`), and potential distribution folder (e.g., `dist`).",
+            "dependencies": [],
+            "details": "Use `git init` in the project root directory. Create essential folders like `src`, `dist`, and potentially `public`. Add a basic `.gitignore` file to exclude common build artifacts and dependencies (`node_modules`, `dist`, etc.).",
+            "status": "pending",
+            "testStrategy": "Verify that a `.git` directory is created and the initial folder structure exists."
+          },
+          {
+            "id": 2,
+            "title": "Set Up Node.js Environment and Package Manager",
+            "description": "Ensure Node.js is installed and initialize the project with a package manager (npm, yarn, or pnpm) to manage dependencies.",
+            "dependencies": [
+              1
+            ],
+            "details": "Run `npm init -y` (or equivalent for yarn/pnpm) in the project root to create a `package.json` file. Ensure the correct Node.js version is used if specified in technical requirements.",
+            "status": "pending",
+            "testStrategy": "Verify that a `package.json` file is created in the project root."
+          },
+          {
+            "id": 3,
+            "title": "Integrate Build Tool and Configure Basic Asset Handling",
+            "description": "Install and configure a build tool (e.g., Webpack, Parcel, Vite) to handle basic processing of HTML, CSS, and potentially JavaScript files.",
+            "dependencies": [
+              2
+            ],
+            "details": "Install the chosen build tool and necessary plugins/loaders (e.g., `html-loader`, `css-loader`, `style-loader` for Webpack). Create a minimal configuration file (e.g., `webpack.config.js`, `parcelrc`, `vite.config.js`) to define entry points and output paths. Configure it to copy/process HTML and CSS files.",
+            "status": "pending",
+            "testStrategy": "Run a basic build command (e.g., `npm run build`) and verify that output files are generated in the `dist` directory."
+          },
+          {
+            "id": 4,
+            "title": "Install and Configure CSS Framework",
+            "description": "Install the chosen CSS framework (Bootstrap or Tailwind CSS) via the package manager and configure the build tool to correctly process its styles.",
+            "dependencies": [
+              3
+            ],
+            "details": "Install the framework package (e.g., `npm install bootstrap` or `npm install tailwindcss postcss autoprefixer`). If using Tailwind, initialize its config (`npx tailwindcss init`) and configure PostCSS. If using Bootstrap with Sass, ensure Sass is configured in the build tool. Update the build tool config to include the framework's entry points or processing steps.",
+            "status": "pending",
+            "testStrategy": "Verify that the framework package is listed in `package.json` and that framework-specific configuration files (like `tailwind.config.js` or PostCSS config) are created/updated."
+          },
+          {
+            "id": 5,
+            "title": "Create Base HTML and Link Processed CSS",
+            "description": "Create a basic `index.html` file and a main CSS entry point file, then configure the build tool to link the processed CSS file into the HTML.",
+            "dependencies": [
+              4
+            ],
+            "details": "Create `src/index.html` with a basic HTML5 structure. Create a main CSS file (e.g., `src/styles/main.css` or `src/styles/main.scss`) and import the framework styles there (e.g., `@import 'bootstrap';` or `@tailwind base; ...`). Update the build tool configuration to ensure the processed CSS is output and correctly linked in `index.html` (e.g., using `HtmlWebpackPlugin` with Webpack). Add a simple element with a framework class (e.g., `<h1 class=\"text-primary\">Hello</h1>` for Bootstrap or `<h1 class=\"text-blue-600\">Hello</h1>` for Tailwind) to verify styling.",
+            "status": "pending",
+            "testStrategy": "Run the build process and open the generated `dist/index.html` in a browser. Verify that the basic HTML structure is present and that the framework's default styles (e.g., font, colors) are applied to the element with the framework class."
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Implement Global Color Palette and Typography",
+        "description": "Define and implement the global color palette and typography rules across the website using the chosen CSS framework or custom CSS.",
+        "details": "Define CSS variables or use the framework's configuration to set the primary (#3498db), secondary (#2ecc71), accent (#f1c40f), text (#333333), and background (#ffffff) colors. Import or link 'Roboto Slab' and 'Open Sans' fonts. Define CSS rules for H1, H2, H3, and body text sizes (2.5rem, 2rem, 1.75rem, 1rem) and assign the correct fonts.",
+        "testStrategy": "Create a style guide page or test component displaying all defined colors and font styles/sizes. Visually verify that colors and typography match the specifications. Use browser developer tools to inspect applied styles.",
+        "priority": "high",
+        "dependencies": [
+          1
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Configure Global Stylesheet or Framework Theming",
+            "description": "Set up the main CSS file or framework configuration entry point where global styles (colors, typography) will be defined. Choose between using native CSS variables or the framework's built-in theming capabilities.",
+            "dependencies": [],
+            "details": "Create a dedicated file (e.g., `_variables.scss`, `theme.js`, `globals.css`) or identify the correct configuration file within your chosen framework. Ensure this file is correctly imported or linked into your project's build process or main stylesheet.",
+            "status": "pending",
+            "testStrategy": "Verify that the new stylesheet or configuration file is correctly included in the project build and accessible."
+          },
+          {
+            "id": 2,
+            "title": "Define Global Color Palette Variables",
+            "description": "Implement the specified color palette using CSS variables or the chosen framework's configuration system.",
+            "dependencies": [
+              1
+            ],
+            "details": "Define variables for primary (#3498db), secondary (#2ecc71), accent (#f1c40f), text (#333333), and background (#ffffff) colors. Example using CSS variables: `:root { --color-primary: #3498db; --color-secondary: #2ecc71; ... }`. Adapt for your framework (e.g., Tailwind config, Bootstrap variables).",
+            "status": "pending",
+            "testStrategy": "Inspect elements in the browser developer tools to confirm that the defined CSS variables or framework tokens are available and hold the correct hex values."
+          },
+          {
+            "id": 3,
+            "title": "Import Global Fonts",
+            "description": "Add the necessary code to import or link the 'Roboto Slab' and 'Open Sans' font families from a reliable source like Google Fonts.",
+            "dependencies": [
+              1
+            ],
+            "details": "Use `@import url('...')` within your main stylesheet, or add `<link>` tags to your main HTML template/layout file for Google Fonts. Ensure both regular and potentially bold/italic weights are included if needed later.",
+            "status": "pending",
+            "testStrategy": "Check the network tab in browser developer tools to confirm that the font files for 'Roboto Slab' and 'Open Sans' are being downloaded when the application loads."
+          },
+          {
+            "id": 4,
+            "title": "Define Heading Typography Styles (H1, H2, H3)",
+            "description": "Create CSS rules or framework configurations for H1, H2, and H3 elements, setting their font family (likely 'Roboto Slab') and the specified font sizes (2.5rem, 2rem, 1.75rem).",
+            "dependencies": [
+              3
+            ],
+            "details": "Write CSS rules targeting `h1`, `h2`, and `h3`. Assign `font-family: 'Roboto Slab', serif;` and the respective `font-size` values. Example: `h1 { font-size: 2.5rem; font-family: 'Roboto Slab', serif; }`.",
+            "status": "pending",
+            "testStrategy": "Create a test page with H1, H2, and H3 elements. Inspect them in the browser to verify the correct font family and size are applied to each."
+          },
+          {
+            "id": 5,
+            "title": "Define Body Typography Styles",
+            "description": "Create CSS rules or framework configurations for the default body text, setting its font family (likely 'Open Sans') and the specified font size (1rem).",
+            "dependencies": [
+              4
+            ],
+            "details": "Write a CSS rule targeting the `body` element or a base class. Assign `font-family: 'Open Sans', sans-serif;` and `font-size: 1rem;`. Ensure line-height is also set appropriately (e.g., 1.5 or 1.6).",
+            "status": "pending",
+            "testStrategy": "Create a test page with paragraphs or other standard text elements. Inspect them in the browser to verify the correct font family and size are applied."
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Implement Responsive Grid and Layout Constraints",
+        "description": "Establish the responsive grid system, consistent spacing, and maximum content width (1200px) based on the chosen CSS framework or custom CSS.",
+        "details": "Utilize the grid system provided by Bootstrap or Tailwind CSS to create responsive layouts. Define utility classes or CSS rules for consistent padding and margin (spacing). Implement a container class with a `max-width` of 1200px and `margin: 0 auto;` for centering content on large screens. Ensure responsiveness across different breakpoints.",
+        "testStrategy": "Test layout on various screen sizes (desktop, tablet, mobile) using browser developer tools' responsive mode. Verify that content is contained within 1200px on large screens and spacing is consistent using the inspect tool.",
+        "priority": "high",
+        "dependencies": [
+          1
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 4,
+        "title": "Implement Sticky Navigation Bar",
+        "description": "Design and implement the sticky navigation bar with clear and concise menu items for easy site navigation.",
+        "details": "Create a header element with navigation links. Apply CSS to make the header sticky (`position: sticky; top: 0;`). Style the navigation links using the defined typography and potentially accent colors for hover/active states. Ensure the navigation is responsive, possibly implementing a mobile toggle/hamburger menu.",
+        "testStrategy": "Scroll down pages to ensure the navigation bar remains fixed at the top. Test navigation links to ensure they point to the correct pages. Verify responsiveness of the navigation bar on mobile devices.",
+        "priority": "high",
+        "dependencies": [
+          1,
+          2,
+          3
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create Basic Navigation HTML Structure",
+            "description": "Set up the fundamental HTML elements for the navigation bar, including the header container, navigation wrapper, and list items for menu links.",
+            "dependencies": [],
+            "details": "Create a `<header>` element at the top of the page's main content area. Inside the header, add a `<nav>` element. Within the `<nav>`, create an `<ul>` list. For each planned menu item (e.g., Home, About, Services, Contact), add an `<li>` containing an `<a>` tag with a placeholder `href` (e.g., `#`). Assign appropriate classes or IDs for styling.",
+            "status": "pending",
+            "testStrategy": "Verify the HTML structure is correctly nested in the browser's developer tools. Ensure all planned menu items are present as list items with links."
+          },
+          {
+            "id": 2,
+            "title": "Apply Sticky Positioning and Base Styles",
+            "description": "Implement the sticky behavior for the header and apply basic container styling like background color, padding, and layout properties.",
+            "dependencies": [
+              1
+            ],
+            "details": "Add CSS rules targeting the `<header>` element. Set `position: sticky;` and `top: 0;`. Apply a background color (using the defined color palette), add vertical and horizontal padding, and set `width: 100%`. Use a layout method like Flexbox on the header or nav container to align the navigation items (e.g., `display: flex; justify-content: space-between; align-items: center;`). Add a `z-index` to ensure it stays above other content.",
+            "status": "pending",
+            "testStrategy": "Scroll down the page to verify the header remains fixed at the top. Check that the background color and padding are applied correctly. Use developer tools to confirm `position: sticky` and `top: 0` are active."
+          },
+          {
+            "id": 3,
+            "title": "Style Navigation Links and List Items",
+            "description": "Style the individual navigation links and their containing list items according to the design system's typography and color specifications, including hover/active states.",
+            "dependencies": [
+              2
+            ],
+            "details": "Target the `<ul>` and `<li>` elements within the nav to remove default list styling (`list-style: none; padding: 0; margin: 0;`). Style the `<li>` elements for layout (e.g., `display: inline-block;` or using flex properties if the `<ul>` is a flex container). Target the `<a>` elements: set font family, size, weight (using defined typography tokens), text color (using defined color tokens), remove text decoration (`text-decoration: none;`), and add padding/margin for spacing. Implement `:hover` and `:active` pseudo-classes to change color or add an underline/background effect using accent colors.",
+            "status": "pending",
+            "testStrategy": "Visually inspect the navigation links. Ensure typography, colors, and spacing match the design. Hover over and click links to verify hover/active styles are applied correctly."
+          },
+          {
+            "id": 4,
+            "title": "Implement Responsive Navigation (Mobile Toggle)",
+            "description": "Adapt the navigation for smaller screens, typically by hiding the full menu and introducing a toggleable hamburger menu.",
+            "dependencies": [
+              3
+            ],
+            "details": "Use CSS media queries to apply different styles below a certain breakpoint (e.g., 768px). On small screens, hide the main `<ul>` navigation list (`display: none;`). Add a button or icon element (e.g., a 'hamburger' icon) within the header that is visible only on small screens. Implement a small amount of JavaScript to toggle a class on the navigation container or the list when the hamburger icon is clicked. Add CSS rules for the toggled state to display the navigation list (e.g., as a vertical column, potentially covering the screen or sliding in).",
+            "status": "pending",
+            "testStrategy": "Resize the browser window or use developer tools' responsive mode to switch between desktop and mobile views. Verify the main menu hides and the hamburger icon appears on mobile. Click the hamburger icon to ensure the mobile menu appears/disappears correctly."
+          },
+          {
+            "id": 5,
+            "title": "Refine Styling and Cross-Browser Testing",
+            "description": "Perform final styling adjustments, ensure visual consistency across different screen sizes and browsers, and test the sticky behavior and responsiveness thoroughly.",
+            "dependencies": [
+              4
+            ],
+            "details": "Review all CSS rules for consistency and potential conflicts. Make minor adjustments to padding, margins, font sizes, or layout properties as needed for optimal appearance on various devices. Test the implemented sticky navigation bar on major browsers (Chrome, Firefox, Safari, Edge) and different devices (desktop, tablet, mobile) to ensure the sticky position, responsiveness, link styling, and mobile toggle function correctly without visual glitches or layout issues.",
+            "status": "pending",
+            "testStrategy": "Manually test the navigation bar on target browsers and devices. Check sticky behavior while scrolling, verify responsiveness by resizing the window and using device modes, test all link styles (including hover/active), and confirm the mobile menu toggle works as expected on touch devices."
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Refactor Main Page Layout and Sections",
+        "description": "Refactor the Main Page layout and content according to the new design system, including hero, featured blog posts, 'About Me', and project showcase sections.",
+        "details": "Update the HTML structure of the main page. Implement the hero section with H1 headline and a button styled with secondary color. Create a section for featured blog posts using a card-based layout. Add an 'About Me' section with a brief text and a link. Build the project showcase section with thumbnails and descriptions, utilizing the grid system.",
+        "testStrategy": "Visually inspect the main page on different devices to ensure all sections are present, correctly styled according to the design system, and responsive. Verify links and buttons are functional.",
+        "priority": "medium",
+        "dependencies": [
+          2,
+          3,
+          4
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Update Main Page HTML Structure and Apply Base Styles",
+            "description": "Refactor the main page's core HTML structure to align with the new design system's layout conventions. Ensure global styles (typography, spacing, base colors) from the design system are correctly applied to the main page container and body.",
+            "dependencies": [],
+            "details": "Review the new design system documentation for base layout structure (e.g., container classes, grid setup if global). Update the main page's root HTML file (e.g., index.html, main.jsx/tsx) to use the new structure. Link or import the necessary global CSS/styling files from the design system. Verify that basic elements like text and background colors adhere to the new system.",
+            "status": "pending",
+            "testStrategy": "Load the main page in a browser. Inspect the HTML structure to confirm new classes/elements are used. Check basic styling (font, background, padding/margin) to ensure global design system styles are applied."
+          },
+          {
+            "id": 2,
+            "title": "Implement Hero Section",
+            "description": "Add the Hero section to the main page, including the H1 headline and a call-to-action button. Style the section layout and elements according to the new design system, specifically using the secondary color for the button.",
+            "dependencies": [
+              1
+            ],
+            "details": "Add a new section element for the hero. Include an H1 tag for the main headline and a button element. Apply design system classes or styles for hero section padding/margin, text alignment, and typography for the H1. Style the button using the design system's defined class or variables for the 'secondary' color button style.",
+            "status": "pending",
+            "testStrategy": "Verify the Hero section appears at the top of the page. Check that the H1 and button are present. Inspect the button's styling to confirm it uses the secondary color palette from the design system. Check section padding/margin."
+          },
+          {
+            "id": 3,
+            "title": "Implement 'About Me' Section",
+            "description": "Add the 'About Me' section to the main page. Include a brief text description and a link (e.g., to a full About page or resume). Style the section and its content according to the new design system.",
+            "dependencies": [
+              1
+            ],
+            "details": "Add a new section element for 'About Me'. Include paragraph tags for the text and an anchor tag for the link. Apply design system classes or styles for section spacing, typography for the text, and link styling.",
+            "status": "pending",
+            "testStrategy": "Verify the 'About Me' section is present below the Hero (or in its intended position). Check that the text and link are displayed correctly. Ensure text and link styles match the design system."
+          },
+          {
+            "id": 4,
+            "title": "Implement Featured Blog Posts Section",
+            "description": "Add the Featured Blog Posts section to the main page. Display a selection of blog posts using a card-based layout as defined by the new design system.",
+            "dependencies": [
+              3
+            ],
+            "details": "Add a new section for Featured Blog Posts. Implement a container for the cards, likely using a flexbox or grid layout for arranging multiple cards. Create a reusable component or structure for a single blog post card, including elements like title, summary, and potentially an image. Apply design system classes/styles for card appearance (border, shadow, padding) and the layout of multiple cards (gap, responsiveness).",
+            "status": "pending",
+            "testStrategy": "Verify the Featured Blog Posts section is present. Check that multiple blog post cards are displayed. Inspect the styling of individual cards and the layout of the section to ensure they match the design system's card and layout patterns."
+          },
+          {
+            "id": 5,
+            "title": "Implement Project Showcase Section",
+            "description": "Add the Project Showcase section to the main page. Display project entries using the grid system defined by the new design system, including thumbnails and descriptions.",
+            "dependencies": [
+              4
+            ],
+            "details": "Add a new section for Project Showcase. Utilize the design system's grid classes or components to create a responsive grid layout. Within each grid item, include elements for a project thumbnail (image) and a description (text). Apply design system classes/styles for grid spacing, item appearance, and typography for descriptions.",
+            "status": "pending",
+            "testStrategy": "Verify the Project Showcase section is present. Check that project entries are arranged in a grid. Ensure thumbnails and descriptions are displayed correctly within each grid item. Test responsiveness by resizing the browser window to see if the grid adapts according to the design system rules."
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Refactor Blog Post Pages",
+        "description": "Refactor Blog Post pages to have a clean, readable layout, including a table of contents, author info, social sharing, and related posts.",
+        "details": "Update the blog post template. Apply body font and text color for content readability. Implement a script or static HTML structure for a table of contents based on headings (H2, H3). Add sections for author information, social sharing buttons (using icons and links), and a 'Related Posts' section (potentially card-based).",
+        "testStrategy": "Review multiple blog post pages to ensure consistent layout. Verify the table of contents links work correctly. Check that author info and social sharing buttons are displayed and functional. Ensure related posts section is present.",
+        "priority": "medium",
+        "dependencies": [
+          2,
+          3,
+          4
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement Core Blog Post Layout and Styling",
+            "description": "Set up the fundamental layout structure for the blog post content area and apply base styling for typography (font family, size, line height) and text color to ensure readability.",
+            "dependencies": [],
+            "details": "Modify the blog post template file. Create or update CSS rules targeting the main content container, paragraphs, headings (H1-H6), links, etc. Focus on body font, text color, line height, and basic spacing for optimal reading experience. Ensure responsiveness for the main content block.",
+            "status": "pending",
+            "testStrategy": "Verify the blog post content is displayed with the specified font, size, color, and line height. Check basic layout responsiveness on different screen sizes."
+          },
+          {
+            "id": 2,
+            "title": "Develop and Integrate Table of Contents",
+            "description": "Create and integrate a dynamic or static table of contents (TOC) based on H2 and H3 headings present within the blog post content. Display the TOC in a suitable location (e.g., sidebar or near the top).",
+            "dependencies": [
+              1
+            ],
+            "details": "Implement a JavaScript script to scan the rendered HTML content for H2 and H3 tags, extract their text and create anchor links. Generate an ordered or unordered list structure for the TOC. Insert the generated TOC HTML into a designated placeholder element in the template. Style the TOC list and links. Alternatively, if using a static site generator or CMS, configure its built-in TOC generation feature.",
+            "status": "pending",
+            "testStrategy": "Check that the TOC appears on the page. Verify that it correctly lists all H2 and H3 headings. Ensure clicking on a TOC link scrolls smoothly to the corresponding section on the page. Test with posts having varying numbers and levels of headings."
+          },
+          {
+            "id": 3,
+            "title": "Add Author Information Section",
+            "description": "Create and style a dedicated section on the blog post page to display information about the post's author, including name, photo, and a brief bio.",
+            "dependencies": [
+              2
+            ],
+            "details": "Add a new section or component to the blog post template file. Structure the HTML to include an image placeholder for the author photo, a heading for the author's name, and a paragraph for the bio. Fetch author data (from frontmatter, CMS API, or a separate data source) and populate the HTML elements. Apply CSS styling to format the section, image (e.g., round), and text.",
+            "status": "pending",
+            "testStrategy": "Verify the author information section appears on the page. Check that the correct author name, photo, and bio are displayed. Ensure the section is styled according to design requirements."
+          },
+          {
+            "id": 4,
+            "title": "Integrate Social Sharing Buttons",
+            "description": "Add a block of social sharing buttons (e.g., Twitter, Facebook, LinkedIn) using icons and links that allow users to easily share the current blog post on social media platforms.",
+            "dependencies": [
+              3
+            ],
+            "details": "Add a new section or component to the template. Include links for desired social platforms. Use SVG icons, a font icon library, or image files for the social media logos. Construct the `href` attributes for the links dynamically, including the current page's URL and title, using the respective platform's sharing URL format. Style the icons and the container block.",
+            "status": "pending",
+            "testStrategy": "Check that the social sharing block appears with the correct icons. Verify that clicking on each icon opens the correct social media sharing dialog/page with the current blog post's URL and title pre-filled (or correctly formatted in the URL)."
+          },
+          {
+            "id": 5,
+            "title": "Build and Style Related Posts Section",
+            "description": "Implement a section at the end of the blog post to display a list of related articles, potentially using a card-based layout for each related post.",
+            "dependencies": [
+              4
+            ],
+            "details": "Add a new section or component to the template, typically placed after the main content and author/sharing sections. Implement logic to determine and fetch related posts (e.g., based on tags, categories, or a simple list). Iterate through the related posts data and render a link or card for each, including title, potentially a summary or image. Apply CSS styling to the section container and the individual related post cards/links for a clean, readable layout.",
+            "status": "pending",
+            "testStrategy": "Verify the related posts section appears. Check that a list of posts is displayed (even if placeholder data initially). Ensure the styling for the section and individual related post items (cards) is correct. Verify that clicking on a related post item navigates to that post's page."
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "Refactor Project Pages",
+        "description": "Refactor Project Pages to display detailed project descriptions, media (images/videos), links, and clear calls to action with a consistent layout.",
+        "details": "Update the project page template. Structure the page to include a title, detailed description, embedded images or videos, and links (e.g., to GitHub, live demo). Style call-to-action buttons using the secondary color. Ensure a consistent layout is applied across all project pages.",
+        "testStrategy": "Check several project pages to confirm the consistent layout. Verify that descriptions, media, and links are displayed correctly. Test call-to-action buttons.",
+        "priority": "medium",
+        "dependencies": [
+          2,
+          3,
+          4
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 8,
+        "title": "Refactor About Page",
+        "description": "Refactor the About Page to include an engaging narrative, timeline of accomplishments, contact information, and social media links.",
+        "details": "Update the About page structure. Write/integrate the narrative text. Create a visually appealing timeline section (using CSS or a simple list structure). Add a contact information section and links/icons for social media profiles.",
+        "testStrategy": "Review the About page to ensure all required sections are present and styled correctly. Verify contact information is accurate and social media links are functional.",
+        "priority": "medium",
+        "dependencies": [
+          2,
+          3,
+          4
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement Base Structure and Integrate Narrative",
+            "description": "Create the foundational HTML structure for the About page. Integrate the provided engaging narrative text into an appropriate section.",
+            "dependencies": [],
+            "details": "Set up the main container and basic layout elements. Place the narrative text within a semantic HTML tag like `<section>` or `<article>`. Ensure basic text formatting is applied.",
+            "status": "pending",
+            "testStrategy": "Verify the page loads with the correct structure and the narrative text is displayed correctly in a browser."
+          },
+          {
+            "id": 2,
+            "title": "Develop and Style Accomplishments Timeline",
+            "description": "Create a dedicated section to display the timeline of accomplishments. Structure the timeline data and apply initial styling.",
+            "dependencies": [
+              1
+            ],
+            "details": "Use an ordered or unordered list (`<ol>`, `<ul>`) or a series of `<div>` elements to represent timeline events. Apply CSS to visually structure the timeline, potentially using pseudo-elements for connectors or markers.",
+            "status": "pending",
+            "testStrategy": "Check that the timeline section appears on the page and the timeline items are structured and styled as intended."
+          },
+          {
+            "id": 3,
+            "title": "Integrate Contact Information Section",
+            "description": "Add a distinct section containing contact details such as email address, physical address (if applicable), and phone number.",
+            "dependencies": [
+              1
+            ],
+            "details": "Create a new section (e.g., `<section>`) for contact information. Use appropriate HTML elements like `<p>`, `<a>` (for email/phone links), or `<address>`. Apply basic styling for layout and readability.",
+            "status": "pending",
+            "testStrategy": "Verify the contact information section is present and the details are displayed accurately."
+          },
+          {
+            "id": 4,
+            "title": "Add Social Media Links and Icons",
+            "description": "Include links and visual icons for relevant social media profiles. This section can be separate or integrated with the contact information.",
+            "dependencies": [
+              3
+            ],
+            "details": "Use anchor tags (`<a>`) for the social media links. Integrate icons using an icon font library (e.g., Font Awesome) or SVG images. Style the icons and links for visual appeal.",
+            "status": "pending",
+            "testStrategy": "Ensure social media icons are visible and clicking them navigates to the correct social media profile URLs."
+          },
+          {
+            "id": 5,
+            "title": "Apply Final Styling and Ensure Responsiveness",
+            "description": "Review the entire About page layout and apply final CSS styles for visual consistency, branding, and appeal. Ensure the page is fully responsive across various screen sizes.",
+            "dependencies": [
+              2,
+              3,
+              4
+            ],
+            "details": "Refine CSS for typography, spacing, colors, and overall layout. Use media queries to adjust the layout and styling for different breakpoints (mobile, tablet, desktop). Test the page on multiple devices or using browser developer tools' responsive mode.",
+            "status": "pending",
+            "testStrategy": "Perform cross-browser testing and verify the page layout and content display correctly and are usable on different screen sizes and devices."
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "title": "Implement UX Interactions and Mobile Touch Optimization",
+        "description": "Implement smooth animations, transitions, and hover effects for interactive elements (links, buttons) and ensure the design is mobile-friendly with focus on touch interactions.",
+        "details": "Add CSS transitions or simple animations to elements like buttons, links, or card hovers for visual feedback. Ensure `:hover` and `:focus` states are styled. Review the design on mobile devices, optimizing touch target sizes and ensuring elements are easily tappable. Use CSS media queries or framework utilities for mobile-specific adjustments.",
+        "testStrategy": "Interact with various elements (buttons, links, cards) on desktop and mobile to verify animations and hover effects. Test the website on a physical mobile device to ensure touch interactions are smooth and elements are easy to tap.",
+        "priority": "medium",
+        "dependencies": [
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement Basic Hover and Focus States",
+            "description": "Apply distinct styles for `:hover` and `:focus` pseudo-classes on interactive elements such as links, buttons, and card-like components to provide immediate visual feedback.",
+            "dependencies": [],
+            "details": "Identify all interactive elements in the UI. Use CSS to define styles for `:hover` and `:focus` states (e.g., background color change, text decoration, border). Ensure accessibility considerations for focus states.",
+            "status": "pending",
+            "testStrategy": "Manually hover over and tab through interactive elements in a desktop browser to verify state changes."
+          },
+          {
+            "id": 2,
+            "title": "Add CSS Transitions and Simple Animations",
+            "description": "Introduce smooth CSS transitions or simple animations to the `:hover` and `:focus` state changes implemented in the previous step, as well as potentially for other dynamic elements.",
+            "dependencies": [
+              1
+            ],
+            "details": "Apply `transition` properties in CSS to the base styles of elements to animate changes in properties like `background-color`, `color`, `transform`, `opacity`, etc., when states change. Keep animations subtle and performant.",
+            "status": "pending",
+            "testStrategy": "Manually interact with elements (hover, click, tab) in a desktop browser to observe the smoothness of transitions and animations."
+          },
+          {
+            "id": 3,
+            "title": "Review and Identify Mobile Touch Targets",
+            "description": "Analyze the design on mobile devices to identify all interactive elements (buttons, links, form fields, etc.) and assess if their touch target size is adequate for easy tapping.",
+            "dependencies": [
+              2
+            ],
+            "details": "Use browser developer tools' mobile emulation or view the site on actual mobile devices. Pay attention to elements that are close together or appear too small. Create a list of elements that need touch target size adjustments.",
+            "status": "pending",
+            "testStrategy": "Navigate through the application on a mobile device and attempt to tap all interactive elements. Note any elements that are difficult to accurately tap."
+          },
+          {
+            "id": 4,
+            "title": "Optimize Touch Target Sizes for Mobile",
+            "description": "Increase the effective touch area for interactive elements identified in the previous step on mobile devices to meet recommended touch target size guidelines (e.g., minimum 44x44 CSS pixels).",
+            "dependencies": [
+              3
+            ],
+            "details": "Use CSS media queries to apply styles only on mobile breakpoints. Increase padding or min-width/min-height of interactive elements or their parent containers to ensure a sufficient touch area without necessarily changing the visual size dramatically (e.g., using padding).",
+            "status": "pending",
+            "testStrategy": "Test the application on multiple mobile devices (different screen sizes/OS) and verify that all interactive elements are easily tappable without accidental taps on adjacent elements."
+          },
+          {
+            "id": 5,
+            "title": "Implement Mobile-Specific Layout and Styling Adjustments",
+            "description": "Apply CSS media queries or framework utilities to make necessary layout and styling adjustments specifically for mobile screens, ensuring the overall design is responsive and touch-friendly.",
+            "dependencies": [
+              4
+            ],
+            "details": "Use `@media` rules in CSS to adjust properties like `font-size`, `margin`, `padding`, `flexbox`/`grid` layouts, and element visibility for different screen sizes. Ensure content reflows correctly and navigation is accessible on mobile.",
+            "status": "pending",
+            "testStrategy": "View the application on various mobile devices and screen sizes (using emulation and physical devices) to ensure the layout is correct, content is readable, and all elements are accessible and usable."
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "title": "Optimize Performance and Ensure Accessibility (WCAG)",
+        "description": "Optimize images and other assets for performance and ensure the entire website complies with WCAG accessibility guidelines.",
+        "details": "Compress images using tools or build process plugins. Consider lazy loading for images below the fold. Minify CSS and JavaScript. Use browser developer tools (Lighthouse, PageSpeed Insights) to identify performance bottlenecks. Review HTML structure for semantic correctness. Add `alt` text to all images. Ensure sufficient color contrast using contrast checker tools. Test keyboard navigation and screen reader compatibility.",
+        "testStrategy": "Run performance audits using Lighthouse or PageSpeed Insights and aim for target scores. Use accessibility audit tools (e.g., Lighthouse, Axe DevTools) to identify and fix WCAG violations. Manually test keyboard navigation (using Tab key) and screen reader compatibility (using VoiceOver, NVDA, or similar).",
+        "priority": "high",
+        "dependencies": [
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement Automated Asset Optimization",
+            "description": "Set up build process tools or plugins to automatically compress images and minify CSS/JavaScript files.",
+            "dependencies": [],
+            "details": "Integrate image compression tools (e.g., imagemin, webpack loaders, Gulp plugins) and minifiers (e.g., UglifyJS, Terser, CSSNano) into the project's build pipeline. Configure settings for optimal compression without significant quality loss.",
+            "status": "pending",
+            "testStrategy": "Verify that asset file sizes are reduced after the build process. Check website functionality to ensure minification didn't break anything."
+          },
+          {
+            "id": 2,
+            "title": "Implement Lazy Loading and Analyze Performance",
+            "description": "Implement lazy loading for images and other non-critical assets below the fold. Use performance analysis tools to identify and address remaining bottlenecks.",
+            "dependencies": [
+              1
+            ],
+            "details": "Use native browser lazy loading (`loading=\"lazy\"`) or a JavaScript library for images and iframes. Run Lighthouse and PageSpeed Insights reports. Analyze metrics (FCP, LCP, TBT, CLS) and address high-priority recommendations (e.g., optimizing fonts, reducing render-blocking resources, optimizing server response times if applicable).",
+            "status": "pending",
+            "testStrategy": "Visually confirm images load as the user scrolls. Run performance audits again using Lighthouse/PageSpeed Insights to check for score improvements and reduced metrics."
+          },
+          {
+            "id": 3,
+            "title": "Ensure Semantic HTML and Image Alt Text",
+            "description": "Review the website's HTML structure to ensure semantic elements are used correctly. Add meaningful `alt` text to all `<img>` tags.",
+            "dependencies": [
+              2
+            ],
+            "details": "Replace non-semantic divs/spans with appropriate HTML5 elements (e.g., `<nav>`, `<article>`, `<aside>`, `<section>`, `<header>`, `<footer>`, `<main>`). Iterate through all `<img>` tags and add descriptive `alt` attributes. For decorative images, use `alt=\"\"`.",
+            "status": "pending",
+            "testStrategy": "Manually inspect HTML source code or use browser developer tools to check element usage. Use browser extensions or automated tools (like Axe DevTools, Lighthouse accessibility audit) to identify missing alt text."
+          },
+          {
+            "id": 4,
+            "title": "Verify and Adjust Color Contrast",
+            "description": "Check text and background color combinations across the website to ensure they meet WCAG AA or AAA contrast requirements. Adjust styles as needed.",
+            "dependencies": [
+              3
+            ],
+            "details": "Use online color contrast checkers or browser developer tools (e.g., Firefox Accessibility Inspector, Chrome DevTools color picker) to test color pairs. Pay attention to body text, headings, links, buttons, and form elements. Adjust CSS color properties to meet the required contrast ratio (4.5:1 for AA, 7:1 for AAA for normal text).",
+            "status": "pending",
+            "testStrategy": "Use automated accessibility checkers (Lighthouse, Axe) to flag contrast issues. Manually check key pages and components using a contrast checker tool."
+          },
+          {
+            "id": 5,
+            "title": "Test Keyboard Navigation and Screen Reader Compatibility",
+            "description": "Test the entire website's navigability using only a keyboard. Test key user flows and content consumption using a screen reader. Address any identified issues.",
+            "dependencies": [
+              4
+            ],
+            "details": "Navigate through all interactive elements (links, buttons, form fields) using Tab, Shift+Tab, Enter, and Space keys. Ensure focus indicators are visible. Test common screen readers (e.g., NVDA, JAWS, VoiceOver) on different operating systems/browsers. Verify content is read in a logical order and interactive elements are announced correctly. Fix issues like inaccessible elements, incorrect ARIA attributes, or focus management problems.",
+            "status": "pending",
+            "testStrategy": "Perform manual keyboard navigation testing on all key pages. Conduct manual screen reader testing on key user flows and content types. Use automated tools (Lighthouse, Axe) to catch some issues, but rely heavily on manual testing for this step."
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "created": "2025-06-30T21:27:02.669Z",
+      "updated": "2025-06-30T21:28:41.254Z",
+      "description": "Tasks for refactoring-design context"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+# Task ID: 2
+# Title: Implement Global Color Palette and Typography
+# Status: pending
+# Dependencies: 1
+# Priority: high
+# Description: Define and implement the global color palette and typography rules across the website using the chosen CSS framework or custom CSS.
+# Details:
+Define CSS variables or use the framework's configuration to set the primary (#3498db), secondary (#2ecc71), accent (#f1c40f), text (#333333), and background (#ffffff) colors. Import or link 'Roboto Slab' and 'Open Sans' fonts. Define CSS rules for H1, H2, H3, and body text sizes (2.5rem, 2rem, 1.75rem, 1rem) and assign the correct fonts.
+
+# Test Strategy:
+Create a style guide page or test component displaying all defined colors and font styles/sizes. Visually verify that colors and typography match the specifications. Use browser developer tools to inspect applied styles.

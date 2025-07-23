@@ -1,0 +1,11 @@
+# Task ID: 7
+# Title: Refactor Project Pages
+# Status: pending
+# Dependencies: 2, 3, 4
+# Priority: medium
+# Description: Refactor Project Pages to display detailed project descriptions, media (images/videos), links, and clear calls to action with a consistent layout.
+# Details:
+Update the project page template. Structure the page to include a title, detailed description, embedded images or videos, and links (e.g., to GitHub, live demo). Style call-to-action buttons using the secondary color. Ensure a consistent layout is applied across all project pages.
+
+# Test Strategy:
+Check several project pages to confirm the consistent layout. Verify that descriptions, media, and links are displayed correctly. Test call-to-action buttons.

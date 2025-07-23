@@ -1,0 +1,11 @@
+# Task ID: 10
+# Title: Optimize Performance and Ensure Accessibility (WCAG)
+# Status: pending
+# Dependencies: 5, 6, 7, 8, 9
+# Priority: high
+# Description: Optimize images and other assets for performance and ensure the entire website complies with WCAG accessibility guidelines.
+# Details:
+Compress images using tools or build process plugins. Consider lazy loading for images below the fold. Minify CSS and JavaScript. Use browser developer tools (Lighthouse, PageSpeed Insights) to identify performance bottlenecks. Review HTML structure for semantic correctness. Add `alt` text to all images. Ensure sufficient color contrast using contrast checker tools. Test keyboard navigation and screen reader compatibility.
+
+# Test Strategy:
+Run performance audits using Lighthouse or PageSpeed Insights and aim for target scores. Use accessibility audit tools (e.g., Lighthouse, Axe DevTools) to identify and fix WCAG violations. Manually test keyboard navigation (using Tab key) and screen reader compatibility (using VoiceOver, NVDA, or similar).

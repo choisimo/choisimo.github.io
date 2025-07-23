@@ -1,0 +1,11 @@
+# Task ID: 6
+# Title: Refactor Blog Post Pages
+# Status: pending
+# Dependencies: 2, 3, 4
+# Priority: medium
+# Description: Refactor Blog Post pages to have a clean, readable layout, including a table of contents, author info, social sharing, and related posts.
+# Details:
+Update the blog post template. Apply body font and text color for content readability. Implement a script or static HTML structure for a table of contents based on headings (H2, H3). Add sections for author information, social sharing buttons (using icons and links), and a 'Related Posts' section (potentially card-based).
+
+# Test Strategy:
+Review multiple blog post pages to ensure consistent layout. Verify the table of contents links work correctly. Check that author info and social sharing buttons are displayed and functional. Ensure related posts section is present.
