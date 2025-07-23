@@ -1,3 +1,12 @@
+{{ define "head" }}
+<style>
+/* 긴급 테스트 - 이 스타일이 적용되면 배경이 빨간색으로 변합니다 */
+body {
+  background-color: red !important;
+}
+</style>
+{{ end }}
+
 {{ define "main" }}
 <section class="page-header container">
   <div class="page-header-content">
@@ -5,7 +14,7 @@
       {{ if .IsHome }}
         최신 포스트
       {{ else if eq .Section "post" }}
-        모든 게시글
+        🔥 모든 게시글 (스타일 업데이트됨!)
       {{ else if eq .Section "project" }}
         프로젝트
       {{ else if eq .Section "document" }}

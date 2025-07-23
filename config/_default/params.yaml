@@ -11,6 +11,9 @@ appearance:
   font: minimal
   font_size: L
 
+# Custom CSS and JS
+custom_css: ['css/custom.css']
+
 # SEO
 
 marketing:
