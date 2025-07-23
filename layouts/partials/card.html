@@ -1,4 +1,4 @@
-<article class="card">
+<article class="card post-card">
   <a href="{{ .Permalink }}" class="card-link">
     <div class="card-image">
       {{ if .Params.featured_image }}
@@ -25,8 +25,20 @@
       <div class="card-header">
         <h3 class="card-title">{{ .Title }}</h3>
         <div class="card-meta">
-          <time class="card-date" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "2006.01.02" }}</time>
-          <span class="reading-time">{{ math.Round (div (countwords .Content) 200.0) }}분 소요</span>
+          <time class="card-date" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span>{{ .Date.Format "2006.01.02" }}</span>
+          </time>
+          <span class="reading-time">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+            <span>{{ math.Round (div (countwords .Content) 200.0) }}분 소요</span>
+          </span>
         </div>
       </div>
       
