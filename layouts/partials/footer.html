@@ -7,21 +7,22 @@
           {{ if .Site.Params.logo }}
             <img src="{{ .Site.Params.logo }}" alt="{{ .Site.Title }}" class="footer-logo" />
           {{ else }}
-            <h3 class="footer-title">{{ .Site.Title }}</h3>
+            <h3 class="footer-title">nodove 블로그</h3>
           {{ end }}
         </div>
         <p class="footer-tagline">{{ .Site.Params.description }}</p>
       </div>
       
       <div class="footer-column">
-        <h4 class="footer-heading">링크</h4>
-        <nav class="footer-nav">
-          <ul>
-            {{ range .Site.Menus.main }}
-              <li><a href="{{ .URL }}">{{ .Name }}</a></li>
-            {{ end }}
-          </ul>
-        </nav>
+        <h4 class="footer-heading">카테고리</h4>
+        <div class="category-tags">
+          <a href="{{ "/post/" | relLangURL }}" class="tag-item">게시글</a>
+          <a href="{{ "/about/" | relLangURL }}" class="tag-item">정보</a>
+          <a href="{{ "/categories/" | relLangURL }}" class="tag-item">카테고리</a>
+          <a href="{{ "/document/" | relLangURL }}" class="tag-item">문서</a>
+          <a href="{{ "/entertainment/" | relLangURL }}" class="tag-item">취미</a>
+          <a href="{{ "/project/" | relLangURL }}" class="tag-item">프로젝트</a>
+        </div>
       </div>
       
       <div class="footer-column">
