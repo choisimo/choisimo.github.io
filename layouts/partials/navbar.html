@@ -1,0 +1,96 @@
+<!-- Navigation Bar -->
+<header class="navbar">
+  <div class="navbar-brand">
+    <a href="{{ "/" | relLangURL }}">
+      <img src="/media/logo.png" alt="{{ .Site.Title }}" class="logo" width="40" height="40">
+      <span class="site-title">{{ .Site.Title }}</span>
+    </a>
+  </div>
+
+  <nav class="navbar-nav">
+    {{ $currentPage := . }}
+    {{ range .Site.Menus.main }}
+      {{ if .HasChildren }}
+        <div class="nav-item dropdown">
+          <a href="{{ .URL | relLangURL }}" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+            {{ .Name }}
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </a>
+          <div class="dropdown-menu">
+            {{ range .Children }}
+              <a class="dropdown-item" href="{{ .URL | relLangURL }}">{{ .Name }}</a>
+            {{ end }}
+          </div>
+        </div>
+      {{ else }}
+        <div class="nav-item">
+          <a class="nav-link{{ if $currentPage.IsMenuCurrent "main" . }} active{{ end }}" href="{{ .URL | relLangURL }}">
+            {{ .Name }}
+          </a>
+        </div>
+      {{ end }}
+    {{ end }}
+  </nav>
+
+  <div class="navbar-actions">
+    <button class="theme-toggle" aria-label="Toggle dark mode">
+      <svg class="moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+      <svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+    </button>
+    
+    <div class="lang-selector">
+      {{ range .Site.Languages }}
+        {{ if ne .LanguageName $.Site.Language.LanguageName }}
+          <a href="{{ .URL }}" class="lang-link">{{ .LanguageName }}</a>
+        {{ end }}
+      {{ end }}
+    </div>
+  </div>
+</header>
+
+<script>
+  // Toggle dropdown menus
+  document.querySelectorAll('.dropdown-toggle').forEach(dropdownToggle => {
+    dropdownToggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      const dropdown = this.nextElementSibling;
+      dropdown.classList.toggle('show');
+    });
+  });
+  
+  // Close dropdowns when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!e.target.matches('.dropdown-toggle')) {
+      document.querySelectorAll('.dropdown-menu.show').forEach(dropdown => {
+        dropdown.classList.remove('show');
+      });
+    }
+  });
+  
+  // Dark mode toggle
+  const themeToggle = document.querySelector('.theme-toggle');
+  themeToggle.addEventListener('click', function() {
+    document.documentElement.classList.toggle('dark');
+    localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+  });
+  
+  // Apply saved theme
+  if (localStorage.getItem('theme') === 'dark' || 
+      (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark');
+  }
+</script>

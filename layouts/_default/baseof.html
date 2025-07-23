@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Summary }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}{{ end }}">
+    
+    <!-- Stylesheets -->
+    {{ $styles := resources.Get "scss/template.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
+    <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/media/favicon.png">
+    
+    <!-- Open Graph / Twitter Card data -->
+    <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}">
+    <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+    <meta property="og:url" content="{{ .Permalink }}">
+    <meta property="og:image" content="{{ with .Params.featured_image }}{{ . | absURL }}{{ else }}{{ "/media/header.jpg" | absURL }}{{ end }}">
+    <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Summary }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}{{ end }}">
+    
+    <!-- Additional head elements from templates -->
+    {{ block "head" . }}{{ end }}
+</head>
+<body>
+    <!-- Navigation -->
+    {{ partial "navbar.html" . }}
+    
+    <!-- Main content -->
+    <main>
+        {{ block "main" . }}{{ end }}
+    </main>
+    
+    <!-- Footer -->
+    <footer class="page-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="copyright">
+                    &copy; {{ now.Format "2006" }} {{ .Site.Title }}
+                </div>
+                <div class="footer-links">
+                    {{ range .Site.Menus.footer }}
+                        <a href="{{ .URL }}" class="footer-link">{{ .Name }}</a>
+                    {{ end }}
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Additional scripts -->
+    {{ block "scripts" . }}{{ end }}
+</body>
+</html>
