@@ -25,7 +25,7 @@
 </head>
 <body>
     <!-- Navigation -->
-    {{ partial "navbar.html" . }}
+    {{ partial "navbar.html" (dict "context" . "Site" .Site) }}
     
     <!-- Main content -->
     <main>
