@@ -1,18 +1,24 @@
 ---
-title: "post list"
+title: "Post List"
 type: post
+# banner:
+#     image: './featured.jpg'         # default banner location : assets/media/header.jpg
+    
 # design:
 #   background:
-#     image: "featured.jpg"     # 배경으로 사용할 이미지 파일 경로
+#     image: "featured.jpg"     # Background image file path
 #     filters:
 #         brightness: 0.1                     # Range 0 - 1 : 1 is transparent and 0 is opaque
-#     position: center                        # 배경 이미지의 위치 (center, contain, actual)
-#     size: contain                             # 배경 이미지가 전체 화면을 덮도록 설정
-#     repeat: no-repeat                       # 배경 이미지가 반복되지 않도록 설정
-#     color: '#F5F5F5'                        # 배경 이미지가 없을 때 기본 색상
+#     position: center                        # Background image position (center, contain, actual)
+#     size: contain                             # Set background image to cover entire screen
+#     repeat: no-repeat                       # Set background image not to repeat
+#     color: '#F5F5F5'                        # Default color when there's no background image
 #     parallax: true                          # fixed background effect on desktop
 #     text_color_light: true                  
-image: 
+
+image:
     placement: 1
     focal_point: 'Center'
+    preview_only: false
+
 ---
