@@ -2,13 +2,19 @@
 // Modern, clean design with proper syntax highlighting
 
 // Import partials and modules
+@import 'variables'; // CSS Variables - must come first
 @import 'mixins'; // Responsive mixins and utilities
 @import 'colors'; // Theme colors and variables
 @import 'typography'; // Typography styles
+@import 'normalize'; // CSS normalize
+@import 'global'; // Global styles
 @import 'components'; // UI components
 @import 'code-syntax'; // Code syntax highlighting
 @import 'footer'; // Footer styling
 @import 'responsive'; // Responsive design adjustments
+@import 'card'; // Modern card component styling
+@import 'projects'; // Projects page styling
+@import 'home'; // Homepage styling
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 

@@ -11,7 +11,7 @@
       <div class="card-overlay">
         <div class="card-category">
           {{ if .Params.categories }}
-            {{ range first 1 .Params.categories }}
+            {{ range first 2 .Params.categories }}
               <span class="category-badge">{{ . }}</span>
             {{ end }}
           {{ else }}
@@ -23,11 +23,11 @@
     
     <div class="card-content">
       <h3 class="card-title">{{ .Title }}</h3>
-      <p class="card-summary">{{ .Summary | truncate 120 }}</p>
+      <p class="card-summary">{{ .Summary | truncate 150 }}</p>
       
       {{ if .Params.tags }}
         <div class="card-tags">
-          {{ range first 3 .Params.tags }}
+          {{ range first 4 .Params.tags }}
             <span class="tag">{{ . }}</span>
           {{ end }}
         </div>
@@ -35,12 +35,12 @@
       
       <div class="card-footer">
         <div class="card-meta">
-          <time class="card-date">{{ .Date.Format "2006년 1월 2일" }}</time>
-          <span class="reading-time">{{ math.Round (div (countwords .Content) 200.0) }}분 읽기</span>
+          <time class="card-date">{{ .Date.Format "2006.01.02" }}</time>
+          <span class="reading-time">{{ math.Round (div (countwords .Content) 200.0) }}분</span>
         </div>
         <div class="card-action">
           <span class="read-more-btn">
-            자세히 보기
+            더 보기
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="m9 18 6-6-6-6"/>
             </svg>

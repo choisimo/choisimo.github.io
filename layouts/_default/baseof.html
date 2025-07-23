@@ -37,20 +37,7 @@
     </main>
     
     <!-- Footer -->
-    <footer class="page-footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="copyright">
-                    &copy; {{ now.Format "2006" }} {{ .Site.Title }}
-                </div>
-                <div class="footer-links">
-                    {{ range .Site.Menus.footer }}
-                        <a href="{{ .URL }}" class="footer-link">{{ .Name }}</a>
-                    {{ end }}
-                </div>
-            </div>
-        </div>
-    </footer>
+    {{ partial "footer.html" . }}
     
     <!-- Additional scripts -->
     {{ block "scripts" . }}{{ end }}

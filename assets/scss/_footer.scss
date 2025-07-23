@@ -1,57 +1,134 @@
-// Footer styling for nodove blog
+// Modern Footer styling for nodove blog
 
 .site-footer {
-  background-color: var(--bg-secondary);
-  padding: 1.5rem 0;
-  color: var(--text-secondary);
-  border-top: 1px solid rgba(255,255,255,0.05);
-  margin-top: 2rem;
+  background-color: var(--card-bg);
+  color: var(--text-color-secondary);
+  border-top: 1px solid var(--border-color);
+  margin-top: 4rem;
+  padding: 0;
   
-  .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    text-align: center;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    width: 100%;
+  .footer-container {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 var(--container-padding);
+    width: 100%;
+  }
+  
+  .footer-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 3rem 0 2rem;
     
     @media (min-width: 768px) {
-      flex-direction: row;
-      justify-content: space-between;
-      text-align: left;
-      gap: 1.5rem;
-      padding-left: 2rem;
-      padding-right: 2rem;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 3rem;
     }
   }
   
-  .footer-copyright {
-    font-size: 0.9rem;
+  .footer-column {
+    &:first-child {
+      margin-bottom: 1rem;
+    }
   }
   
-  .footer-links {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
+  .footer-branding {
+    margin-bottom: 1rem;
+  }
+  
+  .footer-logo {
+    max-height: 40px;
+    width: auto;
+  }
+  
+  .footer-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+    color: var(--heading-color);
+  }
+  
+  .footer-tagline {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+  
+  .footer-heading {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 1rem;
+    color: var(--heading-color);
+  }
+  
+  .footer-nav {
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
     
-    @media (min-width: 768px) {
-      justify-content: flex-end;
+    li {
+      margin-bottom: 0.75rem;
     }
     
     a {
-      color: var(--text-secondary);
+      color: var(--text-color-secondary);
       text-decoration: none;
+      font-size: 0.95rem;
       transition: color 0.2s ease;
-      font-size: 0.9rem;
       
       &:hover {
+        color: var(--primary);
+      }
+    }
+  }
+  
+  .footer-socials {
+    display: flex;
+    gap: 1rem;
+    
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background-color: var(--tag-bg);
+      color: var(--text-color-secondary);
+      transition: all 0.3s ease;
+      
+      &:hover {
+        background-color: var(--primary);
         color: white;
+        transform: translateY(-3px);
+      }
+    }
+  }
+  
+  .footer-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.85rem;
+    gap: 1rem;
+    text-align: center;
+    
+    @media (min-width: 768px) {
+      flex-direction: row;
+      text-align: left;
+    }
+    
+    a {
+      color: var(--primary);
+      text-decoration: none;
+      
+      &:hover {
+        text-decoration: underline;
       }
     }
   }
