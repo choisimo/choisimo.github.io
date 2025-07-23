@@ -5,11 +5,20 @@
   --primary: #3B82F6;
   --primary-light: #93C5FD;
   --primary-darker: #1D4ED8;
+  --primary-hover: #2563EB;
+  --primary-rgb: 59, 130, 246;
   --primary-gradient: linear-gradient(to right, #3B82F6, #6EE7B7);
   --secondary: #6B7280;
+  --secondary-hover: #4B5563;
+  --secondary-rgb: 107, 114, 128;
   --success: #10B981;
+  --success-rgb: 16, 185, 129;
   --warning: #F59E0B;
+  --warning-rgb: 245, 158, 11;
   --danger: #EF4444;
+  --danger-rgb: 239, 68, 68;
+  --info: #0EA5E9;
+  --info-rgb: 14, 165, 233;
   
   /* Text Colors */
   --text-color: #1F2937;
@@ -19,22 +28,30 @@
   
   /* Background Colors */
   --bg-body: #F9FAFB;
+  --bg-color: #FFFFFF;
+  --bg-color-secondary: #F3F4F6;
   --card-bg: #FFFFFF;
   --tag-bg: #F3F4F6;
+  --tag-bg-hover: #E5E7EB;
   --tag-color: #4B5563;
   --border-color: #E5E7EB;
   
   /* Shadows */
-  --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
-  --card-shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
   --header-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   
   /* Border Radius */
   --border-radius: 12px;
+  --border-radius-lg: 16px;
   --btn-radius: 6px;
   
   /* Spacing */
-  --container-padding: 1.5rem;
+  --container-width: 1280px;
+  --container-width-narrow: 920px;
+  --container-width-wide: 1440px;
+  --container-padding: 2rem;
   --section-spacing: 4rem;
   --card-spacing: 2rem;
   

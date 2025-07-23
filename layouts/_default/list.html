@@ -1,6 +1,6 @@
 {{ define "main" }}
-<div class="main-content">
-  <div class="page-header">
+<section class="page-header container">
+  <div class="page-header-content">
     <h1 class="page-title">
       {{ if .IsHome }}
         최신 포스트
@@ -32,15 +32,18 @@
         {{ .Params.description | default .Summary }}
       {{ end }}
     </p>
-    
-    {{ if .Params.tags }}
-    <div class="page-tags">
-      {{ range .Params.tags }}
-        <span class="tag">{{ . }}</span>
-      {{ end }}
-    </div>
+  </div>
+  
+  {{ if .Params.tags }}
+  <div class="page-tags">
+    {{ range .Params.tags }}
+      <span class="tag">{{ . }}</span>
     {{ end }}
   </div>
+  {{ end }}
+</section>
+
+<div class="main-content container">
   
   {{ if .Content }}
     <div class="page-content">
@@ -54,22 +57,47 @@
   {{ end }}
   
   {{ if $pages }}
-    <div class="section-stats">
-      <div class="stats-item">
-        <span class="stats-number">{{ len $pages }}</span>
-        <span class="stats-label">
-          {{ if eq .Section "post" }}개의 글{{ else if eq .Section "project" }}개의 프로젝트{{ else }}개의 항목{{ end }}
-        </span>
-      </div>
-      {{ if .Params.categories }}
+    <div class="list-header">
+      <div class="section-stats">
         <div class="stats-item">
-          <span class="stats-number">{{ len .Params.categories }}</span>
-          <span class="stats-label">개의 카테고리</span>
+          <span class="stats-number">{{ len $pages }}</span>
+          <span class="stats-label">
+            {{ if eq .Section "post" }}개의 글{{ else if eq .Section "project" }}개의 프로젝트{{ else }}개의 항목{{ end }}
+          </span>
         </div>
+        {{ if .Params.categories }}
+          <div class="stats-item">
+            <span class="stats-number">{{ len .Params.categories }}</span>
+            <span class="stats-label">개의 카테고리</span>
+          </div>
+        {{ end }}
+      </div>
+      
+      {{ if gt (len $pages) 1 }}
+      <div class="list-view-options">
+        <button class="view-option active" data-view="grid">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+        </button>
+        <button class="view-option" data-view="list">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="8" y1="6" x2="21" y2="6"></line>
+            <line x1="8" y1="12" x2="21" y2="12"></line>
+            <line x1="8" y1="18" x2="21" y2="18"></line>
+            <line x1="3" y1="6" x2="3.01" y2="6"></line>
+            <line x1="3" y1="12" x2="3.01" y2="12"></line>
+            <line x1="3" y1="18" x2="3.01" y2="18"></line>
+          </svg>
+        </button>
+      </div>
       {{ end }}
     </div>
     
-    <div class="cards-container">
+    <div class="cards-container grid-view">
       {{ range $pages }}
         {{ partial "card.html" . }}
       {{ end }}
@@ -92,34 +120,105 @@
   
   {{ if .Paginator }}
     {{ if gt .Paginator.TotalPages 1 }}
-      <nav class="pagination-wrapper">
+      <nav class="pagination-wrapper" aria-label="페이지 내비게이션">
         <div class="pagination">
           {{ if .Paginator.HasPrev }}
-            <a href="{{ .Paginator.Prev.URL }}" class="btn btn-secondary pagination-btn">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <a href="{{ .Paginator.Prev.URL }}" class="pagination-btn prev" aria-label="이전 페이지">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="15,18 9,12 15,6"></polyline>
               </svg>
-              이전
+              <span>이전</span>
             </a>
+          {{ else }}
+            <span class="pagination-btn disabled">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="15,18 9,12 15,6"></polyline>
+              </svg>
+              <span>이전</span>
+            </span>
           {{ end }}
           
-          <div class="pagination-info">
-            <span class="current-page">{{ .Paginator.PageNumber }}</span>
-            <span class="separator">/</span>
-            <span class="total-pages">{{ .Paginator.TotalPages }}</span>
+          <div class="pagination-numbers">
+            {{ $paginator := .Paginator }}
+            {{ $window := 2 }}
+            
+            {{ if gt $paginator.TotalPages 5 }}
+              {{ if le $paginator.PageNumber $window }}
+                {{ range $paginator.Pagers }}
+                  {{ if le .PageNumber (add $window 2) }}
+                    <a href="{{ .URL }}" class="pagination-number {{ if eq . $paginator.PageNumber }}active{{ end }}">
+                      {{ .PageNumber }}
+                    </a>
+                  {{ end }}
+                {{ end }}
+                <span class="pagination-ellipsis">...</span>
+                <a href="{{ $paginator.Last.URL }}" class="pagination-number">
+                  {{ $paginator.TotalPages }}
+                </a>
+              
+              {{ else if ge $paginator.PageNumber (sub $paginator.TotalPages $window) }}
+                <a href="{{ $paginator.First.URL }}" class="pagination-number">
+                  1
+                </a>
+                <span class="pagination-ellipsis">...</span>
+                {{ range $paginator.Pagers }}
+                  {{ if ge .PageNumber (sub $paginator.TotalPages (add $window 1)) }}
+                    <a href="{{ .URL }}" class="pagination-number {{ if eq . $paginator.PageNumber }}active{{ end }}">
+                      {{ .PageNumber }}
+                    </a>
+                  {{ end }}
+                {{ end }}
+              
+              {{ else }}
+                <a href="{{ $paginator.First.URL }}" class="pagination-number">
+                  1
+                </a>
+                <span class="pagination-ellipsis">...</span>
+                {{ range $paginator.Pagers }}
+                  {{ if and (ge .PageNumber (sub $paginator.PageNumber $window)) (le .PageNumber (add $paginator.PageNumber $window)) }}
+                    <a href="{{ .URL }}" class="pagination-number {{ if eq . $paginator.PageNumber }}active{{ end }}">
+                      {{ .PageNumber }}
+                    </a>
+                  {{ end }}
+                {{ end }}
+                <span class="pagination-ellipsis">...</span>
+                <a href="{{ $paginator.Last.URL }}" class="pagination-number">
+                  {{ $paginator.TotalPages }}
+                </a>
+              {{ end }}
+            
+            {{ else }}
+              {{ range $paginator.Pagers }}
+                <a href="{{ .URL }}" class="pagination-number {{ if eq . $paginator.PageNumber }}active{{ end }}">
+                  {{ .PageNumber }}
+                </a>
+              {{ end }}
+            {{ end }}
           </div>
           
           {{ if .Paginator.HasNext }}
-            <a href="{{ .Paginator.Next.URL }}" class="btn btn-secondary pagination-btn">
-              다음
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <a href="{{ .Paginator.Next.URL }}" class="pagination-btn next" aria-label="다음 페이지">
+              <span>다음</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="9,18 15,12 9,6"></polyline>
               </svg>
             </a>
+          {{ else }}
+            <span class="pagination-btn disabled">
+              <span>다음</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9,18 15,12 9,6"></polyline>
+              </svg>
+            </span>
           {{ end }}
         </div>
       </nav>
     {{ end }}
   {{ end }}
 </div>
+{{ end }}
+
+{{ define "scripts" }}
+  {{ $postListJS := resources.Get "js/post-list.js" | resources.Minify }}
+  <script src="{{ $postListJS.RelPermalink }}"></script>
 {{ end }}
