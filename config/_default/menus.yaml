@@ -191,7 +191,12 @@ main:
 
   - name: "취미"
     weight: 900
+    url: "/entertainment"
   - name: "영화"
     url: "/entertainment/movie"
     parent: "취미"
     weight: 901
+  - name: "게임"
+    url: "/entertainment/game"
+    parent: "취미"
+    weight: 902

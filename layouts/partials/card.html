@@ -1,12 +1,23 @@
 <article class="card post-card">
   <a href="{{ .Permalink }}" class="card-link">
     <div class="card-image">
+      {{ $imageFound := false }}
       {{ if .Params.featured_image }}
+        {{ $imageFound = true }}
         <img src="{{ .Params.featured_image }}" alt="{{ .Title }}" loading="lazy">
       {{ else if .Params.banner.image }}
+        {{ $imageFound = true }}
         <img src="/media/{{ .Params.banner.image }}" alt="{{ .Title }}" loading="lazy">
+      {{ else if .Resources.GetMatch "featured*" }}
+        {{ $imageFound = true }}
+        {{ $featured := .Resources.GetMatch "featured*" }}
+        <img src="{{ $featured.RelPermalink }}" alt="{{ .Title }}" loading="lazy">
+      {{ else if .Page.Resources.GetMatch "*.{jpg,jpeg,png,webp}" }}
+        {{ $imageFound = true }}
+        {{ $image := .Page.Resources.GetMatch "*.{jpg,jpeg,png,webp}" }}
+        <img src="{{ $image.RelPermalink }}" alt="{{ .Title }}" loading="lazy">
       {{ else }}
-        <img src="/media/header.jpg" alt="{{ .Title }}" loading="lazy">
+        <img src="/media/header.jpg" alt="{{ .Title }}" loading="lazy" style="opacity: 0.6; filter: grayscale(0.3);">
       {{ end }}
       <div class="card-overlay">
         <div class="card-category">
