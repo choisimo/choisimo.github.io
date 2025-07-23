@@ -1,0 +1,58 @@
+// Footer styling for nodove blog
+
+.site-footer {
+  background-color: var(--bg-secondary);
+  padding: 1.5rem 0;
+  color: var(--text-secondary);
+  border-top: 1px solid rgba(255,255,255,0.05);
+  margin-top: 2rem;
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    
+    @include media-breakpoint-up(md) {
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+      gap: 1.5rem;
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+  
+  .footer-copyright {
+    font-size: 0.9rem;
+  }
+  
+  .footer-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+    @include media-breakpoint-up(md) {
+      justify-content: flex-end;
+    }
+    
+    a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+      font-size: 0.9rem;
+      
+      &:hover {
+        color: white;
+      }
+    }
+  }
+}

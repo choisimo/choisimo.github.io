@@ -6,9 +6,13 @@
     <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
     <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Summary }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}{{ end }}">
     
-    <!-- Stylesheets -->
-    {{ $styles := resources.Get "scss/template.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
-    <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}">
+    <!-- CSS & JS -->
+    {{ $style := resources.Get "scss/template.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
+    
+    <!-- Main JavaScript -->
+    {{ $main := resources.Get "js/main.js" | resources.Minify }}
+    <script src="{{ $main.RelPermalink }}"></script>
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/media/favicon.png">

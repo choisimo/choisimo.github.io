@@ -1,0 +1,151 @@
+// Code Syntax Highlighting for nodove blog
+// Based on monokai theme
+
+// Code styling variables
+:root {
+  --code-font: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --code-bg: #272822;
+  --code-color: #f8f8f2;
+  --code-line-height: 1.6;
+  --code-radius: 8px;
+  --code-padding: 1.25rem;
+  --inline-code-bg: rgba(0,0,0,0.05);
+  --inline-code-color: #e83e8c;
+}
+
+.dark {
+  --inline-code-bg: rgba(255,255,255,0.1);
+  --inline-code-color: #ff79c6;
+}
+
+// Inline code
+code {
+  font-family: var(--code-font);
+  padding: 0.2em 0.4em;
+  font-size: 0.9em;
+  color: var(--inline-code-color);
+  background-color: var(--inline-code-bg);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+// Code blocks
+pre {
+  display: block;
+  padding: var(--code-padding);
+  margin: 1.5rem 0;
+  font-size: 0.875em;
+  line-height: var(--code-line-height);
+  overflow: auto;
+  background-color: var(--code-bg);
+  border-radius: var(--code-radius);
+  box-shadow: 0 3px 12px rgba(0,0,0,0.2);
+}
+
+pre code {
+  padding: 0;
+  font-size: 0.9em;
+  color: var(--code-color);
+  word-break: normal;
+  word-wrap: normal;
+  background-color: transparent;
+  border: 0;
+  overflow-wrap: normal;
+  white-space: pre;
+}
+
+// Syntax highlighting colors
+.hljs-keyword, 
+.hljs-selector-tag,
+.hljs-built_in,
+.hljs-name,
+.hljs-tag {
+  color: #f92672;
+}
+
+.hljs-string,
+.hljs-title,
+.hljs-section,
+.hljs-attribute,
+.hljs-literal,
+.hljs-template-tag,
+.hljs-template-variable,
+.hljs-type,
+.hljs-addition {
+  color: #a6e22e;
+}
+
+.hljs-comment,
+.hljs-quote,
+.hljs-meta,
+.hljs-deletion {
+  color: #75715e;
+}
+
+.hljs-selector-id,
+.hljs-selector-class {
+  color: #66d9ef;
+}
+
+.hljs-variable,
+.hljs-params,
+.hljs-attr,
+.hljs-selector-pseudo {
+  color: #fd971f;
+}
+
+.hljs-number,
+.hljs-regexp,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link {
+  color: #ae81ff;
+}
+
+.hljs-doctag,
+.hljs-subst,
+.hljs-function {
+  color: #e6db74;
+}
+
+// Code block filename
+.code-filename {
+  display: block;
+  padding: 0.5rem 1.25rem;
+  font-family: var(--code-font);
+  font-size: 0.8rem;
+  color: #f8f8f2;
+  background-color: #3c3c3c;
+  border-top-left-radius: var(--code-radius);
+  border-top-right-radius: var(--code-radius);
+  border-bottom: 1px solid #555;
+}
+
+.code-filename + pre {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  margin-top: 0;
+}
+
+// Line numbers
+.line-numbers pre {
+  position: relative;
+  padding-left: 3.8em;
+  counter-reset: line;
+}
+
+.line-numbers pre code {
+  position: relative;
+}
+
+.line-numbers pre code::before {
+  content: counter(line);
+  counter-increment: line;
+  position: absolute;
+  left: -3em;
+  width: 2.5em;
+  text-align: right;
+  color: #75715e;
+  border-right: 1px solid #555;
+  padding-right: 0.5em;
+}

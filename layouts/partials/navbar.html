@@ -2,10 +2,14 @@
 <header class="navbar">
   <div class="navbar-brand">
     <a href="{{ "/" | relLangURL }}">
-      <img src="/media/logo.png" alt="블로그" class="logo" width="40" height="40">
-      <span class="site-title">최시모 블로그</span>
+      <img src="/media/logo.png" alt="{{ .Site.Title }}" class="logo" width="40" height="40">
+      <span class="site-title">{{ .Site.Title }}</span>
     </a>
   </div>
+  
+  <button class="mobile-nav-toggle" aria-label="Toggle navigation">
+    <span class="toggle-icon"></span>
+  </button>
 
   <nav class="navbar-nav">
     <!-- Main Menu Items -->

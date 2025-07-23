@@ -1,0 +1,148 @@
+// Color theme variables for nodove blog
+
+// Base color variables
+:root {
+  // Primary colors
+  --primary: #667eea;
+  --primary-dark: #5a67d8;
+  --primary-light: #7f9cf5;
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  
+  // Text colors
+  --text-primary: #2d3748;
+  --text-secondary: #4a5568;
+  --text-muted: #718096;
+  
+  // Background colors
+  --bg-primary: #ffffff;
+  --bg-secondary: #f7fafc;
+  --bg-tertiary: #edf2f7;
+  
+  // Border colors
+  --border-color: rgba(0,0,0,0.1);
+  --border-light: rgba(0,0,0,0.05);
+  
+  // Card and shadow styling
+  --card-shadow: 0 4px 6px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.08);
+  --card-shadow-hover: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+  --border-radius: 8px;
+  
+  // Status colors
+  --success: #48bb78;
+  --warning: #ed8936;
+  --danger: #e53e3e;
+  --info: #4299e1;
+}
+
+// Dark theme colors
+.dark {
+  // Text colors
+  --text-primary: #f7fafc;
+  --text-secondary: #cbd5e0;
+  --text-muted: #a0aec0;
+  
+  // Background colors
+  --bg-primary: #1a202c;
+  --bg-secondary: #2d3748;
+  --bg-tertiary: #3e4c5e;
+  
+  // Border colors
+  --border-color: rgba(255,255,255,0.1);
+  --border-light: rgba(255,255,255,0.05);
+  
+  // Card and shadow styling
+  --card-shadow: 0 4px 6px rgba(0,0,0,0.3), 0 1px 3px rgba(0,0,0,0.2);
+  --card-shadow-hover: 0 10px 15px rgba(0,0,0,0.3), 0 4px 6px rgba(0,0,0,0.15);
+}
+
+// Category & Tag colors
+.category-link {
+  background: rgba(102, 126, 234, 0.1);
+  color: var(--primary);
+  
+  &:hover {
+    background: rgba(102, 126, 234, 0.2);
+    color: var(--primary-dark);
+  }
+  
+  .dark & {
+    background: rgba(102, 126, 234, 0.15);
+    color: var(--primary-light);
+    
+    &:hover {
+      background: rgba(102, 126, 234, 0.25);
+    }
+  }
+}
+
+.tag-link {
+  background: rgba(118, 75, 162, 0.1);
+  color: #a855f7;
+  
+  &:hover {
+    background: rgba(118, 75, 162, 0.2);
+    color: #7c3aed;
+  }
+  
+  .dark & {
+    background: rgba(118, 75, 162, 0.15);
+    color: #c4b5fd;
+    
+    &:hover {
+      background: rgba(118, 75, 162, 0.25);
+    }
+  }
+}
+
+// Selection color
+::selection {
+  background-color: var(--primary);
+  color: white;
+}
+
+// Link colors
+a {
+  color: var(--primary);
+  transition: color 0.2s ease;
+  
+  &:hover {
+    color: var(--primary-dark);
+  }
+}
+
+// Button variants
+.btn-primary {
+  background: var(--primary-gradient);
+  color: white;
+  
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  
+  &:hover {
+    background: var(--primary);
+    color: white;
+  }
+  
+  .dark & {
+    border-color: var(--primary-light);
+    color: var(--primary-light);
+    
+    &:hover {
+      background: var(--primary-light);
+      color: var(--bg-primary);
+    }
+  }
+}
+
+// Focus styles
+*:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
