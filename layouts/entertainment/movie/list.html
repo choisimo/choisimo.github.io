@@ -1,0 +1,445 @@
+{{ define "main" }}
+<div class="main-content">
+  <div class="page-header">
+    <h1 class="page-title">영화</h1>
+    <p class="page-subtitle">영화 리뷰와 철학적 분석을 공유합니다</p>
+  </div>
+  
+  {{ if .Content }}
+    <div class="page-content">
+      {{ .Content }}
+    </div>
+  {{ end }}
+  
+  {{ $pages := .Pages }}
+  {{ if $pages }}
+    <div class="section-stats">
+      <div class="stats-item">
+        <span class="stats-number">{{ len $pages }}</span>
+        <span class="stats-label">개의 영화 리뷰</span>
+      </div>
+    </div>
+    
+    <div class="cards-container">
+      {{ range $pages }}
+        <article class="card movie-card">
+          <a href="{{ .Permalink }}" class="card-link">
+            {{ if .Params.featured_image }}
+              <div class="card-image">
+                <img src="{{ .Params.featured_image }}" alt="{{ .Title }}" loading="lazy">
+                <div class="card-overlay">
+                  <div class="card-category">
+                    <span class="category-badge">영화</span>
+                  </div>
+                </div>
+              </div>
+            {{ end }}
+            
+            <div class="card-content">
+              <div class="card-header">
+                <h2 class="card-title">{{ .Title }}</h2>
+                <div class="card-meta">
+                  {{ if .Date }}
+                    <time class="card-date">{{ .Date.Format "2006년 1월 2일" }}</time>
+                  {{ end }}
+                  {{ if .ReadingTime }}
+                    <span class="reading-time">{{ .ReadingTime }}분 소요</span>
+                  {{ end }}
+                </div>
+              </div>
+              
+              {{ if .Summary }}
+                <p class="card-summary">{{ .Summary | truncate 150 }}</p>
+              {{ end }}
+              
+              {{ if .Params.tags }}
+                <div class="card-tags">
+                  {{ range first 3 .Params.tags }}
+                    <span class="tag">{{ . }}</span>
+                  {{ end }}
+                  {{ if gt (len .Params.tags) 3 }}
+                    <span class="more-tags">+{{ sub (len .Params.tags) 3 }}개</span>
+                  {{ end }}
+                </div>
+              {{ end }}
+              
+              <div class="card-footer">
+                <div class="card-action">
+                  <span class="read-more-btn">
+                    자세히 보기
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="m9 18 6-6-6-6"/>
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>
+      {{ end }}
+    </div>
+    
+    {{ template "_internal/pagination.html" . }}
+  {{ else }}
+    <div class="empty-state">
+      <div class="empty-icon">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+          <polygon points="23 7 16 12 23 17 23 7"/>
+          <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+        </svg>
+      </div>
+      <h3>영화 리뷰가 없습니다</h3>
+      <p>곧 흥미로운 영화 리뷰들이 추가될 예정입니다.</p>
+    </div>
+  {{ end }}
+</div>
+
+<style>
+/* Modern Movie Card Styling */
+.movie-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2rem;
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.movie-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  border-color: #2962ff;
+}
+
+.movie-card .card-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.movie-card .card-image {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.movie-card .card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.movie-card:hover .card-image img {
+  transform: scale(1.08);
+}
+
+.movie-card .card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.3) 100%);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 1.5rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.movie-card:hover .card-overlay {
+  opacity: 1;
+}
+
+.movie-card .category-badge {
+  background: linear-gradient(135deg, #2962ff 0%, #1e3a8a 100%);
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  backdrop-filter: blur(10px);
+}
+
+.movie-card .card-content {
+  padding: 1.75rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.movie-card .card-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin: 0 0 1rem 0;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  transition: color 0.3s ease;
+}
+
+.movie-card:hover .card-title {
+  color: #2962ff;
+}
+
+.movie-card .card-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+  color: #718096;
+}
+
+.movie-card .card-date::before {
+  content: '📅';
+  margin-right: 0.5rem;
+}
+
+.movie-card .reading-time::before {
+  content: '⏱️';
+  margin-right: 0.5rem;
+}
+
+.movie-card .card-summary {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #4a5568;
+  margin: 0 0 1.25rem 0;
+  opacity: 0.9;
+  flex: 1;
+}
+
+.movie-card .card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.movie-card .tag {
+  background: linear-gradient(135deg, #2962ff 0%, #1e3a8a 100%);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+}
+
+.movie-card .more-tags {
+  color: #718096;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.movie-card .card-footer {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.movie-card .read-more-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #2962ff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.movie-card:hover .read-more-btn svg {
+  transform: translateX(4px);
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 2rem;
+  margin: 2.5rem 0 4rem;
+}
+
+@media (max-width: 768px) {
+  .cards-container {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.75rem;
+  }
+  
+  .movie-card .card-title {
+    font-size: 1.25rem;
+  }
+  
+  .movie-card .card-content {
+    padding: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cards-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .movie-card .card-title {
+    font-size: 1.15rem;
+  }
+  
+  .movie-card .card-content {
+    padding: 1rem;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .movie-card {
+    background: #2d3748;
+    border-color: #4a5568;
+  }
+  
+  .movie-card:hover {
+    border-color: #63b3ed;
+  }
+  
+  .movie-card .card-title {
+    color: #f7fafc;
+  }
+  
+  .movie-card:hover .card-title {
+    color: #63b3ed;
+  }
+  
+  .movie-card .card-summary {
+    color: #cbd5e0;
+  }
+  
+  .movie-card .card-meta {
+    color: #a0aec0;
+  }
+  
+  .movie-card .card-footer {
+    border-top-color: #4a5568;
+  }
+}
+
+/* Page styling */
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 3px solid #e2e8f0;
+  position: relative;
+}
+
+.page-header::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #2962ff 0%, #1e3a8a 100%);
+  border-radius: 2px;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #1a202c;
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
+}
+
+.page-subtitle {
+  font-size: 1.2rem;
+  color: #4a5568;
+  margin: 0;
+  font-weight: 400;
+}
+
+.section-stats {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+}
+
+.stats-item {
+  text-align: center;
+}
+
+.stats-number {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #2962ff 0%, #1e3a8a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.stats-label {
+  font-size: 0.9rem;
+  color: #4a5568;
+  font-weight: 500;
+}
+
+.page-content {
+  margin-bottom: 2rem;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .page-title {
+    color: #f7fafc;
+  }
+  
+  .page-subtitle {
+    color: #cbd5e0;
+  }
+  
+  .section-stats,
+  .page-content {
+    background: #2d3748;
+    border-color: #4a5568;
+  }
+  
+  .stats-label {
+    color: #cbd5e0;
+  }
+  
+  .page-header {
+    border-bottom-color: #4a5568;
+  }
+}
+</style>
+{{ end }}
