@@ -1,0 +1,51 @@
+<div class="about-widget">
+  {{ if .Params.author.avatar }}
+    <div class="author-avatar">
+      <img src="{{ .Params.author.avatar }}" alt="{{ .Params.author.name }}" class="avatar">
+    </div>
+  {{ end }}
+  
+  <div class="author-info">
+    {{ if .Params.author.name }}
+      <h3 class="author-name">{{ .Params.author.name }}</h3>
+    {{ end }}
+    
+    {{ if .Params.author.role }}
+      <p class="author-role">{{ .Params.author.role }}</p>
+    {{ end }}
+    
+    {{ if .Params.author.bio }}
+      <div class="author-bio">
+        {{ .Params.author.bio | markdownify }}
+      </div>
+    {{ end }}
+    
+    {{ if .Params.author.interests }}
+      <div class="author-interests">
+        <h4>관심 분야</h4>
+        <div class="interests-list">
+          {{ range .Params.author.interests }}
+            <span class="interest-tag">{{ . }}</span>
+          {{ end }}
+        </div>
+      </div>
+    {{ end }}
+    
+    {{ if .Params.author.social }}
+      <div class="author-social">
+        {{ range .Params.author.social }}
+          <a href="{{ .link }}" class="social-link" target="_blank" rel="noopener">
+            <i class="{{ .icon }}"></i>
+            <span>{{ .name }}</span>
+          </a>
+        {{ end }}
+      </div>
+    {{ end }}
+  </div>
+  
+  {{ if .Content }}
+    <div class="widget-content">
+      {{ .Content }}
+    </div>
+  {{ end }}
+</div>

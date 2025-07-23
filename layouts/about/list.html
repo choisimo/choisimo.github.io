@@ -1,0 +1,41 @@
+{{ define "main" }}
+<div class="main-content">
+  <div class="about-hero">
+    <div class="hero-content">
+      <h1 class="hero-title">{{ .Title | default "About Me" }}</h1>
+      <p class="hero-subtitle">{{ .Params.description | default "소개" }}</p>
+    </div>
+  </div>
+  
+  {{ if .Content }}
+    <div class="about-content">
+      {{ .Content }}
+    </div>
+  {{ end }}
+  
+  {{ range .Pages }}
+    <section class="about-section">
+      <div class="section-header">
+        <h2 class="section-title">{{ .Title }}</h2>
+        {{ if .Params.subtitle }}
+          <p class="section-subtitle">{{ .Params.subtitle }}</p>
+        {{ end }}
+      </div>
+      
+      <div class="section-content">
+        {{ if eq .Params.widget "about" }}
+          {{ partial "about-widget.html" . }}
+        {{ else if eq .Params.widget "accomplishments" }}
+          {{ partial "accomplishments-widget.html" . }}
+        {{ else if eq .Params.widget "experience" }}
+          {{ partial "experience-widget.html" . }}
+        {{ else if eq .Params.widget "skills" }}
+          {{ partial "skills-widget.html" . }}
+        {{ else }}
+          {{ .Content }}
+        {{ end }}
+      </div>
+    </section>
+  {{ end }}
+</div>
+{{ end }}

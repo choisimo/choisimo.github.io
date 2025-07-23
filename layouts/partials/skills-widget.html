@@ -1,0 +1,42 @@
+<div class="skills-widget">
+  {{ if .Params.skills }}
+    <div class="skills-grid">
+      {{ range .Params.skills }}
+        <div class="skill-category">
+          <h4 class="skill-category-title">{{ .name }}</h4>
+          
+          <div class="skill-items">
+            {{ range .items }}
+              <div class="skill-item">
+                {{ if .icon }}
+                  <div class="skill-icon">
+                    <i class="{{ .icon }}"></i>
+                  </div>
+                {{ end }}
+                
+                <div class="skill-info">
+                  <span class="skill-name">{{ .name }}</span>
+                  
+                  {{ if .percent }}
+                    <div class="skill-progress">
+                      <div class="skill-bar">
+                        <div class="skill-fill" style="width: {{ .percent }}%"></div>
+                      </div>
+                      <span class="skill-percent">{{ .percent }}%</span>
+                    </div>
+                  {{ end }}
+                </div>
+              </div>
+            {{ end }}
+          </div>
+        </div>
+      {{ end }}
+    </div>
+  {{ end }}
+  
+  {{ if .Content }}
+    <div class="widget-content">
+      {{ .Content }}
+    </div>
+  {{ end }}
+</div>

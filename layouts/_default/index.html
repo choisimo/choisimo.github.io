@@ -1,24 +1,42 @@
-<div style="max-width: 1200px; margin: 0 auto; padding: 2rem;">
-  <div class="cards-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
+<div class="main-content">
+  <div class="page-header">
+    <h1 class="page-title">최신 포스트</h1>
+    <p class="page-subtitle">개발, 알고리즘, 그리고 다양한 경험들을 공유합니다</p>
+  </div>
+  
+  <div class="cards-container">
     {{ range .Paginator.Pages }}
       {{ partial "card.html" . }}
     {{ end }}
   </div>
   
-  <!-- Pagination -->
   {{ if gt .Paginator.TotalPages 1 }}
-    <nav class="pagination" style="margin-top: 3rem; text-align: center;">
-      {{ if .Paginator.HasPrev }}
-        <a href="{{ .Paginator.Prev.URL }}" class="btn btn-secondary" style="margin-right: 1rem;">이전</a>
-      {{ end }}
-      
-      <span style="margin: 0 1rem;">
-        {{ .Paginator.PageNumber }} / {{ .Paginator.TotalPages }}
-      </span>
-      
-      {{ if .Paginator.HasNext }}
-        <a href="{{ .Paginator.Next.URL }}" class="btn btn-secondary" style="margin-left: 1rem;">다음</a>
-      {{ end }}
+    <nav class="pagination-wrapper">
+      <div class="pagination">
+        {{ if .Paginator.HasPrev }}
+          <a href="{{ .Paginator.Prev.URL }}" class="btn btn-secondary pagination-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15,18 9,12 15,6"></polyline>
+            </svg>
+            이전
+          </a>
+        {{ end }}
+        
+        <div class="pagination-info">
+          <span class="current-page">{{ .Paginator.PageNumber }}</span>
+          <span class="separator">/</span>
+          <span class="total-pages">{{ .Paginator.TotalPages }}</span>
+        </div>
+        
+        {{ if .Paginator.HasNext }}
+          <a href="{{ .Paginator.Next.URL }}" class="btn btn-secondary pagination-btn">
+            다음
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9,18 15,12 9,6"></polyline>
+            </svg>
+          </a>
+        {{ end }}
+      </div>
     </nav>
   {{ end }}
 </div>

@@ -1,0 +1,125 @@
+{{ define "main" }}
+<div class="main-content">
+  <div class="page-header">
+    <h1 class="page-title">
+      {{ if .IsHome }}
+        최신 포스트
+      {{ else if eq .Section "post" }}
+        모든 게시글
+      {{ else if eq .Section "project" }}
+        프로젝트
+      {{ else if eq .Section "document" }}
+        문서
+      {{ else if eq .Section "entertainment" }}
+        취미 & 엔터테인먼트
+      {{ else }}
+        {{ .Title }}
+      {{ end }}
+    </h1>
+    
+    <p class="page-subtitle">
+      {{ if .IsHome }}
+        개발, 알고리즘, 그리고 다양한 경험들을 공유합니다
+      {{ else if eq .Section "post" }}
+        {{ .Params.description | default "블로그의 모든 글을 확인해보세요" }}
+      {{ else if eq .Section "project" }}
+        {{ .Params.description | default "다양한 개발 프로젝트들을 소개합니다" }}
+      {{ else if eq .Section "document" }}
+        {{ .Params.description | default "유용한 문서와 자료들을 정리했습니다" }}
+      {{ else if eq .Section "entertainment" }}
+        {{ .Params.description | default "게임, 영화 등 취미 생활을 공유합니다" }}
+      {{ else }}
+        {{ .Params.description | default .Summary }}
+      {{ end }}
+    </p>
+    
+    {{ if .Params.tags }}
+    <div class="page-tags">
+      {{ range .Params.tags }}
+        <span class="tag">{{ . }}</span>
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+  
+  {{ if .Content }}
+    <div class="page-content">
+      {{ .Content }}
+    </div>
+  {{ end }}
+  
+  {{ $pages := .Pages }}
+  {{ if .IsHome }}
+    {{ $pages = .Site.RegularPages }}
+  {{ end }}
+  
+  {{ if $pages }}
+    <div class="section-stats">
+      <div class="stats-item">
+        <span class="stats-number">{{ len $pages }}</span>
+        <span class="stats-label">
+          {{ if eq .Section "post" }}개의 글{{ else if eq .Section "project" }}개의 프로젝트{{ else }}개의 항목{{ end }}
+        </span>
+      </div>
+      {{ if .Params.categories }}
+        <div class="stats-item">
+          <span class="stats-number">{{ len .Params.categories }}</span>
+          <span class="stats-label">개의 카테고리</span>
+        </div>
+      {{ end }}
+    </div>
+    
+    <div class="cards-container">
+      {{ range $pages }}
+        {{ partial "card.html" . }}
+      {{ end }}
+    </div>
+  {{ else }}
+    <div class="empty-state">
+      <div class="empty-icon">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14,2 14,8 20,8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+          <polyline points="10,9 9,9 8,9"/>
+        </svg>
+      </div>
+      <h3>아직 콘텐츠가 없습니다</h3>
+      <p>곧 새로운 {{ if eq .Section "post" }}글{{ else if eq .Section "project" }}프로젝트{{ else }}콘텐츠{{ end }}이 추가될 예정입니다.</p>
+    </div>
+  {{ end }}
+  
+  {{ if .Paginator }}
+    {{ if gt .Paginator.TotalPages 1 }}
+      <nav class="pagination-wrapper">
+        <div class="pagination">
+          {{ if .Paginator.HasPrev }}
+            <a href="{{ .Paginator.Prev.URL }}" class="btn btn-secondary pagination-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="15,18 9,12 15,6"></polyline>
+              </svg>
+              이전
+            </a>
+          {{ end }}
+          
+          <div class="pagination-info">
+            <span class="current-page">{{ .Paginator.PageNumber }}</span>
+            <span class="separator">/</span>
+            <span class="total-pages">{{ .Paginator.TotalPages }}</span>
+          </div>
+          
+          {{ if .Paginator.HasNext }}
+            <a href="{{ .Paginator.Next.URL }}" class="btn btn-secondary pagination-btn">
+              다음
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9,18 15,12 9,6"></polyline>
+              </svg>
+            </a>
+          {{ end }}
+        </div>
+      </nav>
+    {{ end }}
+  {{ end }}
+</div>
+{{ end }}

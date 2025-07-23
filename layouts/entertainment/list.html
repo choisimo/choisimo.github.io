@@ -1,0 +1,104 @@
+{{ define "main" }}
+<div class="main-content">
+  <div class="page-header">
+    <h1 class="page-title">취미 & 엔터테인먼트</h1>
+    <p class="page-subtitle">게임, 영화 등 취미 생활을 공유합니다</p>
+  </div>
+  
+  {{ if .Content }}
+    <div class="page-content">
+      {{ .Content }}
+    </div>
+  {{ end }}
+  
+  {{ $entertainment := .Pages }}
+  {{ if $entertainment }}
+    <div class="section-stats">
+      <div class="stats-item">
+        <span class="stats-number">{{ len $entertainment }}</span>
+        <span class="stats-label">개의 콘텐츠</span>
+      </div>
+    </div>
+    
+    <div class="entertainment-categories">
+      {{ $gamePages := where $entertainment "Section" "entertainment/game" }}
+      {{ $moviePages := where $entertainment "Section" "entertainment/movie" }}
+      
+      {{ if $gamePages }}
+        <section class="entertainment-section">
+          <div class="section-header">
+            <h2 class="section-title">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="6" y="4" width="4" height="16"/>
+                <rect x="14" y="4" width="4" height="16"/>
+              </svg>
+              게임
+            </h2>
+            <p class="section-subtitle">게임 리뷰와 플레이 경험을 공유합니다</p>
+          </div>
+          
+          <div class="entertainment-grid">
+            {{ range first 6 $gamePages }}
+              {{ partial "entertainment-card.html" . }}
+            {{ end }}
+          </div>
+          
+          {{ if gt (len $gamePages) 6 }}
+            <div class="section-more">
+              <a href="/ko/entertainment/game/" class="btn btn-secondary">
+                게임 더보기
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="m9 18 6-6-6-6"/>
+                </svg>
+              </a>
+            </div>
+          {{ end }}
+        </section>
+      {{ end }}
+      
+      {{ if $moviePages }}
+        <section class="entertainment-section">
+          <div class="section-header">
+            <h2 class="section-title">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="23 7 16 12 23 17 23 7"/>
+                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+              </svg>
+              영화
+            </h2>
+            <p class="section-subtitle">영화 리뷰와 감상평을 공유합니다</p>
+          </div>
+          
+          <div class="entertainment-grid">
+            {{ range first 6 $moviePages }}
+              {{ partial "entertainment-card.html" . }}
+            {{ end }}
+          </div>
+          
+          {{ if gt (len $moviePages) 6 }}
+            <div class="section-more">
+              <a href="/ko/entertainment/movie/" class="btn btn-secondary">
+                영화 더보기
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="m9 18 6-6-6-6"/>
+                </svg>
+              </a>
+            </div>
+          {{ end }}
+        </section>
+      {{ end }}
+    </div>
+  {{ else }}
+    <div class="empty-state">
+      <div class="empty-icon">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+          <polygon points="23 7 16 12 23 17 23 7"/>
+          <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+        </svg>
+      </div>
+      <h3>엔터테인먼트 콘텐츠가 없습니다</h3>
+      <p>곧 재미있는 콘텐츠들이 추가될 예정입니다.</p>
+    </div>
+  {{ end }}
+</div>
+{{ end }}

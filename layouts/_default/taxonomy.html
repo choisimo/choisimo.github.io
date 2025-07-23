@@ -1,0 +1,215 @@
+{{ define "main" }}
+<div class="main-content">
+  <div class="taxonomy-header">
+    <div class="taxonomy-info">
+      <h1 class="taxonomy-title">
+        {{ if eq .Type "categories" }}
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7"/>
+            <rect x="14" y="3" width="7" height="7"/>
+            <rect x="14" y="14" width="7" height="7"/>
+            <rect x="3" y="14" width="7" height="7"/>
+          </svg>
+          카테고리: {{ .Title }}
+        {{ else if eq .Type "tags" }}
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
+            <line x1="7" y1="7" x2="7.01" y2="7"/>
+          </svg>
+          태그: {{ .Title }}
+        {{ else }}
+          {{ .Title }}
+        {{ end }}
+      </h1>
+      
+      <p class="taxonomy-description">
+        {{ if eq .Type "categories" }}
+          "{{ .Title }}" 카테고리의 모든 글을 확인해보세요
+        {{ else if eq .Type "tags" }}
+          "{{ .Title }}" 태그가 포함된 모든 글을 확인해보세요
+        {{ else }}
+          {{ .Description | default .Summary }}
+        {{ end }}
+      </p>
+    </div>
+    
+    <div class="taxonomy-stats">
+      <div class="stats-card">
+        <span class="stats-number">{{ len .Pages }}</span>
+        <span class="stats-label">개의 글</span>
+      </div>
+    </div>
+  </div>
+  
+  {{ if .Pages }}
+    <div class="taxonomy-content">
+      <div class="taxonomy-filters">
+        <div class="filter-group">
+          <label>정렬:</label>
+          <select id="sortFilter" onchange="sortPosts()">
+            <option value="date">최신순</option>
+            <option value="title">제목순</option>
+            <option value="popular">인기순</option>
+          </select>
+        </div>
+        
+        <div class="filter-group">
+          <label>년도:</label>
+          <select id="yearFilter" onchange="filterByYear()">
+            <option value="">전체</option>
+            {{ $years := slice }}
+            {{ range .Pages }}
+              {{ $years = $years | append (.Date.Format "2006") }}
+            {{ end }}
+            {{ range uniq $years | sort }}
+              <option value="{{ . }}">{{ . }}년</option>
+            {{ end }}
+          </select>
+        </div>
+      </div>
+      
+      <div class="posts-timeline">
+        {{ $currentYear := "" }}
+        {{ range .Pages.ByDate.Reverse }}
+          {{ $year := .Date.Format "2006" }}
+          {{ if ne $year $currentYear }}
+            {{ if $currentYear }}
+              </div> <!-- Close previous year group -->
+            {{ end }}
+            <div class="year-group" data-year="{{ $year }}">
+              <h3 class="year-title">{{ $year }}년</h3>
+              <div class="year-posts">
+            {{ $currentYear = $year }}
+          {{ end }}
+          
+          <article class="timeline-post" data-year="{{ $year }}">
+            <div class="post-date">
+              <span class="date-day">{{ .Date.Format "02" }}</span>
+              <span class="date-month">{{ .Date.Format "Jan" }}</span>
+            </div>
+            
+            <div class="post-content">
+              <h4 class="post-title">
+                <a href="{{ .Permalink }}">{{ .Title }}</a>
+              </h4>
+              
+              <p class="post-excerpt">{{ .Summary | truncate 120 }}</p>
+              
+              <div class="post-meta">
+                {{ if .Params.categories }}
+                  <div class="post-categories">
+                    {{ range first 2 .Params.categories }}
+                      <a href="/categories/{{ . | urlize }}" class="category-link">{{ . }}</a>
+                    {{ end }}
+                  </div>
+                {{ end }}
+                
+                {{ if .Params.tags }}
+                  <div class="post-tags">
+                    {{ range first 3 .Params.tags }}
+                      <a href="/tags/{{ . | urlize }}" class="tag-link">{{ . }}</a>
+                    {{ end }}
+                  </div>
+                {{ end }}
+                
+                <span class="reading-time">{{ math.Round (div (countwords .Content) 200.0) }}분 읽기</span>
+              </div>
+            </div>
+          </article>
+        {{ end }}
+        {{ if $currentYear }}
+          </div> <!-- Close last year group -->
+        </div>
+        {{ end }}
+      </div>
+    </div>
+    
+    <!-- Related Terms -->
+    {{ if eq .Type "categories" }}
+      {{ $relatedTags := slice }}
+      {{ range .Pages }}
+        {{ range .Params.tags }}
+          {{ $relatedTags = $relatedTags | append . }}
+        {{ end }}
+      {{ end }}
+      {{ $topTags := uniq $relatedTags | first 8 }}
+      
+      {{ if $topTags }}
+        <div class="related-terms">
+          <h3>관련 태그</h3>
+          <div class="related-tags">
+            {{ range $topTags }}
+              <a href="/tags/{{ . | urlize }}" class="related-tag">{{ . }}</a>
+            {{ end }}
+          </div>
+        </div>
+      {{ end }}
+      
+    {{ else if eq .Type "tags" }}
+      {{ $relatedCategories := slice }}
+      {{ range .Pages }}
+        {{ range .Params.categories }}
+          {{ $relatedCategories = $relatedCategories | append . }}
+        {{ end }}
+      {{ end }}
+      {{ $topCategories := uniq $relatedCategories | first 6 }}
+      
+      {{ if $topCategories }}
+        <div class="related-terms">
+          <h3>관련 카테고리</h3>
+          <div class="related-categories">
+            {{ range $topCategories }}
+              <a href="/categories/{{ . | urlize }}" class="related-category">{{ . }}</a>
+            {{ end }}
+          </div>
+        </div>
+      {{ end }}
+    {{ end }}
+    
+  {{ else }}
+    <div class="empty-state">
+      <div class="empty-icon">
+        {{ if eq .Type "categories" }}
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+            <rect x="3" y="3" width="7" height="7"/>
+            <rect x="14" y="3" width="7" height="7"/>
+            <rect x="14" y="14" width="7" height="7"/>
+            <rect x="3" y="14" width="7" height="7"/>
+          </svg>
+        {{ else }}
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
+            <line x1="7" y1="7" x2="7.01" y2="7"/>
+          </svg>
+        {{ end }}
+      </div>
+      <h3>아직 글이 없습니다</h3>
+      <p>{{ if eq .Type "categories" }}"{{ .Title }}" 카테고리에 곧 새로운 글이 추가될 예정입니다.{{ else }}"{{ .Title }}" 태그가 포함된 글이 곧 추가될 예정입니다.{{ end }}</p>
+    </div>
+  {{ end }}
+</div>
+
+<script>
+function sortPosts() {
+  const sortValue = document.getElementById('sortFilter').value;
+  const posts = Array.from(document.querySelectorAll('.timeline-post'));
+  const timeline = document.querySelector('.posts-timeline');
+  
+  // Implementation for sorting would go here
+  // This is a simplified version
+}
+
+function filterByYear() {
+  const yearValue = document.getElementById('yearFilter').value;
+  const yearGroups = document.querySelectorAll('.year-group');
+  
+  yearGroups.forEach(group => {
+    if (yearValue === '' || group.dataset.year === yearValue) {
+      group.style.display = 'block';
+    } else {
+      group.style.display = 'none';
+    }
+  });
+}
+</script>
+{{ end }}

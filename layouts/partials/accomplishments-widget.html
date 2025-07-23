@@ -1,0 +1,48 @@
+<div class="accomplishments-widget">
+  {{ if .Params.accomplishments }}
+    <div class="accomplishments-grid">
+      {{ range .Params.accomplishments }}
+        <div class="accomplishment-card">
+          {{ if .icon }}
+            <div class="accomplishment-icon">
+              <i class="{{ .icon }}"></i>
+            </div>
+          {{ end }}
+          
+          <div class="accomplishment-content">
+            <h4 class="accomplishment-title">{{ .title }}</h4>
+            
+            {{ if .date }}
+              <p class="accomplishment-date">{{ .date }}</p>
+            {{ end }}
+            
+            {{ if .organization }}
+              <p class="accomplishment-org">{{ .organization }}</p>
+            {{ end }}
+            
+            {{ if .description }}
+              <p class="accomplishment-desc">{{ .description }}</p>
+            {{ end }}
+            
+            {{ if .certificate_url }}
+              <a href="{{ .certificate_url }}" class="accomplishment-link" target="_blank">
+                인증서 보기
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15,3 21,3 21,9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </a>
+            {{ end }}
+          </div>
+        </div>
+      {{ end }}
+    </div>
+  {{ end }}
+  
+  {{ if .Content }}
+    <div class="widget-content">
+      {{ .Content }}
+    </div>
+  {{ end }}
+</div>

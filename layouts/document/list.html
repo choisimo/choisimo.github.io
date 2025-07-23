@@ -1,0 +1,117 @@
+{{ define "main" }}
+<div class="main-content">
+  <div class="page-header">
+    <h1 class="page-title">문서</h1>
+    <p class="page-subtitle">유용한 문서와 자료들을 정리했습니다</p>
+  </div>
+  
+  {{ if .Content }}
+    <div class="page-content">
+      {{ .Content }}
+    </div>
+  {{ end }}
+  
+  {{ $docs := .Pages }}
+  {{ if $docs }}
+    <div class="section-stats">
+      <div class="stats-item">
+        <span class="stats-number">{{ len $docs }}</span>
+        <span class="stats-label">개의 문서</span>
+      </div>
+    </div>
+    
+    <div class="documents-grid">
+      {{ range $docs }}
+        <article class="document-card">
+          <div class="document-icon">
+            {{ if eq .Params.type "tutorial" }}
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+              </svg>
+            {{ else if eq .Params.type "guide" }}
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14,2 14,8 20,8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10,9 9,9 8,9"/>
+              </svg>
+            {{ else if eq .Params.type "reference" }}
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1"/>
+              </svg>
+            {{ else }}
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14,2 14,8 20,8"/>
+              </svg>
+            {{ end }}
+          </div>
+          
+          <div class="document-content">
+            <div class="document-meta">
+              {{ if .Params.type }}
+                <span class="document-type {{ .Params.type }}">
+                  {{ if eq .Params.type "tutorial" }}튜토리얼
+                  {{ else if eq .Params.type "guide" }}가이드
+                  {{ else if eq .Params.type "reference" }}레퍼런스
+                  {{ else }}{{ .Params.type }}{{ end }}
+                </span>
+              {{ end }}
+              
+              {{ if .Date }}
+                <time class="document-date">{{ .Date.Format "2006.01.02" }}</time>
+              {{ end }}
+            </div>
+            
+            <h3 class="document-title">
+              <a href="{{ .Permalink }}">{{ .Title }}</a>
+            </h3>
+            
+            <p class="document-summary">{{ .Summary | truncate 120 }}</p>
+            
+            {{ if .Params.tags }}
+              <div class="document-tags">
+                {{ range first 3 .Params.tags }}
+                  <span class="tag">{{ . }}</span>
+                {{ end }}
+              </div>
+            {{ end }}
+            
+            <div class="document-footer">
+              <a href="{{ .Permalink }}" class="read-more">
+                읽어보기
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="m9 18 6-6-6-6"/>
+                </svg>
+              </a>
+              
+              {{ if .Params.difficulty }}
+                <span class="document-difficulty {{ .Params.difficulty }}">
+                  {{ if eq .Params.difficulty "beginner" }}초급
+                  {{ else if eq .Params.difficulty "intermediate" }}중급
+                  {{ else if eq .Params.difficulty "advanced" }}고급
+                  {{ else }}{{ .Params.difficulty }}{{ end }}
+                </span>
+              {{ end }}
+            </div>
+          </div>
+        </article>
+      {{ end }}
+    </div>
+  {{ else }}
+    <div class="empty-state">
+      <div class="empty-icon">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14,2 14,8 20,8"/>
+        </svg>
+      </div>
+      <h3>문서가 없습니다</h3>
+      <p>곧 유용한 문서들이 추가될 예정입니다.</p>
+    </div>
+  {{ end }}
+</div>
+{{ end }}

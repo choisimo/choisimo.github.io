@@ -1,0 +1,56 @@
+<div class="experience-widget">
+  {{ if .Params.experience }}
+    <div class="experience-timeline">
+      {{ range .Params.experience }}
+        <div class="experience-item">
+          <div class="experience-date">
+            {{ if .date_start }}
+              <span class="date-start">{{ .date_start }}</span>
+              {{ if .date_end }}
+                <span class="date-separator">-</span>
+                <span class="date-end">{{ .date_end }}</span>
+              {{ else }}
+                <span class="date-separator">-</span>
+                <span class="date-current">현재</span>
+              {{ end }}
+            {{ end }}
+          </div>
+          
+          <div class="experience-content">
+            <h4 class="experience-title">{{ .title }}</h4>
+            
+            {{ if .company }}
+              <p class="experience-company">{{ .company }}</p>
+            {{ end }}
+            
+            {{ if .location }}
+              <p class="experience-location">{{ .location }}</p>
+            {{ end }}
+            
+            {{ if .description }}
+              <div class="experience-desc">
+                {{ range .description }}
+                  <p>{{ . }}</p>
+                {{ end }}
+              </div>
+            {{ end }}
+            
+            {{ if .technologies }}
+              <div class="experience-tech">
+                {{ range .technologies }}
+                  <span class="tech-tag">{{ . }}</span>
+                {{ end }}
+              </div>
+            {{ end }}
+          </div>
+        </div>
+      {{ end }}
+    </div>
+  {{ end }}
+  
+  {{ if .Content }}
+    <div class="widget-content">
+      {{ .Content }}
+    </div>
+  {{ end }}
+</div>
