@@ -14,7 +14,7 @@ banner:
 
 # 🌊 BFS (너비 우선 탐색) 완전 정복
 
-## 🎯 핵심 개념
+##  핵심 개념
 
 BFS(Breadth-First Search)는 **큐(Queue)**를 사용하여 그래프를 **레벨별로 탐색**하는 알고리즘입니다. 시작 정점에서 가까운 정점부터 차례대로 방문하며, **가중치가 없는 그래프에서 최단 경로**를 찾는 데 사용됩니다.
 
@@ -25,7 +25,7 @@ BFS(Breadth-First Search)는 **큐(Queue)**를 사용하여 그래프를 **레�
 4. **미방문 정점 추가**: 아직 방문하지 않은 인접 정점들을 큐에 추가
 5. **반복**: 큐가 빌 때까지 2-4 과정 반복
 
-## ⏰ 시간복잡도
+##  시간복잡도
 
 | 그래프 표현 | 시간복잡도 | 공간복잡도 |
 |-------------|------------|------------|
@@ -34,7 +34,7 @@ BFS(Breadth-First Search)는 **큐(Queue)**를 사용하여 그래프를 **레�
 
 - V: 정점의 수, E: 간선의 수
 
-## 💻 완전한 구현 코드
+##  완전한 구현 코드
 
 ### 1. 기본 BFS 구현
 ```python
@@ -361,7 +361,7 @@ for i, level in enumerate(tree_levels):
     print(f"Level {i}: {level}")
 ```
 
-## 🔧 고급 응용
+##  고급 응용
 
 ### 1. 다중 소스 BFS
 ```python
@@ -530,7 +530,7 @@ bi_distance = bidirectional_bfs(graph_example, 'A', 'F')
 print(f"Bidirectional BFS distance from A to F: {bi_distance}")
 ```
 
-## 🎪 실전 예제
+##  실전 예제
 
 ### 1. 단어 사다리 (Word Ladder)
 ```python
@@ -674,7 +674,7 @@ for max_breaks in range(3):
     print(f"With {max_breaks} wall breaks: {result}")
 ```
 
-## ⚡ BFS vs DFS 비교
+##  BFS vs DFS 비교
 
 | 특징 | BFS | DFS |
 |------|-----|-----|
@@ -703,6 +703,6 @@ for max_breaks in range(3):
 
 ---
 
-**다음 학습**: [다익스트라(Dijkstra) 최단 경로](../dijkstra/) ➡️
+**다음 학습**: [다익스트라(Dijkstra) 최단 경로](../dijkstra/) 
 
-BFS는 **최단 경로의 기본**이자 **레벨별 탐색의 핵심**입니다. 그래프 알고리즘의 근간을 완벽하게 마스터하세요! 🚀
+BFS는 **최단 경로의 기본**이자 **레벨별 탐색의 핵심**입니다. 그래프 알고리즘의 근간을 완벽하게 마스터하세요! 

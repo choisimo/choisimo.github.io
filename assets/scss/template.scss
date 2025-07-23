@@ -39,7 +39,9 @@ body {
   border-radius: var(--border-radius);
   box-shadow: var(--card-shadow);
   padding: 3rem;
-  margin: 2rem 0;
+  margin: 2rem auto;
+  max-width: 900px;
+  width: 100%;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255,255,255,0.1);
   transition: all 0.3s ease;
@@ -53,6 +55,47 @@ body {
 .dark .article-container {
   background: var(--bg-primary);
   border: 1px solid rgba(255,255,255,0.05);
+}
+
+// Main Content Container
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+// Article Header
+.article-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid rgba(0,0,0,0.1);
+}
+
+.dark .article-header {
+  border-bottom: 2px solid rgba(255,255,255,0.1);
+}
+
+.article-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.article-meta {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.article-tags {
+  margin-top: 1rem;
+}
+
+.article-tags .tag {
+  margin: 0.25rem;
 }
 
 // Modern Typography
@@ -306,9 +349,10 @@ ul.network-icon .big-icon:hover {
 
 // Container Improvements
 .home-section > .content {
-  width: 50em;
-  max-width: calc(100% - 4em);
+  width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 0 2rem;
 }
 
 .home-section > .content > :last-child {
@@ -317,6 +361,7 @@ ul.network-icon .big-icon:hover {
 
 .home-section header {
   margin-bottom: 2rem;
+  text-align: center;
 }
 
 // Responsive Design
@@ -338,8 +383,17 @@ ul.network-icon .big-icon:hover {
   }
   
   .article-container {
-    padding: 2rem;
-    margin: 1rem 0;
+    padding: 2rem 1.5rem;
+    margin: 1rem;
+    max-width: calc(100% - 2rem);
+  }
+  
+  .main-content {
+    padding: 1rem;
+  }
+  
+  .article-title {
+    font-size: 1.8rem;
   }
   
   h1 { font-size: 2rem; }
