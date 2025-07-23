@@ -1,6 +1,6 @@
 ---
 title: "다익스트라 알고리즘 (Dijkstra's Algorithm)"
-date: 2024-01-16
+date: 2025-04-21
 draft: false
 categories: ["Algorithm", "Graph", "Shortest Path"]
 tags: ["Dijkstra", "최단경로", "우선순위큐", "그래프"]

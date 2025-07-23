@@ -1,6 +1,6 @@
 ---
 title: "라빈-카프 알고리즘 (Rabin-Karp Algorithm)"
-date: 2024-01-20
+date: 2025-04-21
 draft: false
 categories: ["Algorithm", "String", "Hashing"]
 tags: ["Rabin-Karp", "해싱", "문자열매칭", "롤링해시"]

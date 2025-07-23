@@ -17,7 +17,7 @@ design:
 ---
 
 <div class="cards-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-top: 2rem;">
-  {{ range first 6 (where .Site.RegularPages "Type" "post") }}
+  {{ range first 6 (where .Site.RegularPages "Type" "post").ByDate.Reverse }}
     <div class="card">
       <a href="{{ .Permalink }}" style="text-decoration:none; color:inherit;">
         <div class="card-image">
@@ -32,6 +32,13 @@ design:
         <div class="card-content">
           <h3>{{ .Title }}</h3>
           <p>{{ .Summary | truncate 120 }}</p>
+          {{ if .Params.tags }}
+            <div class="card-tags">
+              {{ range first 3 .Params.tags }}
+                <span class="tag">{{ . }}</span>
+              {{ end }}
+            </div>
+          {{ end }}
           <p><small>{{ .Date.Format "2006년 1월 2일" }}</small></p>
           <span class="btn">자세히 보기</span>
         </div>

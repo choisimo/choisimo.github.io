@@ -1,6 +1,6 @@
 ---
 title: "깊이 우선 탐색 (DFS, Depth-First Search)"
-date: 2024-01-15
+date: 2025-04-21
 draft: false
 categories: ["Algorithm", "Graph"]
 tags: ["DFS", "그래프", "탐색", "재귀", "스택"]

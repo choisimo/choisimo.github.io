@@ -1,6 +1,6 @@
 ---
 title: "KMP 알고리즘 (Knuth-Morris-Pratt)"
-date: 2024-01-19
+date: 2025-04-21
 draft: false
 categories: ["Algorithm", "String"]
 tags: ["KMP", "문자열매칭", "패턴매칭", "실패함수"]

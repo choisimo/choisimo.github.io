@@ -1,6 +1,6 @@
 ---
 title: "스택(Stack) 완전 정복"
-date: 2024-01-20
+date: 2025-04-21
 summary: "LIFO 구조의 스택 자료구조 개념부터 실전 활용까지 완벽 가이드"
 tags: ["스택", "자료구조", "LIFO", "알고리즘"]
 categories: ["Algorithm", "Data Structure"]

@@ -1,6 +1,6 @@
 ---
 title: "소수 판별과 소인수분해 알고리즘"
-date: 2024-01-21
+date: 2025-04-21
 draft: false
 categories: ["Algorithm", "Math", "Number Theory"]
 tags: ["소수", "에라토스테네스의체", "소인수분해", "밀러라빈"]

@@ -1,6 +1,6 @@
 ---
 title: "배낭 문제 (Knapsack Problem)"
-date: 2024-01-18
+date: 2025-04-21
 draft: false
 categories: ["Algorithm", "Dynamic Programming"]
 tags: ["Knapsack", "배낭문제", "동적계획법", "최적화"]

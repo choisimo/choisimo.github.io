@@ -1,6 +1,6 @@
 ---
 title: "최장 증가 부분 수열 (LIS, Longest Increasing Subsequence)"
-date: 2024-01-17
+date: 2025-04-21
 draft: false
 categories: ["Algorithm", "Dynamic Programming"]
 tags: ["LIS", "동적계획법", "이분탐색", "부분수열"]

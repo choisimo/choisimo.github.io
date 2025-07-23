@@ -1,6 +1,6 @@
 ---
 title: "이진 탐색(Binary Search) 완전 정복"
-date: 2024-01-23
+date: 2025-04-21
 summary: "정렬된 배열에서 O(log n) 시간에 원소를 찾는 이진 탐색의 모든 것"
 tags: ["이진탐색", "탐색", "분할정복", "알고리즘"]
 categories: ["Algorithm", "Search"]

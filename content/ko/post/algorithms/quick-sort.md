@@ -1,6 +1,6 @@
 ---
 title: "퀵 정렬(Quick Sort) 완전 정복"
-date: 2024-01-22
+date: 2025-04-21
 summary: "분할 정복을 이용한 최고 성능의 정렬 알고리즘, 퀵 정렬의 모든 것"
 tags: ["퀵정렬", "정렬", "분할정복", "알고리즘"]
 categories: ["Algorithm", "Sorting"]

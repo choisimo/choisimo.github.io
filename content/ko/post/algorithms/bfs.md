@@ -1,6 +1,6 @@
 ---
 title: "BFS (너비 우선 탐색) 완전 정복"
-date: 2024-01-24
+date: 2025-04-21
 summary: "큐를 이용한 레벨별 그래프 탐색과 최단 경로 알고리즘의 핵심"
 tags: ["BFS", "그래프", "탐색", "최단경로", "알고리즘"]
 categories: ["Algorithm", "Graph"]
