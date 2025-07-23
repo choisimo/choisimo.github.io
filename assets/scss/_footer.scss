@@ -20,7 +20,7 @@
     max-width: 1200px;
     margin: 0 auto;
     
-    @include media-breakpoint-up(md) {
+    @media (min-width: 768px) {
       flex-direction: row;
       justify-content: space-between;
       text-align: left;
@@ -40,7 +40,7 @@
     flex-wrap: wrap;
     justify-content: center;
     
-    @include media-breakpoint-up(md) {
+    @media (min-width: 768px) {
       justify-content: flex-end;
     }
     

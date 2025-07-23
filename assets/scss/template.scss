@@ -2,6 +2,7 @@
 // Modern, clean design with proper syntax highlighting
 
 // Import partials and modules
+@import 'mixins'; // Responsive mixins and utilities
 @import 'colors'; // Theme colors and variables
 @import 'typography'; // Typography styles
 @import 'components'; // UI components
@@ -57,7 +58,7 @@ body {
   border: 1px solid rgba(255,255,255,0.1);
   transition: all 0.3s ease;
   
-  @include media-breakpoint-up(md) {
+  @media (min-width: 768px) {
     padding: 2.5rem 3rem;
     margin: 2rem auto;
   }
@@ -87,7 +88,7 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     
-    @include media-breakpoint-up(md) {
+    @media (min-width: 768px) {
       padding-left: 2rem;
       padding-right: 2rem;
     }
@@ -105,7 +106,7 @@ body {
   padding: 2rem 1rem 2rem;
   position: relative;
   
-  @include media-breakpoint-up(md) {
+  @media (min-width: 768px) {
     padding: 3rem 2rem 2.5rem;
     margin-bottom: 3rem;
   }
@@ -147,7 +148,7 @@ body {
   background-clip: text;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   
-  @include media-breakpoint-up(md) {
+  @media (min-width: 768px) {
     font-size: 2.75rem;
   }
 }
@@ -167,7 +168,7 @@ body {
   gap: 1.25rem;
   margin-bottom: 3rem;
   
-  @include media-breakpoint-up(md) {
+  @media (min-width: 768px) {
     grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
     gap: 2rem;
     margin-bottom: 4rem;
@@ -254,7 +255,7 @@ body {
   box-shadow: var(--card-shadow);
   border: 1px solid var(--border-color, rgba(0,0,0,0.05));
   
-  @include media-breakpoint-up(md) {
+  @media (min-width: 768px) {
     gap: 1.5rem;
     padding: 1rem 2rem;
   }
@@ -381,7 +382,7 @@ li {
   padding-bottom: 0.75rem;
   font-weight: 600;
   
-  @include media-breakpoint-up(md) {
+  @media (min-width: 768px) {
     font-size: 2rem;
     margin-bottom: 2rem;
   }
@@ -403,7 +404,7 @@ li {
   gap: 1.5rem;
   margin-top: 2rem;
   
-  @include media-breakpoint-up(md) {
+  @media (min-width: 768px) {
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2rem;
   }
@@ -3075,7 +3076,7 @@ ul.network-icon .big-icon:hover {
   margin: 0 auto;
   padding: 0 1.5rem;
   
-  @include media-breakpoint-up(md) {
+  @media (min-width: 768px) {
     padding: 0 2rem;
   }
 }
