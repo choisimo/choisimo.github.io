@@ -54,6 +54,13 @@
   {{ $pages := .Pages }}
   {{ if .IsHome }}
     {{ $pages = .Site.RegularPages }}
+  {{ else if eq .Section "post" }}
+    {{ $allPages := .Site.RegularPages }}
+    {{ $pages = where $allPages "Section" "in" (slice "post" "entertainment") }}
+  {{ else if eq .Section "entertainment" }}
+    {{ $allPages := .Site.RegularPages }}
+    {{ $moviePages := where $allPages "Section" "entertainment" }}
+    {{ $pages = $moviePages }}
   {{ end }}
   
   {{ if $pages }}

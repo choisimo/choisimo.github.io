@@ -95,7 +95,7 @@ features:
       theme: preferred_color_scheme
       language_code: ko
   search:
-    provider: 'wowchemy'
+    provider: 'pagefind'
     algolia:
       app_id: ''
       api_key: ''
