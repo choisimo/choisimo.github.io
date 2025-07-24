@@ -13,19 +13,20 @@ html {
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-family: var(--font-family);
   color: var(--text-color);
-  background-color: var(--bg-color);
+  background-color: var(--bg-body);
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: color 0.3s ease, background-color 0.3s ease;
 }
 
 a {
   color: var(--primary);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color 0.3s ease;
   
   &:hover {
     color: var(--primary-hover);
@@ -59,19 +60,20 @@ img {
 .btn {
   display: inline-block;
   padding: 0.6rem 1.2rem;
-  border-radius: var(--border-radius);
-  font-weight: 500;
+  border-radius: var(--btn-radius);
+  font-weight: var(--font-weight-medium);
   text-align: center;
   cursor: pointer;
   transition: all 0.3s ease;
   border: none;
   background-color: var(--primary);
   color: white;
+  font-family: var(--font-family);
   
   &:hover {
     background-color: var(--primary-hover);
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: var(--shadow);
     text-decoration: none;
     color: white;
   }
@@ -186,6 +188,8 @@ img {
 // Sections
 .section {
   padding: 3rem 0;
+  background-color: var(--bg-color);
+  transition: background-color 0.3s ease;
   
   @media (min-width: 768px) {
     padding: 5rem 0;
@@ -194,6 +198,8 @@ img {
 
 .section-sm {
   padding: 2rem 0;
+  background-color: var(--bg-color);
+  transition: background-color 0.3s ease;
   
   @media (min-width: 768px) {
     padding: 3rem 0;
@@ -204,7 +210,7 @@ img {
   font-size: 1.75rem;
   margin-bottom: 1.5rem;
   position: relative;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   color: var(--heading-color);
   
   @media (min-width: 768px) {
@@ -228,7 +234,7 @@ img {
   color: var(--text-color-secondary);
   margin-top: -1rem;
   margin-bottom: 2rem;
-  font-weight: 400;
+  font-weight: var(--font-weight-normal);
 }
 
 // Alerts and notices

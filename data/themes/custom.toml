@@ -1,25 +1,56 @@
-# Essentially Minimal theme but with constant home section bg color.
-name = "Starter Blog"
-
+# Unified Dark Mode Theme Configuration
+name = "Unified Blog Theme"
 
 [light]
-  # Primary color for light mode
-  primary = "#2962ff"              # 기본 주요 색상
-  menu_primary = "rgb(247, 250, 252)"  # 메뉴 배경색
-  menu_text = "#34495e"              # 메뉴 텍스트 색상
-  menu_text_active = "#2962ff"       # 메뉴에서 활성화된 항목의 색상
-  menu_title = "#2b2b2b"             # 메뉴 제목의 색상
-  home_section_odd = "rgb(230, 240, 252)" # 짝수 섹션 배경색
-  home_section_even = "rgb(214, 240, 252)" # 홀수 섹션 배경색
-  text = "#000000"
+  # Primary colors
+  primary = "#667eea"
+  primary_hover = "#5a67d8"
+  
+  # Text colors  
+  text_color = "#2d3748"
+  text_color_secondary = "#4a5568"
+  text_muted = "#718096"
+  heading_color = "#1a202c"
+  
+  # Background colors
+  bg_body = "#f7fafc"
+  bg_color = "#ffffff"
+  bg_color_secondary = "#edf2f7"
+  card_bg = "#ffffff"
+  
+  # Menu colors
+  menu_primary = "#ffffff"
+  menu_text = "#2d3748"
+  menu_text_active = "#667eea"
+  menu_title = "#1a202c"
+  
+  # Section colors
+  home_section_odd = "#f7fafc"
+  home_section_even = "#edf2f7"
 
 [dark]
-  # Primary color for dark mode
-  primary = "#bcdefe"               # 어두운 모드의 주요 색상
-  link = "#99bfc4"                  # 링크 색상
-  link_hover = "#bcdefb"            # 링크에 마우스를 올렸을 때의 색상
-  background = "rgb(26, 32, 44)"    # 배경색
-  home_section_odd = "rgb(26, 32, 44)" # 짝수 섹션 배경색
-  home_section_even = "rgb(26, 32, 44)" # 홀수 섹션 배경색
-  menu_primary = "rgb(26, 32, 44)"      # 메뉴 배경색
-  text = "#ffffff" 
+  # Primary colors
+  primary = "#7f9cf5"
+  primary_hover = "#93c5fd"
+  
+  # Text colors
+  text_color = "#e2e8f0"
+  text_color_secondary = "#cbd5e0"
+  text_muted = "#a0aec0"
+  heading_color = "#f7fafc"
+  
+  # Background colors
+  bg_body = "#1a202c"
+  bg_color = "#1a202c"
+  bg_color_secondary = "#2d3748"
+  card_bg = "#2d3748"
+  
+  # Menu colors
+  menu_primary = "#2d3748"
+  menu_text = "#e2e8f0"
+  menu_text_active = "#7f9cf5"
+  menu_title = "#f7fafc"
+  
+  # Section colors
+  home_section_odd = "#1a202c"
+  home_section_even = "#2d3748" 
