@@ -77,23 +77,27 @@
   }
 }
 
-// Cards container with improved grid and list views
+// Cards container with improved content layout
 .cards-container {
-  display: grid;
-  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
   margin: 2.5rem 0 4rem;
   
   &.grid-view {
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    
-    @media (max-width: 768px) {
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.75rem;
+    @media (min-width: 640px) {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
     }
     
-    @media (max-width: 480px) {
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2.5rem;
+    }
+    
+    @media (min-width: 1400px) {
+      gap: 3rem;
     }
   }
   
@@ -170,24 +174,37 @@
 }
 
 
-/* Hugo Blox Post List Styling */
+/* Enhanced Post List Styling for Content Layout */
 .view-list-item,
 .media.stream-item {
   background: var(--card-bg) !important;
   border: 1px solid var(--border-color) !important;
   border-radius: 16px !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
-  margin-bottom: 2rem !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  margin-bottom: 1.5rem !important;
   padding: 1.75rem !important;
-  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
   overflow: hidden;
+  
+  @media (min-width: 768px) {
+    margin-bottom: 2rem !important;
+    padding: 2rem !important;
+  }
+  
+  @media (min-width: 1024px) {
+    margin-bottom: 2.5rem !important;
+  }
 }
 
 .view-list-item:hover,
 .media.stream-item:hover {
-  transform: translateY(-6px) !important;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15) !important;
-  border-color: var(--primary) !important;
+  transform: translateY(-8px) scale(1.01) !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+  border-color: rgba(var(--primary-rgb), 0.3) !important;
+  
+  .article-title a {
+    color: var(--primary) !important;
+  }
 }
 
 .media-body {
@@ -231,6 +248,7 @@
   opacity: 0.9;
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
