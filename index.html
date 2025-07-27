@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choisimo - Custom Blog</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="icon" href="assets/media/icon.png">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h1>Choisimo</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#posts">Posts</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" id="theme-toggle">🌓</button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>안녕하세요, 개발자 최시모입니다</h1>
+                <p>풀스택 개발과 기술 블로그를 통해 지식을 공유합니다</p>
+                <a href="#posts" class="cta-button">블로그 둘러보기</a>
+            </div>
+        </section>
+
+        <section id="posts" class="posts-section">
+            <div class="container">
+                <h2>최근 포스트</h2>
+                <div class="posts-grid" id="posts-grid">
+                    <!-- 포스트들이 JavaScript로 동적으로 추가됩니다 -->
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="projects-section">
+            <div class="container">
+                <h2>프로젝트</h2>
+                <div class="projects-grid" id="projects-grid">
+                    <!-- 프로젝트들이 JavaScript로 동적으로 추가됩니다 -->
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="container">
+                <h2>About Me</h2>
+                <div class="about-content">
+                    <img src="assets/media/avatar.jpg" alt="Profile" class="profile-img">
+                    <div class="about-text">
+                        <p>안녕하세요! 저는 풀스택 개발자 최시모입니다.</p>
+                        <p>웹 개발, 모바일 앱 개발, 그리고 다양한 기술에 관심이 많습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2>Contact</h2>
+                <div class="contact-info">
+                    <p>📧 이메일로 연락주세요</p>
+                    <p>💼 LinkedIn에서 연결하세요</p>
+                    <p>📱 GitHub에서 코드를 확인하세요</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Choisimo. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+    <script src="scripts/theme.js"></script>
+</body>
+</html>
