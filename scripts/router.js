@@ -1,4 +1,4 @@
-// Router for Single Page Application
+// Enhanced Router for Single Page Application
 class Router {
     constructor() {
         this.routes = {
@@ -11,6 +11,7 @@ class Router {
         };
         
         this.currentRoute = '';
+        this.currentFilters = {};
         this.init();
     }
 
@@ -109,14 +110,14 @@ class Router {
         
         // Populate post content
         document.getElementById('post-title').textContent = post.frontmatter.title;
-        document.getElementById('post-date').textContent = post.frontmatter.date;
+        document.getElementById('post-date').textContent = window.markdownParser.formatDate(post.frontmatter.date);
         document.getElementById('post-category').textContent = post.frontmatter.category;
         document.getElementById('post-read-time').textContent = post.frontmatter.readTime;
         
         // Render tags
         const tagsContainer = document.getElementById('post-tags');
         tagsContainer.innerHTML = '';
-        if (post.frontmatter.tags) {
+        if (post.frontmatter.tags && post.frontmatter.tags.length > 0) {
             post.frontmatter.tags.forEach(tag => {
                 const tagElement = document.createElement('span');
                 tagElement.className = 'tag';
@@ -136,7 +137,7 @@ class Router {
         window.scrollTo(0, 0);
         
         // Update page title
-        document.title = `${post.frontmatter.title} - Nodove`;
+        document.title = `${post.frontmatter.title} - nodove`;
     }
 
     loadPageContent(pageId) {
@@ -154,20 +155,25 @@ class Router {
         
         // Update page title
         const pageTitles = {
-            'home': 'Nodove - Tech Blog',
-            'posts': 'Posts - Nodove',
-            'projects': 'Projects - Nodove',
-            'about': 'About - Nodove',
-            'contact': 'Contact - Nodove'
+            'home': 'nodove - Tech Blog',
+            'posts': 'Posts - nodove',
+            'projects': 'Projects - nodove',
+            'about': 'About - nodove',
+            'contact': 'Contact - nodove'
         };
-        document.title = pageTitles[pageId] || 'Nodove';
+        document.title = pageTitles[pageId] || 'nodove';
     }
 
     loadHomePage() {
         // Load recent posts for home page
-        const posts = window.markdownParser.posts.slice(0, 6); // Show 6 recent posts
+        const posts = window.markdownParser.getRecentPosts(6);
         const container = document.getElementById('recent-posts-grid');
         container.innerHTML = '';
+        
+        if (posts.length === 0) {
+            container.innerHTML = '<p class="no-posts">아직 포스트가 없습니다.</p>';
+            return;
+        }
         
         posts.forEach(post => {
             const postCard = this.createPostCard(post);
@@ -182,53 +188,146 @@ class Router {
         const tag = urlParams.get('tag');
         const search = urlParams.get('search');
         
+        this.currentFilters = { category, tag, search };
+        
         let posts = window.markdownParser.posts;
+        let filteredPosts = [...posts];
         
         // Apply filters
         if (category) {
-            posts = window.markdownParser.getPostsByCategory(category);
+            filteredPosts = window.markdownParser.getPostsByCategory(category);
         } else if (tag) {
-            posts = window.markdownParser.getPostsByTag(tag);
+            filteredPosts = window.markdownParser.getPostsByTag(tag);
         } else if (search) {
-            posts = window.markdownParser.searchPosts(search);
+            filteredPosts = window.markdownParser.searchPosts(search);
         }
+        
+        // Update statistics
+        this.updatePostsStats(filteredPosts.length, posts.length, { category, tag, search });
         
         // Populate posts grid
         const container = document.getElementById('all-posts-grid');
         container.innerHTML = '';
         
-        posts.forEach(post => {
+        if (filteredPosts.length === 0) {
+            container.innerHTML = `
+                <div class="no-posts-message">
+                    <h3>검색 결과가 없습니다</h3>
+                    <p>다른 검색어나 필터를 시도해보세요.</p>
+                    <button class="btn-outline" onclick="window.router.clearAllFilters()">필터 초기화</button>
+                </div>
+            `;
+            return;
+        }
+        
+        filteredPosts.forEach(post => {
             const postCard = this.createPostCard(post);
             container.appendChild(postCard);
         });
         
         // Update filters
         this.updateFilters(category, tag);
+        
+        // Setup clear filters button
+        this.setupClearFilters();
+    }
+
+    updatePostsStats(filtered, total, filters) {
+        const statsContainer = document.getElementById('posts-stats');
+        if (!statsContainer) return;
+        
+        let statsText = `총 ${total}개 포스트`;
+        if (filtered !== total) {
+            statsText += ` 중 ${filtered}개 표시`;
+        }
+        
+        if (filters.search) {
+            statsText += ` (검색: "${filters.search}")`;
+        } else if (filters.category) {
+            statsText += ` (카테고리: ${filters.category})`;
+        } else if (filters.tag) {
+            statsText += ` (태그: ${filters.tag})`;
+        }
+        
+        statsContainer.innerHTML = `<p class="stats-text">${statsText}</p>`;
+    }
+
+    setupClearFilters() {
+        const clearButton = document.getElementById('clear-filters');
+        if (clearButton) {
+            clearButton.addEventListener('click', () => {
+                this.clearAllFilters();
+            });
+        }
+    }
+
+    clearAllFilters() {
+        // Clear search input
+        const searchInput = document.getElementById('search-input');
+        if (searchInput) {
+            searchInput.value = '';
+        }
+        
+        // Navigate to clean posts page
+        this.navigate('/posts');
     }
 
     loadProjectsPage() {
-        // Load projects (you can move this data to a separate file)
+        // Enhanced projects with more details
         const projects = [
             {
+                title: "커스텀 블로그 시스템",
+                description: "순수 JavaScript로 구현한 SPA 기반 개인 블로그 시스템. 마크다운 파싱, 검색, 필터링 기능 지원",
+                tech: ["JavaScript", "HTML5", "CSS3", "SPA", "Markdown"],
+                github: "https://github.com/nodove/blog",
+                demo: "#",
+                status: "완료",
+                year: "2025"
+            },
+            {
                 title: "차량 관리 시스템",
-                description: "Spring Boot와 React를 활용한 종합적인 차량 관리 웹 애플리케이션",
-                tech: ["Spring Boot", "React", "MySQL", "JPA"],
+                description: "Spring Boot와 React를 활용한 종합적인 차량 관리 웹 애플리케이션. 실시간 데이터 동기화 지원",
+                tech: ["Spring Boot", "React", "MySQL", "JPA", "REST API"],
                 github: "https://github.com/nodove/car-management",
-                demo: "#"
+                demo: "#",
+                status: "진행중",
+                year: "2024"
             },
             {
                 title: "AI 기반 키오스크",
-                description: "음성 인식과 자연어 처리 기술을 활용한 스마트 주문 시스템",
-                tech: ["Python", "FastAPI", "OpenAI", "React"],
+                description: "음성 인식과 자연어 처리 기술을 활용한 스마트 주문 시스템. 다국어 지원 및 접근성 고려",
+                tech: ["Python", "FastAPI", "OpenAI", "React", "TensorFlow"],
                 github: "https://github.com/nodove/ai-kiosk",
-                demo: "#"
+                demo: "#",
+                status: "완료",
+                year: "2024"
             },
             {
                 title: "실시간 채팅 앱",
-                description: "WebSocket을 활용한 실시간 메시징 및 화상 통화 기능 지원",
-                tech: ["Node.js", "Socket.io", "React", "WebRTC"],
+                description: "WebSocket을 활용한 실시간 메시징 및 화상 통화 기능 지원. 확장 가능한 마이크로서비스 아키텍처",
+                tech: ["Node.js", "Socket.io", "React", "WebRTC", "Redis"],
                 github: "https://github.com/nodove/realtime-chat",
-                demo: "#"
+                demo: "#",
+                status: "완료",
+                year: "2024"
+            },
+            {
+                title: "개인 일정 관리 API",
+                description: "Django REST Framework를 활용한 일정 관리 API. JWT 인증 및 권한 관리 시스템 구현",
+                tech: ["Django", "PostgreSQL", "JWT", "Docker", "AWS"],
+                github: "https://github.com/nodove/schedule-api",
+                demo: "#",
+                status: "완료",
+                year: "2023"
+            },
+            {
+                title: "모바일 다이어리 앱",
+                description: "React Native와 MongoDB를 활용한 크로스플랫폼 다이어리 앱. 오프라인 동기화 지원",
+                tech: ["React Native", "MongoDB", "Express", "AWS S3"],
+                github: "https://github.com/nodove/mobile-diary",
+                demo: "#",
+                status: "완료",
+                year: "2023"
             }
         ];
         
@@ -243,15 +342,24 @@ class Router {
 
     createPostCard(post) {
         const card = document.createElement('div');
-        card.className = 'post-card fade-in';
+        card.className = 'post-card animate-on-scroll';
         card.innerHTML = `
-            <div class="post-meta">${post.frontmatter.date} • ${post.frontmatter.readTime} • ${post.frontmatter.category}</div>
-            <h3>${post.frontmatter.title}</h3>
-            <p>${post.frontmatter.excerpt}</p>
+            <div class="post-meta">
+                <span class="post-date">${window.markdownParser.formatDate(post.frontmatter.date)}</span>
+                <span class="post-separator">•</span>
+                <span class="post-read-time">${post.frontmatter.readTime}</span>
+                <span class="post-separator">•</span>
+                <span class="post-category">${post.frontmatter.category}</span>
+            </div>
+            <h3 class="post-title">${post.frontmatter.title}</h3>
+            <p class="post-excerpt">${post.frontmatter.excerpt || ''}</p>
             <div class="post-tags">
-                ${post.frontmatter.tags ? post.frontmatter.tags.map(tag => 
-                    `<span class="tag-small">${tag}</span>`
-                ).join('') : ''}
+                ${post.frontmatter.tags && post.frontmatter.tags.length > 0 ? 
+                    post.frontmatter.tags.map(tag => 
+                        `<span class="tag-small" onclick="window.router.navigate('/posts?tag=${encodeURIComponent(tag)}')">${tag}</span>`
+                    ).join('') : 
+                    ''
+                }
             </div>
             <a href="/post/${post.slug}" class="read-more" data-route="/post/${post.slug}">더 읽기 →</a>
         `;
@@ -260,16 +368,29 @@ class Router {
 
     createProjectCard(project) {
         const card = document.createElement('div');
-        card.className = 'project-card fade-in';
+        card.className = 'project-card animate-on-scroll';
         card.innerHTML = `
-            <h3>${project.title}</h3>
-            <p>${project.description}</p>
+            <div class="project-header">
+                <h3 class="project-title">${project.title}</h3>
+                <div class="project-meta">
+                    <span class="project-year">${project.year}</span>
+                    <span class="project-status status-${project.status === '완료' ? 'completed' : 'in-progress'}">${project.status}</span>
+                </div>
+            </div>
+            <p class="project-description">${project.description}</p>
             <div class="tech-stack">
                 ${project.tech.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
             </div>
             <div class="project-links">
-                <a href="${project.github}" class="project-link" target="_blank">GitHub</a>
-                <a href="${project.demo}" class="project-link" target="_blank">Demo</a>
+                <a href="${project.github}" class="project-link github-link" target="_blank" rel="noopener noreferrer">
+                    <span>GitHub</span>
+                </a>
+                ${project.demo !== '#' ? 
+                    `<a href="${project.demo}" class="project-link demo-link" target="_blank" rel="noopener noreferrer">
+                        <span>Demo</span>
+                    </a>` : 
+                    ''
+                }
             </div>
         `;
         return card;
@@ -280,7 +401,8 @@ class Router {
         const categoryFilter = document.getElementById('category-filter');
         if (categoryFilter) {
             categoryFilter.innerHTML = '<option value="">모든 카테고리</option>';
-            window.markdownParser.getCategories().forEach(category => {
+            const categories = window.markdownParser.getCategories();
+            categories.forEach(category => {
                 const option = document.createElement('option');
                 option.value = category;
                 option.textContent = category;
@@ -288,7 +410,10 @@ class Router {
                 categoryFilter.appendChild(option);
             });
             
-            categoryFilter.addEventListener('change', (e) => {
+            // Remove existing event listener and add new one
+            categoryFilter.replaceWith(categoryFilter.cloneNode(true));
+            const newCategoryFilter = document.getElementById('category-filter');
+            newCategoryFilter.addEventListener('change', (e) => {
                 const category = e.target.value;
                 const newUrl = category ? `/posts?category=${encodeURIComponent(category)}` : '/posts';
                 this.navigate(newUrl);
@@ -299,16 +424,30 @@ class Router {
         const tagsFilter = document.getElementById('tags-filter');
         if (tagsFilter) {
             tagsFilter.innerHTML = '';
-            window.markdownParser.getTags().forEach(tag => {
-                const tagButton = document.createElement('button');
-                tagButton.className = `tag-filter ${tag === selectedTag ? 'active' : ''}`;
-                tagButton.textContent = tag;
-                tagButton.addEventListener('click', () => {
-                    const newUrl = `/posts?tag=${encodeURIComponent(tag)}`;
-                    this.navigate(newUrl);
+            const tags = window.markdownParser.getTags();
+            
+            if (tags.length > 0) {
+                // Add "All Tags" button
+                const allTagsButton = document.createElement('button');
+                allTagsButton.className = `tag-filter ${!selectedTag ? 'active' : ''}`;
+                allTagsButton.textContent = '모든 태그';
+                allTagsButton.addEventListener('click', () => {
+                    this.navigate('/posts');
                 });
-                tagsFilter.appendChild(tagButton);
-            });
+                tagsFilter.appendChild(allTagsButton);
+                
+                // Add individual tag buttons
+                tags.forEach(tag => {
+                    const tagButton = document.createElement('button');
+                    tagButton.className = `tag-filter ${tag === selectedTag ? 'active' : ''}`;
+                    tagButton.textContent = tag;
+                    tagButton.addEventListener('click', () => {
+                        const newUrl = `/posts?tag=${encodeURIComponent(tag)}`;
+                        this.navigate(newUrl);
+                    });
+                    tagsFilter.appendChild(tagButton);
+                });
+            }
         }
     }
 
@@ -319,12 +458,26 @@ class Router {
         });
         
         // Add active class to current nav item
-        const baseRoute = path.split('/')[1] || 'home';
-        const activeLink = document.querySelector(`.nav-menu a[data-route="${baseRoute}"]`);
+        let baseRoute = path.split('/')[1] || '';
+        if (path.startsWith('/post/')) {
+            baseRoute = 'posts'; // Post detail pages should highlight Posts nav item
+        }
+        
+        const routeMap = {
+            '': 'home',
+            'posts': 'posts',
+            'projects': 'projects',
+            'about': 'about',
+            'contact': 'contact'
+        };
+        
+        const targetRoute = routeMap[baseRoute] || 'home';
+        const activeLink = document.querySelector(`.nav-menu a[href="/${targetRoute === 'home' ? '' : targetRoute}"]`);
         if (activeLink) {
             activeLink.classList.add('active');
         }
     }
+}
 }
 
 // Global router instance

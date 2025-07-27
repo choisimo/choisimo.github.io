@@ -4,11 +4,13 @@ class MarkdownParser {
         this.posts = [];
         this.categories = new Set();
         this.tags = new Set();
+        this.isLoaded = false;
+        this.loadingPromise = null;
     }
 
-    // Parse frontmatter from markdown content
+    // Enhanced frontmatter parser with better YAML support
     parseFrontmatter(content) {
-        const frontmatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
+        const frontmatterRegex = /^---\s*\r?\n([\s\S]*?)\r?\n---\s*\r?\n([\s\S]*)$/;
         const match = content.match(frontmatterRegex);
         
         if (!match) {
@@ -19,109 +21,220 @@ class MarkdownParser {
         const markdownContent = match[2];
         const frontmatter = {};
 
-        frontmatterText.split('\n').forEach(line => {
-            const colonIndex = line.indexOf(':');
-            if (colonIndex > 0) {
-                const key = line.substring(0, colonIndex).trim();
-                let value = line.substring(colonIndex + 1).trim();
-                
-                // Remove quotes if present
+        // Parse YAML-like frontmatter
+        const lines = frontmatterText.split(/\r?\n/);
+        let currentKey = null;
+        let currentValue = [];
+        let inArray = false;
+
+        for (const line of lines) {
+            const trimmedLine = line.trim();
+            if (!trimmedLine || trimmedLine.startsWith('#')) continue;
+
+            if (inArray) {
+                if (trimmedLine.startsWith('-')) {
+                    // Array item
+                    const item = trimmedLine.substring(1).trim().replace(/^["']|["']$/g, '');
+                    currentValue.push(item);
+                } else if (trimmedLine.includes(':')) {
+                    // End of array, start new key
+                    if (currentKey) {
+                        frontmatter[currentKey] = currentValue;
+                    }
+                    inArray = false;
+                    currentValue = [];
+                } else {
+                    continue;
+                }
+            }
+
+            if (!inArray && trimmedLine.includes(':')) {
+                const colonIndex = trimmedLine.indexOf(':');
+                const key = trimmedLine.substring(0, colonIndex).trim();
+                let value = trimmedLine.substring(colonIndex + 1).trim();
+
+                // Save previous array if exists
+                if (currentKey && currentValue.length > 0) {
+                    frontmatter[currentKey] = currentValue;
+                    currentValue = [];
+                }
+
+                currentKey = key;
+
+                // Remove quotes
                 if ((value.startsWith('"') && value.endsWith('"')) || 
                     (value.startsWith("'") && value.endsWith("'"))) {
                     value = value.slice(1, -1);
                 }
-                
-                // Handle arrays (tags)
+
+                // Check for arrays
                 if (value.startsWith('[') && value.endsWith(']')) {
                     try {
-                        value = JSON.parse(value);
+                        frontmatter[key] = JSON.parse(value);
                     } catch (e) {
                         // Fallback parsing
-                        value = value.slice(1, -1).split(',').map(item => item.trim().replace(/['"]/g, ''));
+                        const arrayContent = value.slice(1, -1);
+                        if (arrayContent.trim()) {
+                            frontmatter[key] = arrayContent.split(',').map(item => item.trim().replace(/['"]/g, ''));
+                        } else {
+                            frontmatter[key] = [];
+                        }
                     }
+                    currentKey = null;
+                } else if (!value && lines.indexOf(line) < lines.length - 1) {
+                    // Check if next lines are array items
+                    const nextLine = lines[lines.indexOf(line) + 1];
+                    if (nextLine && nextLine.trim().startsWith('-')) {
+                        inArray = true;
+                        currentValue = [];
+                    } else {
+                        frontmatter[key] = value;
+                        currentKey = null;
+                    }
+                } else {
+                    // Simple value
+                    frontmatter[key] = value;
+                    currentKey = null;
                 }
-                
-                frontmatter[key] = value;
             }
-        });
+        }
+
+        // Save last array if exists
+        if (currentKey && currentValue.length > 0) {
+            frontmatter[currentKey] = currentValue;
+        }
 
         return { frontmatter, content: markdownContent };
     }
 
-    // Load all posts from the posts directory
+    // Enhanced post loading with better error handling
     async loadPosts() {
+        // Prevent multiple simultaneous loads
+        if (this.loadingPromise) {
+            return this.loadingPromise;
+        }
+
+        this.loadingPromise = this._loadPostsInternal();
+        return this.loadingPromise;
+    }
+
+    async _loadPostsInternal() {
         try {
+            console.log('Starting to load posts...');
             this.posts = [];
             this.categories.clear();
             this.tags.clear();
             
-            // Try to load actual post files
             const years = ['2024', '2025'];
-            let loadedPosts = 0;
+            let totalLoaded = 0;
             
             for (const year of years) {
-                const postFiles = await this.getPostFiles(year);
-                for (const filename of postFiles) {
-                    try {
-                        const success = await this.loadSinglePost(year, filename);
-                        if (success) loadedPosts++;
-                    } catch (error) {
-                        console.warn(`Failed to load ${filename}:`, error);
-                    }
-                }
+                console.log(`Loading posts from ${year}...`);
+                const loaded = await this.loadPostsFromYear(year);
+                totalLoaded += loaded;
+                console.log(`Loaded ${loaded} posts from ${year}`);
             }
             
-            // If no posts loaded from files, use sample posts as fallback
-            if (loadedPosts === 0) {
-                console.log('No posts found in files, loading sample posts...');
+            // Sort posts by date (newest first)
+            this.posts.sort((a, b) => {
+                const dateA = new Date(a.frontmatter.date || '1970-01-01');
+                const dateB = new Date(b.frontmatter.date || '1970-01-01');
+                return dateB - dateA;
+            });
+
+            console.log(`Total posts loaded: ${this.posts.length}`);
+            
+            // If no posts loaded, show error and load samples
+            if (this.posts.length === 0) {
+                console.warn('No posts could be loaded from files, using sample data');
                 await this.loadSamplePosts();
             }
 
-            // Sort posts by date (newest first)
-            this.posts.sort((a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date));
-
-            console.log(`Loaded ${this.posts.length} posts`);
+            this.isLoaded = true;
+            this.loadingPromise = null;
             return this.posts;
+            
         } catch (error) {
-            console.error('Failed to load posts:', error);
-            // Load sample posts as fallback
+            console.error('Critical error loading posts:', error);
+            this.loadingPromise = null;
             await this.loadSamplePosts();
             return this.posts;
         }
     }
 
-    // Get list of post files for a given year
-    async getPostFiles(year) {
+    // Load posts from a specific year
+    async loadPostsFromYear(year) {
         try {
-            // Try different methods to get file list
-            const methods = [
-                () => this.getFileListFromIndex(year),
-                () => this.getFileListFromManifest(year),
-                () => this.getCommonPostFiles(year)
-            ];
-
-            for (const method of methods) {
-                try {
-                    const files = await method();
-                    if (files && files.length > 0) {
-                        return files;
-                    }
-                } catch (e) {
-                    continue;
-                }
-            }
+            const fileList = await this.getPostFileList(year);
+            console.log(`Found ${fileList.length} files for ${year}:`, fileList);
             
-            return [];
+            let loaded = 0;
+            const loadPromises = fileList.map(async (filename) => {
+                try {
+                    const success = await this.loadSinglePost(year, filename);
+                    if (success) loaded++;
+                    return success;
+                } catch (error) {
+                    console.warn(`Failed to load ${year}/${filename}:`, error.message);
+                    return false;
+                }
+            });
+            
+            await Promise.all(loadPromises);
+            return loaded;
+            
         } catch (error) {
-            console.warn(`Could not get file list for ${year}:`, error);
-            return [];
+            console.error(`Error loading posts from ${year}:`, error);
+            return 0;
         }
     }
 
-    // Method 1: Try to get files from directory index
+    // Get file list with multiple fallback methods
+    async getPostFileList(year) {
+        const methods = [
+            () => this.getFileListFromManifest(year),
+            () => this.getFileListFromIndex(year),
+            () => this.getKnownFiles(year)
+        ];
+
+        for (const method of methods) {
+            try {
+                const files = await method();
+                if (files && files.length > 0) {
+                    console.log(`Got file list for ${year} using method:`, method.name);
+                    return files.filter(f => f.endsWith('.md'));
+                }
+            } catch (error) {
+                console.log(`Method failed for ${year}:`, method.name, error.message);
+                continue;
+            }
+        }
+        
+        console.warn(`No file list found for ${year}`);
+        return [];
+    }
+
+    // Method 1: Load from manifest.json (most reliable)
+    async getFileListFromManifest(year) {
+        const response = await fetch(`/posts/${year}/manifest.json`);
+        if (!response.ok) {
+            throw new Error(`Manifest not found for ${year}`);
+        }
+        
+        const manifest = await response.json();
+        if (!manifest.files || !Array.isArray(manifest.files)) {
+            throw new Error(`Invalid manifest format for ${year}`);
+        }
+        
+        return manifest.files;
+    }
+
+    // Method 2: Try to get files from directory index  
     async getFileListFromIndex(year) {
         const response = await fetch(`/posts/${year}/`);
-        if (!response.ok) throw new Error('Index not available');
+        if (!response.ok) {
+            throw new Error(`Directory index not available for ${year}`);
+        }
         
         const html = await response.text();
         const fileRegex = /href="([^"]+\.md)"/g;
@@ -130,36 +243,49 @@ class MarkdownParser {
         
         while ((match = fileRegex.exec(html)) !== null) {
             const filename = match[1];
-            if (filename !== '../' && !filename.includes('/')) {
+            if (!filename.includes('../') && !filename.includes('/')) {
                 files.push(filename);
             }
+        }
+        
+        if (files.length === 0) {
+            throw new Error(`No markdown files found in directory index for ${year}`);
         }
         
         return files;
     }
 
-    // Method 2: Try to load from a manifest file
-    async getFileListFromManifest(year) {
-        const response = await fetch(`/posts/${year}/manifest.json`);
-        if (!response.ok) throw new Error('Manifest not available');
-        
-        const manifest = await response.json();
-        return manifest.files || [];
-    }
+    // Method 3: Known files fallback
+    async getKnownFiles(year) {
+        const knownFiles = {
+            '2024': [
+                'ai-personalized-learning-system.md',
+                'algorithm-guide.md',
+                'changedetection-io-guide.md',
+                'coding-test-guide.md',
+                'database-containerization-guide.md',
+                'linux-networkmanager-static-ip.md',
+                'multimodal-recommendation-system-research.md',
+                'opensource-schedule-management-analysis.md'
+            ],
+            '2025': [
+                'ai-models-for-coding.md',
+                'arch-linux-gui-setup-experience.md',
+                'docker-kubernetes-guide.md',
+                'python-ai-chatbot-development.md',
+                'react-nextjs-modern-web-development.md',
+                'spring-boot-realtime-communication.md'
+            ]
+        };
 
-    // Method 3: Try common post filenames
-    async getCommonPostFiles(year) {
-        const commonFiles = [
-            'opensource-schedule-management-analysis.md',
-            'multimodal-recommendation-system-research.md',
-            'react-nextjs-modern-web-development.md',
-            'python-ai-chatbot-development.md',
-            'docker-kubernetes-guide.md'
-        ];
+        const files = knownFiles[year] || [];
+        if (files.length === 0) {
+            throw new Error(`No known files for ${year}`);
+        }
 
+        // Verify files exist
         const existingFiles = [];
-        
-        for (const filename of commonFiles) {
+        for (const filename of files) {
             try {
                 const response = await fetch(`/posts/${year}/${filename}`, { method: 'HEAD' });
                 if (response.ok) {
@@ -173,45 +299,115 @@ class MarkdownParser {
         return existingFiles;
     }
 
-    // Load a single post file
+    // Enhanced single post loading
     async loadSinglePost(year, filename) {
         try {
+            console.log(`Loading post: ${year}/${filename}`);
+            
             const response = await fetch(`/posts/${year}/${filename}`);
-            if (!response.ok) return false;
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
             
             const content = await response.text();
+            if (!content.trim()) {
+                throw new Error('Empty file content');
+            }
+            
             const { frontmatter, content: markdownContent } = this.parseFrontmatter(content);
             
-            if (frontmatter.title) {
-                const slug = filename.replace('.md', '');
-                
-                // Add to categories and tags
-                if (frontmatter.category) {
-                    this.categories.add(frontmatter.category);
-                }
-                if (frontmatter.tags && Array.isArray(frontmatter.tags)) {
-                    frontmatter.tags.forEach(tag => this.tags.add(tag));
-                }
-                
-                this.posts.push({
-                    slug,
-                    frontmatter,
-                    content: markdownContent,
-                    id: slug,
-                    url: `/post/${slug}`
-                });
-                
-                return true;
+            // Validate required fields
+            if (!frontmatter.title) {
+                console.warn(`Post ${filename} missing title, skipping`);
+                return false;
             }
-            return false;
+            
+            // Generate slug from filename
+            const slug = filename.replace('.md', '');
+            
+            // Ensure date is properly formatted
+            if (!frontmatter.date) {
+                frontmatter.date = '2024-01-01'; // Default date
+            }
+            
+            // Ensure category exists
+            if (!frontmatter.category) {
+                frontmatter.category = 'General';
+            }
+            
+            // Ensure tags is an array
+            if (!frontmatter.tags) {
+                frontmatter.tags = [];
+            } else if (typeof frontmatter.tags === 'string') {
+                frontmatter.tags = [frontmatter.tags];
+            }
+            
+            // Generate excerpt if not provided
+            if (!frontmatter.excerpt) {
+                frontmatter.excerpt = this.generateExcerpt(markdownContent);
+            }
+            
+            // Generate read time if not provided
+            if (!frontmatter.readTime) {
+                frontmatter.readTime = this.calculateReadTime(markdownContent);
+            }
+            
+            // Add to collections
+            this.categories.add(frontmatter.category);
+            frontmatter.tags.forEach(tag => this.tags.add(tag));
+            
+            // Create post object
+            const post = {
+                slug,
+                frontmatter,
+                content: markdownContent,
+                id: slug,
+                url: `/post/${slug}`,
+                year: parseInt(year)
+            };
+            
+            this.posts.push(post);
+            console.log(`Successfully loaded: ${frontmatter.title}`);
+            return true;
+            
         } catch (error) {
-            console.warn(`Could not load post ${filename}:`, error);
+            console.error(`Failed to load ${year}/${filename}:`, error.message);
             return false;
         }
     }
 
-    // Fallback sample posts
+    // Generate excerpt from content
+    generateExcerpt(content, maxLength = 150) {
+        // Remove markdown formatting
+        const plainText = content
+            .replace(/#{1,6}\s+/g, '') // Remove headers
+            .replace(/\*\*(.*?)\*\*/g, '$1') // Remove bold
+            .replace(/\*(.*?)\*/g, '$1') // Remove italic
+            .replace(/`(.*?)`/g, '$1') // Remove inline code
+            .replace(/```[\s\S]*?```/g, '') // Remove code blocks
+            .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // Remove links, keep text
+            .replace(/\n+/g, ' ') // Replace newlines with spaces
+            .trim();
+        
+        if (plainText.length <= maxLength) {
+            return plainText;
+        }
+        
+        return plainText.substring(0, maxLength).replace(/\s+\w*$/, '') + '...';
+    }
+
+    // Calculate reading time
+    calculateReadTime(content) {
+        const wordsPerMinute = 200;
+        const wordCount = content.trim().split(/\s+/).length;
+        const minutes = Math.ceil(wordCount / wordsPerMinute);
+        return `${minutes}분`;
+    }
+
+    // Enhanced fallback sample posts
     async loadSamplePosts() {
+        console.log('Loading sample posts as fallback...');
+        
         const samplePosts = [
             {
                 slug: 'react-nextjs-modern-web-development',
@@ -340,6 +536,43 @@ Docker는 애플리케이션을 컨테이너로 패키징하여 어떤 환경에
 ## 결론
 
 Docker와 Kubernetes는 현대적인 애플리케이션 배포의 핵심 기술입니다.`
+            },
+            {
+                slug: 'algorithm-fundamentals',
+                frontmatter: {
+                    title: '알고리즘 기초와 코딩 테스트 준비',
+                    date: '2024-12-20',
+                    category: 'Algorithm',
+                    tags: ['Algorithm', 'Coding Test', 'Data Structure'],
+                    excerpt: '코딩 테스트와 알고리즘 문제 해결을 위한 기본 개념과 접근 방법을 설명합니다.',
+                    readTime: '10분'
+                },
+                content: `# 알고리즘 기초와 코딩 테스트 준비
+
+## 기본 자료구조
+
+### 배열과 리스트
+배열과 리스트는 가장 기본적인 자료구조입니다.
+
+### 스택과 큐
+LIFO(Last In First Out)와 FIFO(First In First Out) 개념을 이해해야 합니다.
+
+## 정렬 알고리즘
+
+### 버블 정렬
+가장 간단하지만 비효율적인 정렬 방법입니다.
+
+### 퀵 정렬
+분할 정복을 이용한 효율적인 정렬 알고리즘입니다.
+
+## 검색 알고리즘
+
+### 이진 검색
+정렬된 배열에서 효율적으로 원소를 찾는 방법입니다.
+
+## 결론
+
+꾸준한 연습과 체계적인 학습이 알고리즘 실력 향상의 핵심입니다.`
             }
         ];
 
@@ -356,9 +589,12 @@ Docker와 Kubernetes는 현대적인 애플리케이션 배포의 핵심 기술�
             this.posts.push({
                 ...post,
                 id: post.slug,
-                url: `/post/${post.slug}`
+                url: `/post/${post.slug}`,
+                year: parseInt(post.frontmatter.date.split('-')[0])
             });
         });
+
+        console.log(`Loaded ${samplePosts.length} sample posts`);
     }
 
     // Get a single post by slug
@@ -405,35 +641,101 @@ Docker와 Kubernetes는 현대적인 애플리케이션 배포의 핵심 기술�
         return Array.from(this.tags).sort();
     }
 
-    // Render markdown to HTML
+    // Enhanced markdown rendering with better code highlighting
     renderMarkdown(markdown) {
         if (typeof marked !== 'undefined') {
-            // Configure marked options
+            // Configure marked options for better rendering
             marked.setOptions({
                 highlight: function(code, language) {
-                    return `<pre data-lang="${language}"><code class="language-${language}">${code}</code></pre>`;
+                    // Add syntax highlighting class
+                    const lang = language || 'text';
+                    return `<pre class="code-block"><code class="language-${lang}" data-lang="${lang}">${code}</code></pre>`;
                 },
                 breaks: true,
-                gfm: true
+                gfm: true,
+                tables: true,
+                smartLists: true,
+                smartypants: true
             });
             return marked.parse(markdown);
         }
-        // Fallback markdown rendering
-        return this.simpleMarkdownRender(markdown);
+        // Enhanced fallback markdown rendering
+        return this.enhancedMarkdownRender(markdown);
     }
     
-    // Simple markdown rendering fallback
-    simpleMarkdownRender(markdown) {
+    // Enhanced markdown rendering fallback
+    enhancedMarkdownRender(markdown) {
         return markdown
+            // Headers
+            .replace(/^#### (.*$)/gm, '<h4>$1</h4>')
             .replace(/^### (.*$)/gm, '<h3>$1</h3>')
             .replace(/^## (.*$)/gm, '<h2>$1</h2>')
             .replace(/^# (.*$)/gm, '<h1>$1</h1>')
+            // Code blocks
+            .replace(/```(\w*)\n([\s\S]*?)```/g, '<pre class="code-block"><code class="language-$1" data-lang="$1">$2</code></pre>')
+            // Inline code
+            .replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>')
+            // Bold and italic
             .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
             .replace(/\*(.*?)\*/g, '<em>$1</em>')
-            .replace(/```([^`]+)```/g, '<pre><code>$1</code></pre>')
-            .replace(/`([^`]+)`/g, '<code>$1</code>')
-            .replace(/\n/g, '<br>');
+            // Links
+            .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+            // Lists
+            .replace(/^\- (.+$)/gm, '<li>$1</li>')
+            .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')
+            // Line breaks
+            .replace(/\n\n/g, '</p><p>')
+            .replace(/\n/g, '<br>')
+            // Wrap in paragraphs
+            .replace(/^(?!<[hul]|<pre|<blockquote)(.+$)/gm, '<p>$1</p>')
+            // Clean up empty paragraphs
+            .replace(/<p><\/p>/g, '')
+            .replace(/<p>(<[hul])/g, '$1')
+            .replace(/(<\/[hul]>)<\/p>/g, '$1');
     }
+
+    // Utility method to format date
+    formatDate(dateString) {
+        const date = new Date(dateString);
+        if (isNaN(date.getTime())) {
+            return dateString; // Return original if invalid
+        }
+        
+        return date.toLocaleDateString('ko-KR', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+    }
+
+    // Get recent posts
+    getRecentPosts(limit = 5) {
+        return this.posts.slice(0, limit);
+    }
+
+    // Get posts by year
+    getPostsByYear(year) {
+        if (!year) return this.posts;
+        return this.posts.filter(post => post.year === parseInt(year));
+    }
+
+    // Get post statistics
+    getStats() {
+        return {
+            totalPosts: this.posts.length,
+            totalCategories: this.categories.size,
+            totalTags: this.tags.size,
+            years: [...new Set(this.posts.map(post => post.year))].sort((a, b) => b - a)
+        };
+    }
+
+    // Force reload posts
+    async reloadPosts() {
+        this.isLoaded = false;
+        this.loadingPromise = null;
+        return this.loadPosts();
+    }
+}
 }
 
 // Global instance
