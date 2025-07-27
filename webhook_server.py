@@ -6,10 +6,13 @@ import hmac
 import hashlib
 import logging
 import sys
+import json
 from pathlib import Path
 
 from importer.config_manager import load_config, AppConfig
 from importer.logger_setup import setup_logging
+from importer.post_generator import HugoPostGenerator
+from importer.git_utils import GitAutoCommit
 
 # Global logger, will be configured in main_webhook
 logger: logging.Logger 
@@ -106,6 +109,7 @@ def main_webhook():
         # --- GitHub Signature Verification ---
         github_signature = request.headers.get('X-Hub-Signature-256')
         gitlab_token = request.headers.get('X-Gitlab-Token')
+        n8n_token = request.headers.get('X-N8N-Token')  # n8n 웹훅 토큰
 
         if github_signature:
             logger.debug("Attempting GitHub signature verification.")
@@ -134,49 +138,90 @@ def main_webhook():
                 logger.warning("GitLab token verification failed. Request rejected.")
                 return "Token verification failed", 403
             logger.info("GitLab token verified successfully.")
+        
+        # --- n8n Token Verification ---
+        elif n8n_token:
+            logger.debug("Attempting n8n token verification.")
+            if not hmac.compare_digest(n8n_token, _webhook_secret):
+                logger.warning("n8n token verification failed. Request rejected.")
+                return "Token verification failed", 403
+            logger.info("n8n token verified successfully.")
             
         else:
-            logger.warning("No recognized signature/token header (X-Hub-Signature-256 or X-Gitlab-Token) found. Request rejected.")
+            logger.warning("No recognized signature/token header found. Request rejected.")
             return "Missing signature/token", 403
 
 
-        # 2. Branch Filtering (Optional)
-        if _app_config.webhook.allowed_branch:
-            logger.debug(f"Allowed branch configured: '{_app_config.webhook.allowed_branch}'. Checking payload.")
-            try:
-                payload = request.json
-                if not payload: # Should not happen if request.data was present for HMAC
-                    logger.warning("Request payload is empty or not JSON after signature verification.")
-                    return "Invalid payload", 400
+        # 2. 웹훅 데이터 파싱 및 포스트 생성
+        try:
+            payload = request.json
+            if not payload:
+                logger.warning("Request payload is empty or not JSON.")
+                return "Invalid payload", 400
 
-                # GitHub: payload['ref'] is like 'refs/heads/main'
-                # GitLab: payload['ref'] is like 'refs/heads/main', or payload['object_attributes']['target_branch'] for merge requests
-                # This needs to be adapted based on the expected payload structure from the specific webhook provider.
+            logger.info(f"Received webhook payload: {json.dumps(payload, indent=2, ensure_ascii=False)}")
+
+            # n8n form 데이터 처리
+            if 'form_data' in payload:
+                form_data = payload['form_data']
+                logger.info("Processing n8n form data for blog post creation")
                 
-                # Generic 'ref' check, common for GitHub push events
-                event_ref = payload.get('ref')
-                expected_ref = f'refs/heads/{_app_config.webhook.allowed_branch}'
+                # Hugo 포스트 생성
+                post_generator = HugoPostGenerator()
+                post_path, post_title = post_generator.create_post(form_data)
                 
-                if event_ref != expected_ref:
-                    logger.info(f"Webhook event for ref '{event_ref}' does not match allowed branch '{expected_ref}'. No action taken.")
-                    return "Event acknowledged (branch mismatch)", 200 # OK, but no action
-                logger.info(f"Webhook event for ref '{event_ref}' matches allowed branch.")
-            except Exception as e:
-                logger.error(f"Error parsing JSON payload or checking branch: {e}", exc_info=True)
-                return "Payload parsing error", 400
-        else:
-            logger.debug("No specific branch filter configured. Proceeding with sync trigger.")
+                # Git 자동 커밋 및 푸시
+                git_committer = GitAutoCommit()
+                
+                # Git 설정 (환경변수에서 가져오거나 기본값 사용)
+                git_name = os.getenv('GIT_AUTHOR_NAME', 'Hugo Blog Bot')
+                git_email = os.getenv('GIT_AUTHOR_EMAIL', 'bot@example.com')
+                
+                if git_committer.auto_commit_and_push(post_title, post_path, git_name, git_email):
+                    logger.info(f"포스트 생성 및 Git 푸시 완료: {post_title}")
+                    return {"status": "success", "message": f"Post created and pushed: {post_title}", "path": post_path}, 200
+                else:
+                    logger.error("Git 커밋/푸시 실패")
+                    return {"status": "partial_success", "message": f"Post created but Git push failed: {post_title}", "path": post_path}, 207
+            
+            # 기존 Git 웹훅 처리 (브랜치 필터링)
+            elif 'ref' in payload:
+                logger.info("Processing Git webhook")
+                
+                # Branch Filtering (Optional)
+                if _app_config.webhook.allowed_branch:
+                    logger.debug(f"Allowed branch configured: '{_app_config.webhook.allowed_branch}'. Checking payload.")
+                    
+                    # GitHub: payload['ref'] is like 'refs/heads/main'
+                    # GitLab: payload['ref'] is like 'refs/heads/main', or payload['object_attributes']['target_branch'] for merge requests
+                    
+                    # Generic 'ref' check, common for GitHub push events
+                    event_ref = payload.get('ref')
+                    expected_ref = f'refs/heads/{_app_config.webhook.allowed_branch}'
+                    
+                    if event_ref != expected_ref:
+                        logger.info(f"Webhook event for ref '{event_ref}' does not match allowed branch '{expected_ref}'. No action taken.")
+                        return "Event acknowledged (branch mismatch)", 200 # OK, but no action
+                    logger.info(f"Webhook event for ref '{event_ref}' matches allowed branch.")
+                else:
+                    logger.debug("No specific branch filter configured. Proceeding with sync trigger.")
 
-
-        # 3. Trigger Sync (Run main.py)
-        logger.info("Valid webhook received and processed. Triggering main importer sync process...")
-        
-        # Get the path to the config file used by this webhook server itself, to pass to main.py
-        # This assumes main.py uses the same config file.
-        current_config_path = os.getenv("HUGO_IMPORTER_CONFIG", "config.yaml")
-        run_main_script(config_file_path=current_config_path)
-        
-        return "Accepted: Sync process triggered.", 202
+                # Trigger Sync (Run main.py)
+                logger.info("Valid Git webhook received. Triggering main importer sync process...")
+                
+                # Get the path to the config file used by this webhook server itself, to pass to main.py
+                current_config_path = os.getenv("HUGO_IMPORTER_CONFIG", "config.yaml")
+                run_main_script(config_file_path=current_config_path)
+                
+                return "Accepted: Sync process triggered.", 202
+            
+            else:
+                logger.warning("Unknown webhook payload format")
+                return "Unknown payload format", 400
+                
+        except Exception as e:
+            logger.error(f"Error processing webhook payload: {e}", exc_info=True)
+            return "Payload processing error", 500
 
     logger.info(f"Starting webhook server on http://{_app_config.webhook.host}:{_app_config.webhook.port}{_app_config.webhook.endpoint_path}")
     try:

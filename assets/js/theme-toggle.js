@@ -1,7 +1,7 @@
 // PRD-Aligned Dark Mode Theme Toggle
 class ThemeToggle {
   constructor() {
-    this.theme = this.getStoredTheme() || this.getPreferredTheme();
+    this.theme = this.getStoredTheme() || 'dark';
     this.init();
   }
 

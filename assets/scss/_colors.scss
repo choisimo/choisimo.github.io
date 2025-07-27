@@ -60,6 +60,7 @@
   --info-rgb: 23, 162, 184;
 }
 
+<<<<<<< HEAD
 // Dark mode color overrides (PRD-defined)
 @media (prefers-color-scheme: dark) {
   :root {
@@ -83,6 +84,38 @@
     --bg-color-secondary: var(--secondary-bg);
     
     --border-light: #374151;
+=======
+// Dark mode color overrides - Enhanced visibility
+@media (prefers-color-scheme: dark) {
+  :root {
+    // High contrast text colors for better visibility
+    --text-color: #ffffff;
+    --text-color-secondary: #e2e8f0;
+    --text-muted: #cbd5e0;
+    --heading-color: #ffffff;
+    
+    // Dark theme backgrounds
+    --bg-body: #0d1117;
+    --bg-color: #0d1117;
+    --bg-color-secondary: #161b22;
+    --card-bg: #161b22;
+    
+    // Enhanced borders for visibility
+    --border-color: rgba(255,255,255,0.15);
+    --border-light: rgba(255,255,255,0.08);
+    
+    // Stronger shadows for depth
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.3), 0 8px 16px rgba(0, 0, 0, 0.15);
+    --card-shadow: 0 4px 6px rgba(0,0,0,0.4), 0 1px 3px rgba(0,0,0,0.25);
+    --card-shadow-hover: 0 10px 15px rgba(0,0,0,0.5), 0 4px 6px rgba(0,0,0,0.3);
+    
+    // Enhanced tag colors for dark mode
+    --tag-bg: #21262d;
+    --tag-bg-hover: #30363d;
+    --tag-color: #f0f6fc;
+>>>>>>> 1b47432a7d72640575174030c8a8010218d7086c
     
     // Adjusted primary colors for dark mode
     --primary: var(--accent-blue);
@@ -103,8 +136,9 @@
   }
 }
 
-// Manual dark mode class (for theme toggle functionality)
+// Manual dark mode class (for theme toggle functionality) - Enhanced visibility
 .dark {
+<<<<<<< HEAD
   // Dark Mode Colors (PRD-defined)
   --primary-bg: #1a1d23;
   --secondary-bg: #2d3748;
@@ -125,6 +159,35 @@
   --bg-color-secondary: var(--secondary-bg);
   
   --border-light: #374151;
+=======
+  // High contrast text colors for better visibility
+  --text-color: #ffffff;
+  --text-color-secondary: #e2e8f0;
+  --text-muted: #cbd5e0;
+  --heading-color: #ffffff;
+  
+  // Dark theme backgrounds
+  --bg-body: #0d1117;
+  --bg-color: #0d1117;
+  --bg-color-secondary: #161b22;
+  --card-bg: #161b22;
+  
+  // Enhanced borders for visibility
+  --border-color: rgba(255,255,255,0.15);
+  --border-light: rgba(255,255,255,0.08);
+  
+  // Stronger shadows for depth
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.3), 0 8px 16px rgba(0, 0, 0, 0.15);
+  --card-shadow: 0 4px 6px rgba(0,0,0,0.4), 0 1px 3px rgba(0,0,0,0.25);
+  --card-shadow-hover: 0 10px 15px rgba(0,0,0,0.5), 0 4px 6px rgba(0,0,0,0.3);
+  
+  // Enhanced tag colors for dark mode
+  --tag-bg: #21262d;
+  --tag-bg-hover: #30363d;
+  --tag-color: #f0f6fc;
+>>>>>>> 1b47432a7d72640575174030c8a8010218d7086c
   
   // Adjusted primary colors for dark mode
   --primary: var(--accent-blue);
