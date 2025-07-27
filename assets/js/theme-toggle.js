@@ -1,4 +1,4 @@
-// Dark Mode Theme Toggle
+// PRD-Aligned Dark Mode Theme Toggle
 class ThemeToggle {
   constructor() {
     this.theme = this.getStoredTheme() || this.getPreferredTheme();
@@ -24,9 +24,20 @@ class ThemeToggle {
     document.documentElement.setAttribute('data-theme', theme);
     document.documentElement.classList.toggle('dark', theme === 'dark');
     localStorage.setItem('theme', theme);
+    
+    // PRD: Trigger custom event for theme change
+    document.dispatchEvent(new CustomEvent('themeChanged', { 
+      detail: { theme } 
+    }));
   }
 
   createToggle() {
+    // Check if toggle already exists
+    const existingToggle = document.getElementById('theme-toggle');
+    if (existingToggle) {
+      return;
+    }
+
     const toggle = document.createElement('button');
     toggle.id = 'theme-toggle';
     toggle.className = 'theme-toggle';
@@ -48,36 +59,34 @@ class ThemeToggle {
       </svg>
     `;
 
-    // Add CSS styles for the toggle
+    // PRD: Enhanced CSS styles for the toggle with proper theming
     const style = document.createElement('style');
     style.textContent = `
       .theme-toggle {
-        position: fixed;
-        bottom: 2rem;
-        right: 2rem;
-        width: 3rem;
-        height: 3rem;
-        border-radius: 50%;
-        border: 2px solid var(--border-color);
         background: var(--card-bg);
-        color: var(--text-color);
+        border: 1px solid var(--border-color);
+        color: var(--text-primary);
+        padding: 0.5rem;
+        border-radius: 6px;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: var(--shadow-lg);
+        min-height: 44px;
+        min-width: 44px;
         transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-        z-index: 1000;
+        position: relative;
       }
 
       .theme-toggle:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--card-shadow-hover);
-        border-color: var(--primary);
+        color: var(--accent-blue);
+        border-color: var(--accent-blue);
+        background: rgba(var(--primary-rgb), 0.1);
+        transform: translateY(-1px);
       }
 
       .theme-toggle:focus {
-        outline: 2px solid var(--primary);
+        outline: 2px solid var(--accent-blue);
         outline-offset: 2px;
       }
 
@@ -97,34 +106,40 @@ class ThemeToggle {
         transform: rotate(180deg) scale(0.5);
       }
 
-      [data-theme="dark"] .theme-toggle .sun-icon {
+      [data-theme="dark"] .theme-toggle .sun-icon,
+      .dark .theme-toggle .sun-icon {
         opacity: 0;
         transform: rotate(-180deg) scale(0.5);
       }
 
-      [data-theme="dark"] .theme-toggle .moon-icon {
+      [data-theme="dark"] .theme-toggle .moon-icon,
+      .dark .theme-toggle .moon-icon {
         opacity: 1;
         transform: rotate(0deg) scale(1);
       }
 
       @media (max-width: 768px) {
         .theme-toggle {
-          bottom: 1.5rem;
-          right: 1.5rem;
-          width: 2.75rem;
-          height: 2.75rem;
+          min-height: 44px;
+          min-width: 44px;
         }
       }
     `;
 
     document.head.appendChild(style);
 
-    // Insert toggle into navbar or body
-    const navbar = document.querySelector('.navbar') || document.querySelector('nav') || document.querySelector('header');
-    if (navbar) {
-      navbar.appendChild(toggle);
+    // Insert toggle into existing navbar structure
+    const navbarActions = document.querySelector('.navbar-actions');
+    if (navbarActions) {
+      navbarActions.appendChild(toggle);
     } else {
-      document.body.appendChild(toggle);
+      // Fallback: append to navbar or body
+      const navbar = document.querySelector('.navbar') || document.querySelector('nav') || document.querySelector('header');
+      if (navbar) {
+        navbar.appendChild(toggle);
+      } else {
+        document.body.appendChild(toggle);
+      }
     }
   }
 
@@ -143,6 +158,15 @@ class ThemeToggle {
         this.setTheme(e.matches ? 'dark' : 'light');
       }
     });
+
+    // PRD: Handle theme transitions smoothly
+    document.addEventListener('themeChanged', (e) => {
+      // Add smooth transition class temporarily
+      document.documentElement.style.transition = 'color 0.3s ease, background-color 0.3s ease';
+      setTimeout(() => {
+        document.documentElement.style.transition = '';
+      }, 300);
+    });
   }
 }
 
@@ -150,3 +174,12 @@ class ThemeToggle {
 document.addEventListener('DOMContentLoaded', () => {
   new ThemeToggle();
 });
+
+// PRD: Also handle case where script loads after DOM
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    new ThemeToggle();
+  });
+} else {
+  new ThemeToggle();
+}

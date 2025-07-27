@@ -193,14 +193,14 @@
   }
 }
 
-// Buttons
+// PRD-Aligned Button System
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1.5rem; // PRD: Enhanced padding
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: var(--font-weight-semibold); // PRD: 600 weight
   line-height: 1.5;
   text-align: center;
   white-space: nowrap;
@@ -208,60 +208,111 @@
   cursor: pointer;
   user-select: none;
   border: 1px solid transparent;
-  border-radius: 0.25rem;
-  transition: all 0.2s ease-in-out;
+  border-radius: var(--btn-radius); // PRD: 8px border radius
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1); // PRD: Enhanced easing
+  text-decoration: none;
+  min-height: 44px; // PRD: Minimum touch target
   
   &:hover {
     text-decoration: none;
+    transform: translateY(-1px); // PRD: Subtle hover movement
   }
   
   &:focus {
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    outline: 2px solid var(--accent-blue); // PRD: WCAG AA focus indicator
+    outline-offset: 2px;
+  }
+  
+  &:active {
+    transform: translateY(0);
   }
   
   &.btn-sm {
-    padding: 0.25rem 0.5rem;
+    padding: 0.5rem 1rem;
     font-size: 0.75rem;
-    border-radius: 0.2rem;
+    min-height: 36px;
   }
   
   &.btn-lg {
-    padding: 0.75rem 1.5rem;
+    padding: 1rem 2rem;
     font-size: 1rem;
-    border-radius: 0.3rem;
+    min-height: 52px;
   }
 }
 
+// PRD: Primary button with accent-blue
 .btn-primary {
-  background-color: var(--primary);
-  border-color: var(--primary);
-  color: #fff;
+  background-color: var(--accent-blue);
+  border-color: var(--accent-blue);
+  color: white;
   
   &:hover {
-    background-color: var(--primary-dark);
-    border-color: var(--primary-dark);
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
+    box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.3); // PRD: Enhanced shadow
+  }
+  
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgba(var(--primary-rgb), 0.5);
+  }
+}
+
+// PRD: Secondary button with transparent background
+.btn-secondary {
+  background-color: transparent;
+  border: 2px solid var(--accent-blue); // PRD: 2px border
+  color: var(--accent-blue);
+  
+  &:hover {
+    background-color: var(--accent-blue);
+    color: white;
+    transform: translateY(-1px);
+  }
+  
+  &:focus {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 2px;
   }
 }
 
 .btn-gradient {
-  background: var(--primary-gradient);
+  background: linear-gradient(135deg, var(--accent-blue) 0%, var(--primary-hover) 100%);
   border: none;
-  color: #fff;
+  color: white;
   
   &:hover {
     opacity: 0.9;
+    box-shadow: 0 4px 16px rgba(var(--primary-rgb), 0.4);
   }
 }
 
 .btn-outline {
   background-color: transparent;
-  border-color: var(--primary);
-  color: var(--primary);
+  border: 2px solid var(--accent-blue);
+  color: var(--accent-blue);
   
   &:hover {
-    background-color: var(--primary);
-    color: #fff;
+    background-color: var(--accent-blue);
+    color: white;
+  }
+}
+
+// PRD: Mobile responsive button adjustments
+@media (max-width: 768px) {
+  .btn {
+    min-height: 44px; // PRD: Ensure touch target size
+    min-width: 44px;
+    padding: 0.75rem 1.25rem;
+  }
+  
+  .btn-sm {
+    min-height: 40px;
+    min-width: 40px;
+  }
+  
+  .btn-lg {
+    min-height: 48px;
+    padding: 0.875rem 1.75rem;
   }
 }
 

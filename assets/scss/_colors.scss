@@ -1,119 +1,152 @@
-// Unified Color System for Light and Dark Modes
+// PRD-Aligned Color System for Light and Dark Modes
 
 :root {
-  // Primary color palette
-  --primary: #667eea;
-  --primary-dark: #5a67d8;
-  --primary-light: #7f9cf5;
-  --primary-hover: #5a67d8;
-  --primary-rgb: 102, 126, 234;
-  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  // Primary color palette (PRD: accent-blue)
+  --primary: #007bff;
+  --primary-dark: #0056b3;
+  --primary-light: #4dabf7;
+  --primary-hover: #0056b3;
+  --primary-rgb: 0, 123, 255;
+  --primary-gradient: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
   
-  // Semantic color variables (will be overridden in dark mode)
-  --text-color: #2d3748;
-  --text-color-secondary: #4a5568;
-  --text-muted: #718096;
-  --heading-color: #1a202c;
+  // Light Mode Colors (PRD-defined)
+  --primary-bg: #ffffff;
+  --secondary-bg: #f8f9fa;
+  --card-bg: #ffffff;
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --accent-blue: #007bff;
+  --border-color: #dee2e6;
+  
+  // Semantic variables for consistency
+  --text-color: var(--text-primary);
+  --text-color-secondary: var(--text-secondary);
+  --text-muted: #868e96;
+  --heading-color: var(--text-primary);
   
   // Background colors
-  --bg-body: #f7fafc;
-  --bg-color: #ffffff;
-  --bg-color-secondary: #edf2f7;
-  --card-bg: #ffffff;
+  --bg-body: var(--primary-bg);
+  --bg-color: var(--primary-bg);
+  --bg-color-secondary: var(--secondary-bg);
   
   // UI elements
-  --border-color: rgba(0,0,0,0.1);
-  --border-light: rgba(0,0,0,0.05);
+  --border-light: #f1f3f4;
   
-  // Shadows
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+  // Shadows (optimized for light mode)
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
-  --card-shadow: 0 4px 6px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.08);
-  --card-shadow-hover: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+  --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+  --card-shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.12), 0 4px 6px rgba(0, 0, 0, 0.08);
   
   // Tags and badges
-  --tag-bg: #f3f4f6;
-  --tag-bg-hover: #e5e7eb;
-  --tag-color: #4b5563;
+  --tag-bg: #f8f9fa;
+  --tag-bg-hover: #e9ecef;
+  --tag-color: #495057;
   
   // Border radius
   --border-radius: 12px;
   --border-radius-lg: 16px;
   --btn-radius: 8px;
   
-  // Status colors (consistent across themes)
-  --success: #48bb78;
-  --success-rgb: 72, 187, 120;
-  --warning: #ed8936;
-  --warning-rgb: 237, 137, 54;
-  --danger: #e53e3e;
-  --danger-rgb: 229, 62, 62;
-  --info: #4299e1;
-  --info-rgb: 66, 153, 225;
+  // Status colors (WCAG AA compliant)
+  --success: #28a745;
+  --success-rgb: 40, 167, 69;
+  --warning: #ffc107;
+  --warning-rgb: 255, 193, 7;
+  --danger: #dc3545;
+  --danger-rgb: 220, 53, 69;
+  --info: #17a2b8;
+  --info-rgb: 23, 162, 184;
 }
 
-// Dark mode color overrides
+// Dark mode color overrides (PRD-defined)
 @media (prefers-color-scheme: dark) {
   :root {
-    --text-color: #e2e8f0;
-    --text-color-secondary: #cbd5e0;
-    --text-muted: #a0aec0;
-    --heading-color: #f7fafc;
+    // Dark Mode Colors (PRD-defined)
+    --primary-bg: #1a1d23;
+    --secondary-bg: #2d3748;
+    --card-bg: #374151;
+    --text-primary: #f7fafc;
+    --text-secondary: #a0aec0;
+    --accent-blue: #63b3ed;
+    --border-color: #4a5568;
     
-    --bg-body: #1a202c;
-    --bg-color: #1a202c;
-    --bg-color-secondary: #2d3748;
-    --card-bg: #2d3748;
+    // Update semantic variables
+    --text-color: var(--text-primary);
+    --text-color-secondary: var(--text-secondary);
+    --text-muted: #9ca3af;
+    --heading-color: var(--text-primary);
     
-    --border-color: rgba(255,255,255,0.12);
-    --border-light: rgba(255,255,255,0.06);
+    --bg-body: var(--primary-bg);
+    --bg-color: var(--primary-bg);
+    --bg-color-secondary: var(--secondary-bg);
     
-    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-    --shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.2), 0 8px 16px rgba(0, 0, 0, 0.1);
-    --card-shadow: 0 4px 6px rgba(0,0,0,0.3), 0 1px 3px rgba(0,0,0,0.2);
-    --card-shadow-hover: 0 10px 15px rgba(0,0,0,0.4), 0 4px 6px rgba(0,0,0,0.25);
+    --border-light: #374151;
     
-    --tag-bg: #374151;
-    --tag-bg-hover: #4b5563;
-    --tag-color: #d1d5db;
-    
+    // Adjusted primary colors for dark mode
+    --primary: var(--accent-blue);
     --primary-light: #93c5fd;
+    --primary-hover: #3b82f6;
+    --primary-rgb: 99, 179, 237;
+    
+    // Enhanced shadows for dark mode
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.4), 0 8px 16px rgba(0, 0, 0, 0.2);
+    --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.3);
+    --card-shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.5), 0 4px 6px rgba(0, 0, 0, 0.4);
+    
+    --tag-bg: #4b5563;
+    --tag-bg-hover: #6b7280;
+    --tag-color: #d1d5db;
   }
 }
 
 // Manual dark mode class (for theme toggle functionality)
 .dark {
-  --text-color: #e2e8f0;
-  --text-color-secondary: #cbd5e0;
-  --text-muted: #a0aec0;
-  --heading-color: #f7fafc;
+  // Dark Mode Colors (PRD-defined)
+  --primary-bg: #1a1d23;
+  --secondary-bg: #2d3748;
+  --card-bg: #374151;
+  --text-primary: #f7fafc;
+  --text-secondary: #a0aec0;
+  --accent-blue: #63b3ed;
+  --border-color: #4a5568;
   
-  --bg-body: #1a202c;
-  --bg-color: #1a202c;
-  --bg-color-secondary: #2d3748;
-  --card-bg: #2d3748;
+  // Update semantic variables
+  --text-color: var(--text-primary);
+  --text-color-secondary: var(--text-secondary);
+  --text-muted: #9ca3af;
+  --heading-color: var(--text-primary);
   
-  --border-color: rgba(255,255,255,0.12);
-  --border-light: rgba(255,255,255,0.06);
+  --bg-body: var(--primary-bg);
+  --bg-color: var(--primary-bg);
+  --bg-color-secondary: var(--secondary-bg);
   
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.2), 0 8px 16px rgba(0, 0, 0, 0.1);
-  --card-shadow: 0 4px 6px rgba(0,0,0,0.3), 0 1px 3px rgba(0,0,0,0.2);
-  --card-shadow-hover: 0 10px 15px rgba(0,0,0,0.4), 0 4px 6px rgba(0,0,0,0.25);
+  --border-light: #374151;
   
-  --tag-bg: #374151;
-  --tag-bg-hover: #4b5563;
-  --tag-color: #d1d5db;
-  
+  // Adjusted primary colors for dark mode
+  --primary: var(--accent-blue);
   --primary-light: #93c5fd;
+  --primary-hover: #3b82f6;
+  --primary-rgb: 99, 179, 237;
+  
+  // Enhanced shadows for dark mode
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.4), 0 8px 16px rgba(0, 0, 0, 0.2);
+  --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.3);
+  --card-shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.5), 0 4px 6px rgba(0, 0, 0, 0.4);
+  
+  --tag-bg: #4b5563;
+  --tag-bg-hover: #6b7280;
+  --tag-color: #d1d5db;
 }
 
 // Global link and interaction styles
 a {
-  color: var(--primary);
+  color: var(--accent-blue);
   transition: color 0.3s ease;
   text-decoration: none;
   
@@ -123,37 +156,66 @@ a {
   }
 }
 
-// Button variants
+// Enhanced button variants with PRD-aligned styling
 .btn-primary {
-  background: var(--primary-gradient);
+  background: var(--accent-blue);
   color: white;
   border: none;
+  border-radius: var(--btn-radius);
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
   
   &:hover {
-    opacity: 0.9;
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.3);
+  }
+  
+  &:focus {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 2px;
+  }
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 2px solid var(--accent-blue);
+  color: var(--accent-blue);
+  border-radius: var(--btn-radius);
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  
+  &:hover {
+    background: var(--accent-blue);
+    color: white;
     transform: translateY(-1px);
   }
-}
-
-.btn-outline {
-  background: transparent;
-  border: 2px solid var(--primary);
-  color: var(--primary);
   
-  &:hover {
-    background: var(--primary);
-    color: white;
+  &:focus {
+    outline: 2px solid var(--accent-blue);
+    outline-offset: 2px;
   }
 }
 
-// Focus styles for accessibility
+// Ensure minimum touch target size (44px)
+@media (max-width: 768px) {
+  .btn-primary,
+  .btn-secondary {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+// Enhanced focus styles for accessibility (WCAG 4.5:1 contrast ratio)
 *:focus {
-  outline: 2px solid var(--primary);
+  outline: 2px solid var(--accent-blue);
   outline-offset: 2px;
 }
 
-// Selection color
+// Improved selection color
 ::selection {
-  background-color: var(--primary);
-  color: white;
+  background-color: rgba(var(--primary-rgb), 0.3);
+  color: var(--text-primary);
 }
