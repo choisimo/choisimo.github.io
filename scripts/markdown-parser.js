@@ -1,4 +1,4 @@
-// Markdown Parser and Post Manager
+// GitHub Pages용 정적 JSON 기반 Markdown Parser
 class MarkdownParser {
     constructor() {
         this.posts = [];
@@ -6,108 +6,10 @@ class MarkdownParser {
         this.tags = new Set();
         this.isLoaded = false;
         this.loadingPromise = null;
+        this.metadata = null;
     }
 
-    // Enhanced frontmatter parser with better YAML support
-    parseFrontmatter(content) {
-        const frontmatterRegex = /^---\s*\r?\n([\s\S]*?)\r?\n---\s*\r?\n([\s\S]*)$/;
-        const match = content.match(frontmatterRegex);
-        
-        if (!match) {
-            return { frontmatter: {}, content: content };
-        }
-
-        const frontmatterText = match[1];
-        const markdownContent = match[2];
-        const frontmatter = {};
-
-        // Parse YAML-like frontmatter
-        const lines = frontmatterText.split(/\r?\n/);
-        let currentKey = null;
-        let currentValue = [];
-        let inArray = false;
-
-        for (const line of lines) {
-            const trimmedLine = line.trim();
-            if (!trimmedLine || trimmedLine.startsWith('#')) continue;
-
-            if (inArray) {
-                if (trimmedLine.startsWith('-')) {
-                    // Array item
-                    const item = trimmedLine.substring(1).trim().replace(/^["']|["']$/g, '');
-                    currentValue.push(item);
-                } else if (trimmedLine.includes(':')) {
-                    // End of array, start new key
-                    if (currentKey) {
-                        frontmatter[currentKey] = currentValue;
-                    }
-                    inArray = false;
-                    currentValue = [];
-                } else {
-                    continue;
-                }
-            }
-
-            if (!inArray && trimmedLine.includes(':')) {
-                const colonIndex = trimmedLine.indexOf(':');
-                const key = trimmedLine.substring(0, colonIndex).trim();
-                let value = trimmedLine.substring(colonIndex + 1).trim();
-
-                // Save previous array if exists
-                if (currentKey && currentValue.length > 0) {
-                    frontmatter[currentKey] = currentValue;
-                    currentValue = [];
-                }
-
-                currentKey = key;
-
-                // Remove quotes
-                if ((value.startsWith('"') && value.endsWith('"')) || 
-                    (value.startsWith("'") && value.endsWith("'"))) {
-                    value = value.slice(1, -1);
-                }
-
-                // Check for arrays
-                if (value.startsWith('[') && value.endsWith(']')) {
-                    try {
-                        frontmatter[key] = JSON.parse(value);
-                    } catch (e) {
-                        // Fallback parsing
-                        const arrayContent = value.slice(1, -1);
-                        if (arrayContent.trim()) {
-                            frontmatter[key] = arrayContent.split(',').map(item => item.trim().replace(/['"]/g, ''));
-                        } else {
-                            frontmatter[key] = [];
-                        }
-                    }
-                    currentKey = null;
-                } else if (!value && lines.indexOf(line) < lines.length - 1) {
-                    // Check if next lines are array items
-                    const nextLine = lines[lines.indexOf(line) + 1];
-                    if (nextLine && nextLine.trim().startsWith('-')) {
-                        inArray = true;
-                        currentValue = [];
-                    } else {
-                        frontmatter[key] = value;
-                        currentKey = null;
-                    }
-                } else {
-                    // Simple value
-                    frontmatter[key] = value;
-                    currentKey = null;
-                }
-            }
-        }
-
-        // Save last array if exists
-        if (currentKey && currentValue.length > 0) {
-            frontmatter[currentKey] = currentValue;
-        }
-
-        return { frontmatter, content: markdownContent };
-    }
-
-    // Enhanced post loading with better error handling
+    // GitHub Pages용 정적 JSON에서 포스트 로드
     async loadPosts() {
         // Prevent multiple simultaneous loads
         if (this.loadingPromise) {
@@ -120,33 +22,22 @@ class MarkdownParser {
 
     async _loadPostsInternal() {
         try {
-            console.log('Starting to load posts...');
+            console.log('Loading posts from static JSON data...');
             this.posts = [];
             this.categories.clear();
             this.tags.clear();
             
-            const years = ['2024', '2025'];
-            let totalLoaded = 0;
+            // 메타데이터 로드
+            await this.loadMetadata();
             
-            for (const year of years) {
-                console.log(`Loading posts from ${year}...`);
-                const loaded = await this.loadPostsFromYear(year);
-                totalLoaded += loaded;
-                console.log(`Loaded ${loaded} posts from ${year}`);
-            }
+            // 메인 포스트 JSON 파일에서 로드
+            const posts = await this.loadFromStaticJSON();
             
-            // Sort posts by date (newest first)
-            this.posts.sort((a, b) => {
-                const dateA = new Date(a.frontmatter.date || '1970-01-01');
-                const dateB = new Date(b.frontmatter.date || '1970-01-01');
-                return dateB - dateA;
-            });
-
-            console.log(`Total posts loaded: ${this.posts.length}`);
-            
-            // If no posts loaded, show error and load samples
-            if (this.posts.length === 0) {
-                console.warn('No posts could be loaded from files, using sample data');
+            if (posts && posts.length > 0) {
+                this.processPosts(posts);
+                console.log(`Successfully loaded ${this.posts.length} posts from static JSON`);
+            } else {
+                console.warn('No posts found in static JSON, using sample data');
                 await this.loadSamplePosts();
             }
 
@@ -155,256 +46,127 @@ class MarkdownParser {
             return this.posts;
             
         } catch (error) {
-            console.error('Critical error loading posts:', error);
+            console.error('Error loading posts from static JSON:', error);
             this.loadingPromise = null;
             await this.loadSamplePosts();
             return this.posts;
         }
     }
 
-    // Load posts from a specific year
-    async loadPostsFromYear(year) {
+    // 메타데이터 로드
+    async loadMetadata() {
         try {
-            const fileList = await this.getPostFileList(year);
-            console.log(`Found ${fileList.length} files for ${year}:`, fileList);
-            
-            let loaded = 0;
-            const loadPromises = fileList.map(async (filename) => {
-                try {
-                    const success = await this.loadSinglePost(year, filename);
-                    if (success) loaded++;
-                    return success;
-                } catch (error) {
-                    console.warn(`Failed to load ${year}/${filename}:`, error.message);
-                    return false;
-                }
-            });
-            
-            await Promise.all(loadPromises);
-            return loaded;
-            
+            const response = await fetch('/data/metadata.json');
+            if (response.ok) {
+                this.metadata = await response.json();
+                console.log('Metadata loaded:', this.metadata);
+            }
         } catch (error) {
-            console.error(`Error loading posts from ${year}:`, error);
-            return 0;
+            console.warn('Could not load metadata:', error.message);
         }
     }
 
-    // Get file list with multiple fallback methods
-    async getPostFileList(year) {
-        const methods = [
-            () => this.getFileListFromManifest(year),
-            () => this.getFileListFromIndex(year),
-            () => this.getKnownFiles(year)
-        ];
-
-        for (const method of methods) {
-            try {
-                const files = await method();
-                if (files && files.length > 0) {
-                    console.log(`Got file list for ${year} using method:`, method.name);
-                    return files.filter(f => f.endsWith('.md'));
-                }
-            } catch (error) {
-                console.log(`Method failed for ${year}:`, method.name, error.message);
-                continue;
-            }
-        }
-        
-        console.warn(`No file list found for ${year}`);
-        return [];
-    }
-
-    // Method 1: Load from manifest.json (most reliable)
-    async getFileListFromManifest(year) {
-        const response = await fetch(`/posts/${year}/manifest.json`);
-        if (!response.ok) {
-            throw new Error(`Manifest not found for ${year}`);
-        }
-        
-        const manifest = await response.json();
-        if (!manifest.files || !Array.isArray(manifest.files)) {
-            throw new Error(`Invalid manifest format for ${year}`);
-        }
-        
-        return manifest.files;
-    }
-
-    // Method 2: Try to get files from directory index  
-    async getFileListFromIndex(year) {
-        const response = await fetch(`/posts/${year}/`);
-        if (!response.ok) {
-            throw new Error(`Directory index not available for ${year}`);
-        }
-        
-        const html = await response.text();
-        const fileRegex = /href="([^"]+\.md)"/g;
-        const files = [];
-        let match;
-        
-        while ((match = fileRegex.exec(html)) !== null) {
-            const filename = match[1];
-            if (!filename.includes('../') && !filename.includes('/')) {
-                files.push(filename);
-            }
-        }
-        
-        if (files.length === 0) {
-            throw new Error(`No markdown files found in directory index for ${year}`);
-        }
-        
-        return files;
-    }
-
-    // Method 3: Known files fallback
-    async getKnownFiles(year) {
-        const knownFiles = {
-            '2024': [
-                'ai-personalized-learning-system.md',
-                'algorithm-guide.md',
-                'changedetection-io-guide.md',
-                'coding-test-guide.md',
-                'database-containerization-guide.md',
-                'linux-networkmanager-static-ip.md',
-                'multimodal-recommendation-system-research.md',
-                'opensource-schedule-management-analysis.md'
-            ],
-            '2025': [
-                'ai-models-for-coding.md',
-                'arch-linux-gui-setup-experience.md',
-                'docker-kubernetes-guide.md',
-                'python-ai-chatbot-development.md',
-                'react-nextjs-modern-web-development.md',
-                'spring-boot-realtime-communication.md'
-            ]
-        };
-
-        const files = knownFiles[year] || [];
-        if (files.length === 0) {
-            throw new Error(`No known files for ${year}`);
-        }
-
-        // Verify files exist
-        const existingFiles = [];
-        for (const filename of files) {
-            try {
-                const response = await fetch(`/posts/${year}/${filename}`, { method: 'HEAD' });
-                if (response.ok) {
-                    existingFiles.push(filename);
-                }
-            } catch (e) {
-                continue;
-            }
-        }
-        
-        return existingFiles;
-    }
-
-    // Enhanced single post loading
-    async loadSinglePost(year, filename) {
+    // 정적 JSON에서 포스트 로드
+    async loadFromStaticJSON() {
         try {
-            console.log(`Loading post: ${year}/${filename}`);
-            
-            const response = await fetch(`/posts/${year}/${filename}`);
+            // 메인 포스트 파일 시도
+            const response = await fetch('/data/posts.json');
             if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                throw new Error(`Failed to load posts.json: ${response.status}`);
             }
             
-            const content = await response.text();
-            if (!content.trim()) {
-                throw new Error('Empty file content');
+            const posts = await response.json();
+            if (!Array.isArray(posts)) {
+                throw new Error('Invalid posts data format');
             }
             
-            const { frontmatter, content: markdownContent } = this.parseFrontmatter(content);
-            
-            // Validate required fields
-            if (!frontmatter.title) {
-                console.warn(`Post ${filename} missing title, skipping`);
-                return false;
-            }
-            
-            // Generate slug from filename
-            const slug = filename.replace('.md', '');
-            
-            // Ensure date is properly formatted
-            if (!frontmatter.date) {
-                frontmatter.date = '2024-01-01'; // Default date
-            }
-            
-            // Ensure category exists
-            if (!frontmatter.category) {
-                frontmatter.category = 'General';
-            }
-            
-            // Ensure tags is an array
-            if (!frontmatter.tags) {
-                frontmatter.tags = [];
-            } else if (typeof frontmatter.tags === 'string') {
-                frontmatter.tags = [frontmatter.tags];
-            }
-            
-            // Generate excerpt if not provided
-            if (!frontmatter.excerpt) {
-                frontmatter.excerpt = this.generateExcerpt(markdownContent);
-            }
-            
-            // Generate read time if not provided
-            if (!frontmatter.readTime) {
-                frontmatter.readTime = this.calculateReadTime(markdownContent);
-            }
-            
-            // Add to collections
-            this.categories.add(frontmatter.category);
-            frontmatter.tags.forEach(tag => this.tags.add(tag));
-            
-            // Create post object
-            const post = {
-                slug,
-                frontmatter,
-                content: markdownContent,
-                id: slug,
-                url: `/post/${slug}`,
-                year: parseInt(year)
-            };
-            
-            this.posts.push(post);
-            console.log(`Successfully loaded: ${frontmatter.title}`);
-            return true;
+            return posts;
             
         } catch (error) {
-            console.error(`Failed to load ${year}/${filename}:`, error.message);
-            return false;
+            console.error('Error loading main posts JSON:', error);
+            
+            // 연도별 파일들을 시도
+            return await this.loadFromYearlyJSON();
         }
     }
 
-    // Generate excerpt from content
-    generateExcerpt(content, maxLength = 150) {
-        // Remove markdown formatting
-        const plainText = content
-            .replace(/#{1,6}\s+/g, '') // Remove headers
-            .replace(/\*\*(.*?)\*\*/g, '$1') // Remove bold
-            .replace(/\*(.*?)\*/g, '$1') // Remove italic
-            .replace(/`(.*?)`/g, '$1') // Remove inline code
-            .replace(/```[\s\S]*?```/g, '') // Remove code blocks
-            .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // Remove links, keep text
-            .replace(/\n+/g, ' ') // Replace newlines with spaces
-            .trim();
-        
-        if (plainText.length <= maxLength) {
-            return plainText;
+    // 연도별 JSON 파일에서 로드
+    async loadFromYearlyJSON() {
+        try {
+            const allPosts = [];
+            const years = ['2024', '2025'];
+            
+            for (const year of years) {
+                try {
+                    const response = await fetch(`/data/posts_${year}.json`);
+                    if (response.ok) {
+                        const yearPosts = await response.json();
+                        if (Array.isArray(yearPosts)) {
+                            allPosts.push(...yearPosts);
+                            console.log(`Loaded ${yearPosts.length} posts from ${year}`);
+                        }
+                    }
+                } catch (error) {
+                    console.warn(`Could not load posts for ${year}:`, error.message);
+                }
+            }
+            
+            return allPosts;
+            
+        } catch (error) {
+            console.error('Error loading yearly JSON files:', error);
+            return [];
         }
-        
-        return plainText.substring(0, maxLength).replace(/\s+\w*$/, '') + '...';
     }
 
-    // Calculate reading time
-    calculateReadTime(content) {
-        const wordsPerMinute = 200;
-        const wordCount = content.trim().split(/\s+/).length;
-        const minutes = Math.ceil(wordCount / wordsPerMinute);
-        return `${minutes}분`;
+    // 포스트 데이터 처리
+    processPosts(postsData) {
+        postsData.forEach(postData => {
+            try {
+                // 데이터 구조 정규화
+                const post = {
+                    id: postData.id || postData.slug,
+                    slug: postData.slug || postData.id,
+                    frontmatter: {
+                        title: postData.title,
+                        date: postData.date,
+                        author: postData.author || 'nodove',
+                        categories: postData.categories || [],
+                        tags: postData.tags || [],
+                        excerpt: postData.excerpt,
+                        readTime: postData.readTime
+                    },
+                    content: postData.content,
+                    url: `/post/${postData.slug || postData.id}`,
+                    year: parseInt((postData.date || '2024-01-01').split('-')[0])
+                };
+
+                // 카테고리와 태그 수집
+                if (post.frontmatter.categories) {
+                    post.frontmatter.categories.forEach(cat => this.categories.add(cat));
+                }
+                if (post.frontmatter.tags) {
+                    post.frontmatter.tags.forEach(tag => this.tags.add(tag));
+                }
+
+                this.posts.push(post);
+                
+            } catch (error) {
+                console.warn('Error processing post:', postData.title || 'Unknown', error);
+            }
+        });
+
+        // 날짜순 정렬 (최신순)
+        this.posts.sort((a, b) => {
+            const dateA = new Date(a.frontmatter.date || '1970-01-01');
+            const dateB = new Date(b.frontmatter.date || '1970-01-01');
+            return dateB - dateA;
+        });
     }
 
-    // Enhanced fallback sample posts
+    // 샘플 포스트 로드 (fallback용)
+
+    // 샘플 포스트 로드 (fallback용)
     async loadSamplePosts() {
         console.log('Loading sample posts as fallback...');
         
@@ -414,10 +176,11 @@ class MarkdownParser {
                 frontmatter: {
                     title: 'React와 Next.js로 모던 웹 개발하기',
                     date: '2025-01-20',
-                    category: 'Web Development',
+                    categories: ['Web Development'],
                     tags: ['React', 'Next.js', 'JavaScript', 'Frontend'],
                     excerpt: '최신 React 기능과 Next.js의 장점을 활용한 웹 개발 방법론을 소개합니다.',
-                    readTime: '5분'
+                    readTime: '5분',
+                    author: 'nodove'
                 },
                 content: `# React와 Next.js로 모던 웹 개발하기
 
@@ -481,10 +244,11 @@ React와 Next.js는 모던 웹 개발의 표준이 되었습니다. 두 기술�
                 frontmatter: {
                     title: 'Python으로 AI 챗봇 만들기',
                     date: '2025-01-15',
-                    category: 'AI/ML',
+                    categories: ['AI/ML'],
                     tags: ['Python', 'AI', 'Chatbot', 'OpenAI'],
                     excerpt: 'OpenAI API를 활용하여 실용적인 AI 챗봇을 구현하는 과정을 단계별로 설명합니다.',
-                    readTime: '8분'
+                    readTime: '8분',
+                    author: 'nodove'
                 },
                 content: `# Python으로 AI 챗봇 만들기
 
@@ -518,34 +282,15 @@ openai.api_key = os.getenv('OPENAI_API_KEY')
 Python과 OpenAI API를 활용하면 강력한 AI 챗봇을 쉽게 구현할 수 있습니다.`
             },
             {
-                slug: 'docker-kubernetes-guide',
-                frontmatter: {
-                    title: 'Docker와 Kubernetes 실전 가이드',
-                    date: '2025-01-10',
-                    category: 'DevOps',
-                    tags: ['Docker', 'Kubernetes', 'DevOps', 'Container'],
-                    excerpt: '컨테이너 기술의 핵심인 Docker와 오케스트레이션 도구 Kubernetes 활용법을 다룹니다.',
-                    readTime: '12분'
-                },
-                content: `# Docker와 Kubernetes 실전 가이드
-
-## Docker 기초
-
-Docker는 애플리케이션을 컨테이너로 패키징하여 어떤 환경에서도 일관되게 실행할 수 있게 해주는 플랫폼입니다.
-
-## 결론
-
-Docker와 Kubernetes는 현대적인 애플리케이션 배포의 핵심 기술입니다.`
-            },
-            {
                 slug: 'algorithm-fundamentals',
                 frontmatter: {
                     title: '알고리즘 기초와 코딩 테스트 준비',
                     date: '2024-12-20',
-                    category: 'Algorithm',
+                    categories: ['Algorithm'],
                     tags: ['Algorithm', 'Coding Test', 'Data Structure'],
                     excerpt: '코딩 테스트와 알고리즘 문제 해결을 위한 기본 개념과 접근 방법을 설명합니다.',
-                    readTime: '10분'
+                    readTime: '10분',
+                    author: 'nodove'
                 },
                 content: `# 알고리즘 기초와 코딩 테스트 준비
 
@@ -579,8 +324,8 @@ LIFO(Last In First Out)와 FIFO(First In First Out) 개념을 이해해야 합�
         // Process sample posts
         samplePosts.forEach(post => {
             // Add to categories and tags
-            if (post.frontmatter.category) {
-                this.categories.add(post.frontmatter.category);
+            if (post.frontmatter.categories) {
+                post.frontmatter.categories.forEach(cat => this.categories.add(cat));
             }
             if (post.frontmatter.tags) {
                 post.frontmatter.tags.forEach(tag => this.tags.add(tag));
@@ -605,7 +350,9 @@ LIFO(Last In First Out)와 FIFO(First In First Out) 개념을 이해해야 합�
     // Get posts by category
     getPostsByCategory(category) {
         if (!category) return this.posts;
-        return this.posts.filter(post => post.frontmatter.category === category);
+        return this.posts.filter(post => 
+            post.frontmatter.categories && post.frontmatter.categories.includes(category)
+        );
     }
 
     // Get posts by tag
@@ -735,7 +482,6 @@ LIFO(Last In First Out)와 FIFO(First In First Out) 개념을 이해해야 합�
         this.loadingPromise = null;
         return this.loadPosts();
     }
-}
 }
 
 // Global instance
