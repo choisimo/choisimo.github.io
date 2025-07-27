@@ -60,31 +60,6 @@
   --info-rgb: 23, 162, 184;
 }
 
-<<<<<<< HEAD
-// Dark mode color overrides (PRD-defined)
-@media (prefers-color-scheme: dark) {
-  :root {
-    // Dark Mode Colors (PRD-defined)
-    --primary-bg: #1a1d23;
-    --secondary-bg: #2d3748;
-    --card-bg: #374151;
-    --text-primary: #f7fafc;
-    --text-secondary: #a0aec0;
-    --accent-blue: #63b3ed;
-    --border-color: #4a5568;
-    
-    // Update semantic variables
-    --text-color: var(--text-primary);
-    --text-color-secondary: var(--text-secondary);
-    --text-muted: #9ca3af;
-    --heading-color: var(--text-primary);
-    
-    --bg-body: var(--primary-bg);
-    --bg-color: var(--primary-bg);
-    --bg-color-secondary: var(--secondary-bg);
-    
-    --border-light: #374151;
-=======
 // Dark mode color overrides - Enhanced visibility
 @media (prefers-color-scheme: dark) {
   :root {
@@ -115,51 +90,18 @@
     --tag-bg: #21262d;
     --tag-bg-hover: #30363d;
     --tag-color: #f0f6fc;
->>>>>>> 1b47432a7d72640575174030c8a8010218d7086c
     
     // Adjusted primary colors for dark mode
-    --primary: var(--accent-blue);
+    --primary: #63b3ed;
+    --accent-blue: #63b3ed;
     --primary-light: #93c5fd;
     --primary-hover: #3b82f6;
     --primary-rgb: 99, 179, 237;
-    
-    // Enhanced shadows for dark mode
-    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
-    --shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
-    --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.4), 0 8px 16px rgba(0, 0, 0, 0.2);
-    --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.3);
-    --card-shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.5), 0 4px 6px rgba(0, 0, 0, 0.4);
-    
-    --tag-bg: #4b5563;
-    --tag-bg-hover: #6b7280;
-    --tag-color: #d1d5db;
   }
 }
 
 // Manual dark mode class (for theme toggle functionality) - Enhanced visibility
 .dark {
-<<<<<<< HEAD
-  // Dark Mode Colors (PRD-defined)
-  --primary-bg: #1a1d23;
-  --secondary-bg: #2d3748;
-  --card-bg: #374151;
-  --text-primary: #f7fafc;
-  --text-secondary: #a0aec0;
-  --accent-blue: #63b3ed;
-  --border-color: #4a5568;
-  
-  // Update semantic variables
-  --text-color: var(--text-primary);
-  --text-color-secondary: var(--text-secondary);
-  --text-muted: #9ca3af;
-  --heading-color: var(--text-primary);
-  
-  --bg-body: var(--primary-bg);
-  --bg-color: var(--primary-bg);
-  --bg-color-secondary: var(--secondary-bg);
-  
-  --border-light: #374151;
-=======
   // High contrast text colors for better visibility
   --text-color: #ffffff;
   --text-color-secondary: #e2e8f0;
@@ -187,24 +129,13 @@
   --tag-bg: #21262d;
   --tag-bg-hover: #30363d;
   --tag-color: #f0f6fc;
->>>>>>> 1b47432a7d72640575174030c8a8010218d7086c
   
   // Adjusted primary colors for dark mode
-  --primary: var(--accent-blue);
+  --primary: #63b3ed;
+  --accent-blue: #63b3ed;
   --primary-light: #93c5fd;
   --primary-hover: #3b82f6;
   --primary-rgb: 99, 179, 237;
-  
-  // Enhanced shadows for dark mode
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
-  --shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
-  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.4), 0 8px 16px rgba(0, 0, 0, 0.2);
-  --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.3);
-  --card-shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.5), 0 4px 6px rgba(0, 0, 0, 0.4);
-  
-  --tag-bg: #4b5563;
-  --tag-bg-hover: #6b7280;
-  --tag-color: #d1d5db;
 }
 
 // Global link and interaction styles

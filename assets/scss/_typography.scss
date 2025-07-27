@@ -4,14 +4,9 @@
 body {
   font-family: var(--font-family, 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif);
   font-size: 16px;
-<<<<<<< HEAD
   line-height: 1.6; // PRD: Improved body text line-height
-  color: var(--text-primary);
-  font-weight: var(--font-weight-normal);
-=======
-  line-height: 1.7;
   color: var(--text-color);
->>>>>>> 1b47432a7d72640575174030c8a8010218d7086c
+  font-weight: var(--font-weight-normal);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -22,12 +17,8 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 1rem;
   font-weight: var(--font-weight-semibold); // PRD: 600 weight for better hierarchy
   line-height: 1.3;
-<<<<<<< HEAD
-  color: var(--text-primary);
-  letter-spacing: -0.02em; // Improved readability
-=======
   color: var(--text-color);
->>>>>>> 1b47432a7d72640575174030c8a8010218d7086c
+  letter-spacing: -0.02em; // Improved readability
 }
 
 h1 {
@@ -89,7 +80,7 @@ p {
   margin-top: 0;
   margin-bottom: 1.5rem;
   line-height: 1.6; // PRD: Consistent line-height
-  color: var(--text-primary);
+  color: var(--text-color);
 }
 
 .lead {
@@ -97,7 +88,7 @@ p {
   font-weight: var(--font-weight-normal);
   margin-bottom: 2rem;
   line-height: 1.6;
-  color: var(--text-primary);
+  color: var(--text-color);
 }
 
 small, .small {
@@ -134,7 +125,7 @@ ul, ol {
   li {
     margin-bottom: 0.5rem;
     line-height: 1.6;
-    color: var(--text-primary);
+    color: var(--text-color);
   }
 }
 
@@ -244,7 +235,7 @@ hr {
 
 // PRD: Color utilities for semantic text
 .text-primary {
-  color: var(--text-primary) !important;
+  color: var(--text-color) !important;
 }
 
 .text-secondary {
