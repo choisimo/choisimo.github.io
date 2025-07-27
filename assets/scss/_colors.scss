@@ -13,6 +13,7 @@
   --primary-bg: #ffffff;
   --secondary-bg: #f8f9fa;
   --card-bg: #ffffff;
+  --card-bg-rgb: 255, 255, 255; // PRD: RGB values for backdrop-filter
   --text-primary: #212529;
   --text-secondary: #6c757d;
   --accent-blue: #007bff;
@@ -60,6 +61,14 @@
   --info-rgb: 23, 162, 184;
 }
 
+// PRD: Smooth theme transition animations
+* {
+  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 // Dark mode color overrides - Enhanced visibility
 @media (prefers-color-scheme: dark) {
   :root {
@@ -74,6 +83,7 @@
     --bg-color: #0d1117;
     --bg-color-secondary: #161b22;
     --card-bg: #161b22;
+    --card-bg-rgb: 22, 27, 34; // PRD: RGB values for backdrop-filter
     
     // Enhanced borders for visibility
     --border-color: rgba(255,255,255,0.15);
@@ -113,6 +123,7 @@
   --bg-color: #0d1117;
   --bg-color-secondary: #161b22;
   --card-bg: #161b22;
+  --card-bg-rgb: 22, 27, 34; // PRD: RGB values for backdrop-filter
   
   // Enhanced borders for visibility
   --border-color: rgba(255,255,255,0.15);

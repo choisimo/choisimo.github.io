@@ -64,14 +64,38 @@
   }
 }
 
-// Navigation menu
+// Navigation menu - PRD: Enhanced mobile navigation
 .navbar-nav {
   display: flex;
   align-items: center;
   gap: 2rem;
   
   @media (max-width: 768px) {
-    display: none; // Mobile menu implementation needed
+    position: fixed;
+    top: 64px; // PRD: Account for navbar height
+    left: 0;
+    right: 0;
+    background: var(--card-bg);
+    border-top: 1px solid var(--border-color);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 1rem 0;
+    transform: translateY(-100%); // PRD: Slide animation
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); // PRD: Smooth animation
+    z-index: 999;
+    max-height: calc(100vh - 64px);
+    overflow-y: auto;
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(10px); // PRD: Glass effect
+    
+    &.active {
+      transform: translateY(0); // PRD: Slide in
+      opacity: 1;
+      visibility: visible;
+    }
   }
 }
 
@@ -80,6 +104,29 @@
   
   &.dropdown {
     position: relative;
+  }
+  
+  @media (max-width: 768px) {
+    width: 100%;
+    
+    &.dropdown {
+      .dropdown-menu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        border: none;
+        background: var(--bg-color-secondary);
+        padding: 0;
+        margin: 0;
+        border-radius: 0;
+        
+        &:not(.show) {
+          display: none; // PRD: Toggle visibility in mobile
+        }
+      }
+    }
   }
 }
 
@@ -110,6 +157,22 @@
     
     &[aria-expanded="true"] svg {
       transform: rotate(180deg);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    padding: 1rem 1.5rem; // PRD: Better mobile touch targets
+    border-radius: 0;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 1rem; // PRD: Larger mobile text
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    &:hover {
+      background: var(--bg-color-secondary);
+      border-left: 3px solid var(--accent-blue); // PRD: Visual feedback
     }
   }
 }
@@ -339,16 +402,16 @@
   }
 }
 
-// Mobile navigation toggle
+// PRD: Enhanced mobile navigation toggle with improved animation
 .mobile-nav-toggle {
   display: none;
   background: none;
-  border: none;
+  border: 1px solid var(--border-color);
   color: var(--text-primary);
   padding: 0.5rem;
-  border-radius: 6px;
+  border-radius: 8px; // PRD: Consistent border radius
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); // PRD: Smooth animation
   min-height: 44px;
   min-width: 44px;
   
@@ -360,21 +423,43 @@
   
   &:hover {
     color: var(--accent-blue);
+    border-color: var(--accent-blue);
     background: rgba(var(--primary-rgb), 0.1);
+    transform: scale(1.05); // PRD: Subtle hover feedback
   }
   
   &:focus {
     outline: 2px solid var(--accent-blue);
     outline-offset: 2px;
   }
+  
+  // PRD: Active state with rotation animation
+  &.active {
+    color: var(--accent-blue);
+    border-color: var(--accent-blue);
+    background: rgba(var(--primary-rgb), 0.1);
+    
+    .toggle-icon {
+      background: transparent;
+      
+      &::before {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+      
+      &::after {
+        transform: rotate(-45deg) translate(7px, -6px);
+      }
+    }
+  }
 }
 
+// PRD: Enhanced hamburger icon with smooth animation
 .toggle-icon {
   position: relative;
   width: 20px;
   height: 2px;
   background: currentColor;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); // PRD: Smooth animation
   
   &::before,
   &::after {
@@ -383,7 +468,7 @@
     width: 100%;
     height: 2px;
     background: currentColor;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); // PRD: Consistent animation
   }
   
   &::before {
@@ -395,19 +480,63 @@
   }
 }
 
-// Mobile responsive adjustments
+// PRD: Body scroll lock when mobile nav is open
+body.nav-open {
+  overflow: hidden;
+  
+  @media (max-width: 768px) {
+    &::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5); // PRD: Overlay for mobile nav
+      z-index: 998;
+    }
+  }
+}
+
+// Mobile responsive adjustments - PRD Enhanced
 @media (max-width: 768px) {
   .navbar {
     padding: 0.75rem 0;
+    position: fixed; // PRD: Fixed navbar for mobile
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(var(--card-bg-rgb), 0.95); // PRD: Semi-transparent background
+    backdrop-filter: blur(10px); // PRD: Glass effect
+    border-bottom: 1px solid var(--border-color);
   }
   
   .navbar-actions {
     gap: 0.75rem;
+    
+    .search-container {
+      display: none; // PRD: Hide search in mobile nav bar
+    }
+    
+    .lang-selector {
+      display: none; // PRD: Move to mobile menu
+    }
   }
   
-  .search-container,
-  .lang-selector {
-    display: none; // Simplify mobile navbar
+  // PRD: Add mobile-specific nav items in the mobile menu
+  .navbar-nav {
+    .mobile-only {
+      display: block;
+      border-top: 1px solid var(--border-color);
+      margin-top: 1rem;
+      padding-top: 1rem;
+      
+      .nav-link {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        padding: 0.75rem 1.5rem;
+      }
+    }
   }
 }
 
@@ -418,5 +547,11 @@
   
   .navbar-actions {
     gap: 0.5rem;
+  }
+  
+  .navbar {
+    .container {
+      padding: 0 1rem; // PRD: Tighter mobile padding
+    }
   }
 }

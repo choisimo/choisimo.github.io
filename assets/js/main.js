@@ -10,6 +10,9 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Dropdown menu functionality
   setupDropdownMenus();
+  
+  // Enhanced search functionality - PRD: Debounced search
+  setupEnhancedSearch();
 });
 
 /**
@@ -133,5 +136,102 @@ function setupDropdownMenus() {
         });
       }
     });
+  }
+}
+
+/**
+ * PRD: Enhanced search functionality with debounce
+ */
+function setupEnhancedSearch() {
+  const searchToggle = document.querySelector('.search-toggle');
+  const searchBox = document.querySelector('.search-box');
+  const searchInput = document.querySelector('.search-box input');
+  const searchResults = document.querySelector('.search-results');
+  
+  if (!searchToggle || !searchBox || !searchInput || !searchResults) return;
+  
+  // PRD: Debounce function for search performance
+  function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
+  
+  // Toggle search box
+  searchToggle.addEventListener('click', function(e) {
+    e.stopPropagation();
+    searchBox.classList.toggle('active');
+    
+    if (searchBox.classList.contains('active')) {
+      searchInput.focus();
+    }
+  });
+  
+  // Close search on outside click
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.search-container')) {
+      searchBox.classList.remove('active');
+    }
+  });
+  
+  // PRD: ESC key to close search
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && searchBox.classList.contains('active')) {
+      searchBox.classList.remove('active');
+    }
+  });
+  
+  // PRD: Debounced search function
+  const debouncedSearch = debounce(performSearch, 300);
+  
+  // Search input event
+  searchInput.addEventListener('input', function() {
+    const query = this.value.trim();
+    
+    if (query.length === 0) {
+      searchResults.innerHTML = '';
+      return;
+    }
+    
+    if (query.length < 2) {
+      searchResults.innerHTML = '<div class="search-result">최소 2글자 이상 입력해주세요.</div>';
+      return;
+    }
+    
+    // Show loading state
+    searchResults.innerHTML = '<div class="search-loading">검색 중...</div>';
+    
+    // Perform debounced search
+    debouncedSearch(query);
+  });
+  
+  /**
+   * PRD: Perform search with loading and empty states
+   */
+  function performSearch(query) {
+    // Simulate search - replace with actual search implementation
+    setTimeout(() => {
+      const mockResults = [
+        { title: '검색 결과 1', excerpt: '검색어와 관련된 내용입니다.' },
+        { title: '검색 결과 2', excerpt: '또 다른 검색 결과입니다.' }
+      ];
+      
+      if (mockResults.length === 0) {
+        searchResults.innerHTML = '<div class="search-empty">검색 결과가 없습니다.</div>';
+      } else {
+        searchResults.innerHTML = mockResults.map(result => 
+          `<div class="search-result">
+            <strong>${result.title}</strong><br>
+            <small>${result.excerpt}</small>
+          </div>`
+        ).join('');
+      }
+    }, 200);
   }
 }
