@@ -1,209 +1,378 @@
 // Main JavaScript for Custom Blog
-document.addEventListener('DOMContentLoaded', function() {
-    // Sample blog posts data
-    const posts = [
-        {
-            title: "React와 Next.js로 모던 웹 개발하기",
-            excerpt: "최신 React 기능과 Next.js의 장점을 활용한 웹 개발 방법론을 소개합니다.",
-            date: "2025-01-20",
-            readTime: "5분",
-            category: "Web Development"
-        },
-        {
-            title: "Python으로 AI 챗봇 만들기",
-            excerpt: "OpenAI API를 활용하여 실용적인 AI 챗봇을 구현하는 과정을 단계별로 설명합니다.",
-            date: "2025-01-15",
-            readTime: "8분",
-            category: "AI/ML"
-        },
-        {
-            title: "Docker와 Kubernetes 실전 가이드",
-            excerpt: "컨테이너 기술의 핵심인 Docker와 오케스트레이션 도구 Kubernetes 활용법을 다룹니다.",
-            date: "2025-01-10",
-            readTime: "12분",
-            category: "DevOps"
-        },
-        {
-            title: "모바일 앱 개발: React Native vs Flutter",
-            excerpt: "크로스 플랫폼 모바일 개발 프레임워크의 특징과 선택 기준을 비교 분석합니다.",
-            date: "2025-01-05",
-            readTime: "7분",
-            category: "Mobile"
-        },
-        {
-            title: "웹 성능 최적화 기법",
-            excerpt: "사용자 경험을 향상시키는 웹사이트 성능 최적화 방법들을 실무 관점에서 소개합니다.",
-            date: "2024-12-28",
-            readTime: "6분",
-            category: "Performance"
-        },
-        {
-            title: "Git과 GitHub 마스터하기",
-            excerpt: "버전 관리의 핵심인 Git과 협업 도구 GitHub의 고급 기능들을 활용하는 방법을 설명합니다.",
-            date: "2024-12-20",
-            readTime: "9분",
-            category: "Tools"
-        }
-    ];
-
-    // Sample projects data
-    const projects = [
-        {
-            title: "차량 관리 시스템",
-            description: "Spring Boot와 React를 활용한 종합적인 차량 관리 웹 애플리케이션",
-            tech: ["Spring Boot", "React", "MySQL", "JPA"],
-            github: "#",
-            demo: "#"
-        },
-        {
-            title: "AI 기반 키오스크",
-            description: "음성 인식과 자연어 처리 기술을 활용한 스마트 주문 시스템",
-            tech: ["Python", "FastAPI", "OpenAI", "React"],
-            github: "#",
-            demo: "#"
-        },
-        {
-            title: "실시간 채팅 앱",
-            description: "WebSocket을 활용한 실시간 메시징 및 화상 통화 기능 지원",
-            tech: ["Node.js", "Socket.io", "React", "WebRTC"],
-            github: "#",
-            demo: "#"
-        },
-        {
-            title: "날씨 예보 대시보드",
-            description: "오픈 API를 활용한 실시간 날씨 정보 및 예보 시각화 대시보드",
-            tech: ["Vue.js", "Chart.js", "OpenWeather API"],
-            github: "#",
-            demo: "#"
-        }
-    ];
-
-    // Render posts
-    function renderPosts() {
-        const postsGrid = document.getElementById('posts-grid');
-        if (!postsGrid) return;
-
-        posts.forEach(post => {
-            const postCard = document.createElement('div');
-            postCard.className = 'post-card fade-in';
-            postCard.innerHTML = `
-                <div class="post-meta">${post.date} • ${post.readTime} • ${post.category}</div>
-                <h3>${post.title}</h3>
-                <p>${post.excerpt}</p>
-                <a href="#" class="read-more">더 읽기 →</a>
-            `;
-            postsGrid.appendChild(postCard);
-        });
-    }
-
-    // Render projects
-    function renderProjects() {
-        const projectsGrid = document.getElementById('projects-grid');
-        if (!projectsGrid) return;
-
-        projects.forEach(project => {
-            const projectCard = document.createElement('div');
-            projectCard.className = 'project-card fade-in';
-            projectCard.innerHTML = `
-                <h3>${project.title}</h3>
-                <p>${project.description}</p>
-                <div class="tech-stack">
-                    ${project.tech.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
-                </div>
-                <div class="project-links">
-                    <a href="${project.github}" class="project-link">GitHub</a>
-                    <a href="${project.demo}" class="project-link">Demo</a>
-                </div>
-            `;
-            projectsGrid.appendChild(projectCard);
-        });
-    }
-
-    // Smooth scrolling for navigation links
-    function setupSmoothScrolling() {
-        const navLinks = document.querySelectorAll('.nav-menu a[href^="#"]');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-    }
-
-    // Intersection Observer for animations
-    function setupScrollAnimations() {
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in');
-                }
-            });
-        }, observerOptions);
-
-        // Observe sections
-        const sections = document.querySelectorAll('section');
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-    }
-
-    // Initialize everything
-    renderPosts();
-    renderProjects();
+document.addEventListener('DOMContentLoaded', async function() {
+    // Initialize markdown parser and load posts
+    await window.markdownParser.loadPosts();
+    
+    // Setup search functionality
+    setupSearch();
+    
+    // Setup smooth scrolling for anchor links
     setupSmoothScrolling();
+    
+    // Setup scroll animations
     setupScrollAnimations();
+    
+    // Add custom styles
+    addCustomStyles();
+});
 
-    // Add CSS for tech tags and project links
+// Search functionality
+function setupSearch() {
+    const searchInput = document.getElementById('search-input');
+    if (!searchInput) return;
+    
+    let searchTimeout;
+    
+    searchInput.addEventListener('input', function(e) {
+        clearTimeout(searchTimeout);
+        const query = e.target.value.trim();
+        
+        // Debounce search
+        searchTimeout = setTimeout(() => {
+            if (query) {
+                window.router.navigate(`/posts?search=${encodeURIComponent(query)}`);
+            } else if (window.location.pathname === '/posts' && window.location.search.includes('search=')) {
+                window.router.navigate('/posts');
+            }
+        }, 300);
+    });
+    
+    // Handle search on posts page
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchQuery = urlParams.get('search');
+    if (searchQuery) {
+        searchInput.value = searchQuery;
+    }
+}
+
+// Smooth scrolling for navigation links
+function setupSmoothScrolling() {
+    const navLinks = document.querySelectorAll('.nav-menu a[href^="#"]');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+}
+
+// Intersection Observer for animations
+function setupScrollAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in');
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements that should animate
+    const animateElements = document.querySelectorAll('.post-card, .project-card, .hero, .about-content');
+    animateElements.forEach(element => {
+        observer.observe(element);
+    });
+}
+
+// Add custom CSS styles
+function addCustomStyles() {
     const style = document.createElement('style');
     style.textContent = `
-        .tech-stack {
-            margin: 1rem 0;
+        /* Search input styling */
+        .search-input {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            font-size: 0.9rem;
+            width: 200px;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+        }
+        
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        /* Page structure */
+        .page {
+            min-height: calc(100vh - 160px);
+            padding: 2rem 0;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+        
+        /* Filters */
+        .filters {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+            margin-top: 2rem;
+        }
+        
+        .filter-select {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+        
+        .tags-filter {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
+            justify-content: center;
         }
         
-        .tech-tag {
+        .tag-filter {
+            padding: 0.3rem 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-filter:hover,
+        .tag-filter.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        /* Tags in posts */
+        .post-tags {
+            margin: 1rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+        }
+        
+        .tag-small {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+        
+        .tag {
             background-color: var(--primary-color);
             color: white;
             padding: 0.3rem 0.8rem;
             border-radius: 16px;
             font-size: 0.8rem;
             font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 0.2rem;
         }
         
-        .project-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
+        .tag:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-1px);
         }
         
-        .project-link {
+        /* Post detail styling */
+        .post-detail {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .post-header {
+            margin-bottom: 3rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 2rem;
+        }
+        
+        .post-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+        
+        .post-content {
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+        
+        .post-content h1,
+        .post-content h2,
+        .post-content h3 {
+            margin: 2rem 0 1rem 0;
+            color: var(--text-color);
+        }
+        
+        .post-content h1 {
+            font-size: 2rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+        
+        .post-content h2 {
+            font-size: 1.5rem;
+        }
+        
+        .post-content h3 {
+            font-size: 1.3rem;
+        }
+        
+        .post-content p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .post-content ul,
+        .post-content ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+        
+        .post-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .post-content pre {
+            background-color: #f1f5f9;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        [data-theme="dark"] .post-content pre {
+            background-color: #1e293b;
+            border-color: #374151;
+        }
+        
+        .post-content code {
+            background-color: #f1f5f9;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        
+        [data-theme="dark"] .post-content code {
+            background-color: #374151;
+        }
+        
+        .post-content blockquote {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+            color: #6b7280;
+            font-style: italic;
+        }
+        
+        .post-navigation {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+        
+        /* Button styles */
+        .btn-outline {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--primary-color);
             color: var(--primary-color);
             text-decoration: none;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--primary-color);
-            border-radius: 6px;
+            border-radius: 8px;
+            font-weight: 600;
             transition: all 0.3s ease;
         }
         
-        .project-link:hover {
+        .btn-outline:hover {
             background-color: var(--primary-color);
             color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Navigation active state */
+        .nav-menu a.active {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        /* Recent posts section on home */
+        .recent-posts-section {
+            padding: 4rem 0;
+            background-color: var(--header-bg);
+        }
+        
+        .view-all-posts {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        /* Responsive design updates */
+        @media (max-width: 768px) {
+            .search-input {
+                width: 150px;
+            }
+            
+            .nav-controls {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .filters {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .tags-filter {
+                justify-content: flex-start;
+            }
+            
+            .post-header h1 {
+                font-size: 2rem;
+            }
+            
+            .post-content {
+                font-size: 1rem;
+            }
         }
     `;
     document.head.appendChild(style);
-});
+}

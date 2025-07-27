@@ -3,85 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Choisimo - Custom Blog</title>
+    <title>Nodove - Tech Blog</title>
     <link rel="stylesheet" href="styles/main.css">
     <link rel="icon" href="assets/media/icon.png">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
     <header class="header">
         <nav class="navbar">
             <div class="nav-brand">
-                <h1>Choisimo</h1>
+                <a href="/">
+                    <h1>Nodove</h1>
+                </a>
             </div>
             <ul class="nav-menu">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#posts">Posts</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="/" data-route="home">Home</a></li>
+                <li><a href="/posts" data-route="posts">Posts</a></li>
+                <li><a href="/projects" data-route="projects">Projects</a></li>
+                <li><a href="/about" data-route="about">About</a></li>
+                <li><a href="/contact" data-route="contact">Contact</a></li>
             </ul>
-            <button class="theme-toggle" id="theme-toggle">🌓</button>
+            <div class="nav-controls">
+                <input type="text" id="search-input" placeholder="검색..." class="search-input">
+                <button class="theme-toggle" id="theme-toggle">🌓</button>
+            </div>
         </nav>
     </header>
 
-    <main>
-        <section id="home" class="hero">
-            <div class="hero-content">
-                <h1>안녕하세요, 개발자 최시모입니다</h1>
-                <p>풀스택 개발과 기술 블로그를 통해 지식을 공유합니다</p>
-                <a href="#posts" class="cta-button">블로그 둘러보기</a>
-            </div>
-        </section>
+    <main id="main-content">
+        <!-- 홈 페이지 -->
+        <div id="home-page" class="page">
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>안녕하세요, 개발자 Nodove입니다</h1>
+                    <p>풀스택 개발과 기술 블로그를 통해 지식을 공유합니다</p>
+                    <a href="/posts" class="cta-button" data-route="posts">블로그 둘러보기</a>
+                </div>
+            </section>
 
-        <section id="posts" class="posts-section">
+            <section class="recent-posts-section">
+                <div class="container">
+                    <h2>최근 포스트</h2>
+                    <div class="posts-grid" id="recent-posts-grid">
+                        <!-- 최근 포스트가 여기에 표시됩니다 -->
+                    </div>
+                    <div class="view-all-posts">
+                        <a href="/posts" class="btn-outline" data-route="posts">모든 포스트 보기</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- 포스트 리스트 페이지 -->
+        <div id="posts-page" class="page" style="display: none;">
             <div class="container">
-                <h2>최근 포스트</h2>
-                <div class="posts-grid" id="posts-grid">
-                    <!-- 포스트들이 JavaScript로 동적으로 추가됩니다 -->
+                <div class="page-header">
+                    <h1>모든 포스트</h1>
+                    <div class="filters">
+                        <select id="category-filter" class="filter-select">
+                            <option value="">모든 카테고리</option>
+                        </select>
+                        <div id="tags-filter" class="tags-filter">
+                            <!-- 태그 버튼들이 여기에 표시됩니다 -->
+                        </div>
+                    </div>
+                </div>
+                <div class="posts-grid" id="all-posts-grid">
+                    <!-- 모든 포스트가 여기에 표시됩니다 -->
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section id="projects" class="projects-section">
+        <!-- 포스트 상세 페이지 -->
+        <div id="post-detail-page" class="page" style="display: none;">
             <div class="container">
-                <h2>프로젝트</h2>
+                <article class="post-detail">
+                    <div class="post-header">
+                        <h1 id="post-title"></h1>
+                        <div class="post-meta">
+                            <span id="post-date"></span>
+                            <span id="post-category"></span>
+                            <span id="post-read-time"></span>
+                        </div>
+                        <div class="post-tags" id="post-tags"></div>
+                    </div>
+                    <div class="post-content" id="post-content">
+                        <!-- 마크다운 콘텐츠가 여기에 렌더링됩니다 -->
+                    </div>
+                    <div class="post-navigation">
+                        <a href="/posts" class="btn-outline" data-route="posts">← 포스트 목록으로</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <!-- 프로젝트 페이지 -->
+        <div id="projects-page" class="page" style="display: none;">
+            <div class="container">
+                <h1>프로젝트</h1>
                 <div class="projects-grid" id="projects-grid">
-                    <!-- 프로젝트들이 JavaScript로 동적으로 추가됩니다 -->
+                    <!-- 프로젝트들이 여기에 표시됩니다 -->
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section id="about" class="about-section">
+        <!-- About 페이지 -->
+        <div id="about-page" class="page" style="display: none;">
             <div class="container">
-                <h2>About Me</h2>
+                <h1>About Me</h1>
                 <div class="about-content">
                     <img src="assets/media/avatar.jpg" alt="Profile" class="profile-img">
                     <div class="about-text">
-                        <p>안녕하세요! 저는 풀스택 개발자 최시모입니다.</p>
+                        <p>안녕하세요! 저는 풀스택 개발자 Nodove입니다.</p>
                         <p>웹 개발, 모바일 앱 개발, 그리고 다양한 기술에 관심이 많습니다.</p>
+                        <p>이 블로그를 통해 개발 경험과 학습한 내용을 공유하고 있습니다.</p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section id="contact" class="contact-section">
+        <!-- Contact 페이지 -->
+        <div id="contact-page" class="page" style="display: none;">
             <div class="container">
-                <h2>Contact</h2>
+                <h1>Contact</h1>
                 <div class="contact-info">
                     <p>📧 이메일로 연락주세요</p>
                     <p>💼 LinkedIn에서 연결하세요</p>
                     <p>📱 GitHub에서 코드를 확인하세요</p>
                 </div>
             </div>
-        </section>
+        </div>
+
     </main>
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Choisimo. All rights reserved.</p>
+            <p>&copy; 2025 Nodove. All rights reserved.</p>
         </div>
     </footer>
 
+    <script src="scripts/markdown-parser.js"></script>
+    <script src="scripts/router.js"></script>
     <script src="scripts/main.js"></script>
     <script src="scripts/theme.js"></script>
 </body>
