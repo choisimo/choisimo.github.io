@@ -6,9 +6,19 @@ document.addEventListener('DOMContentLoaded', async function() {
         // Show loading indicator
         showLoadingIndicator();
         
+        // 마크다운 파서가 로드될 때까지 대기
+        await waitForMarkdownParser();
+        
         // Initialize markdown parser and load posts
+        console.log('Starting to load posts...');
         await window.markdownParser.loadPosts();
-        console.log('Posts loaded successfully');
+        console.log('Posts loaded successfully, count:', window.markdownParser.posts.length);
+        
+        // 라우터 초기화는 포스트 로딩 후에 실행
+        console.log('Initializing router...');
+        if (!window.router) {
+            window.router = new Router();
+        }
         
         // Setup search functionality
         setupSearch();
@@ -36,9 +46,30 @@ document.addEventListener('DOMContentLoaded', async function() {
     } catch (error) {
         console.error('Failed to initialize blog:', error);
         hideLoadingIndicator();
-        showErrorMessage('블로그를 로드하는 중 오류가 발생했습니다.');
+        showErrorMessage('블로그를 로드하는 중 오류가 발생했습니다. 브라우저 콘솔을 확인해주세요.');
     }
 });
+
+// 마크다운 파서가 로드될 때까지 대기하는 함수
+async function waitForMarkdownParser() {
+    console.log('Waiting for markdown parser...');
+    
+    let attempts = 0;
+    const maxAttempts = 50; // 5초 대기
+    
+    while (!window.markdownParser && attempts < maxAttempts) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+        attempts++;
+    }
+    
+    if (!window.markdownParser) {
+        console.error('Markdown parser not found, creating emergency instance');
+        // 응급 상황: 마크다운 파서가 로드되지 않은 경우
+        throw new Error('Markdown parser failed to load');
+    }
+    
+    console.log('Markdown parser found successfully');
+}
 
 // Loading indicator functions
 function showLoadingIndicator() {

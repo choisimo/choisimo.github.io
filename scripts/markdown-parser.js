@@ -7,12 +7,26 @@ class MarkdownParser {
         this.isLoaded = false;
         this.loadingPromise = null;
         this.metadata = null;
+        this.debugMode = true; // 디버깅 모드 활성화
+    }
+
+    log(message, ...args) {
+        if (this.debugMode) {
+            console.log(`[MarkdownParser] ${message}`, ...args);
+        }
+    }
+
+    error(message, ...args) {
+        console.error(`[MarkdownParser] ${message}`, ...args);
     }
 
     // GitHub Pages용 정적 JSON에서 포스트 로드
     async loadPosts() {
+        this.log('loadPosts() called');
+        
         // Prevent multiple simultaneous loads
         if (this.loadingPromise) {
+            this.log('Already loading, returning existing promise');
             return this.loadingPromise;
         }
 
@@ -21,34 +35,50 @@ class MarkdownParser {
     }
 
     async _loadPostsInternal() {
+        this.log('Starting _loadPostsInternal');
+        
         try {
-            console.log('Loading posts from static JSON data...');
+            this.log('Initializing data structures');
             this.posts = [];
             this.categories.clear();
             this.tags.clear();
             
-            // 메타데이터 로드
-            await this.loadMetadata();
+            // 일단 샘플 데이터를 먼저 로드해서 기본 기능 확인
+            this.log('Loading sample posts first as fallback');
+            await this.loadSamplePosts();
             
-            // 메인 포스트 JSON 파일에서 로드
-            const posts = await this.loadFromStaticJSON();
-            
-            if (posts && posts.length > 0) {
-                this.processPosts(posts);
-                console.log(`Successfully loaded ${this.posts.length} posts from static JSON`);
-            } else {
-                console.warn('No posts found in static JSON, using sample data');
-                await this.loadSamplePosts();
+            // 그 다음 실제 JSON 데이터 시도
+            try {
+                this.log('Attempting to load real JSON data');
+                const posts = await this.loadFromStaticJSON();
+                
+                if (posts && posts.length > 0) {
+                    this.log(`Found ${posts.length} posts in JSON, replacing sample data`);
+                    // 샘플 데이터를 지우고 실제 데이터로 대체
+                    this.posts = [];
+                    this.categories.clear();
+                    this.tags.clear();
+                    this.processPosts(posts);
+                }
+            } catch (jsonError) {
+                this.error('Failed to load JSON data, keeping sample data:', jsonError);
             }
 
+            this.log(`Final result: ${this.posts.length} posts loaded`);
             this.isLoaded = true;
             this.loadingPromise = null;
             return this.posts;
             
         } catch (error) {
-            console.error('Error loading posts from static JSON:', error);
+            this.error('Critical error in _loadPostsInternal:', error);
             this.loadingPromise = null;
-            await this.loadSamplePosts();
+            
+            // 최후의 수단으로 하드코딩된 샘플 로드
+            if (this.posts.length === 0) {
+                this.log('Loading emergency fallback data');
+                await this.loadEmergencyData();
+            }
+            
             return this.posts;
         }
     }
@@ -56,34 +86,45 @@ class MarkdownParser {
     // 메타데이터 로드
     async loadMetadata() {
         try {
+            this.log('Attempting to load metadata');
             const response = await fetch('/data/metadata.json');
             if (response.ok) {
                 this.metadata = await response.json();
-                console.log('Metadata loaded:', this.metadata);
+                this.log('Metadata loaded successfully:', this.metadata);
+            } else {
+                this.log('Metadata response not ok:', response.status);
             }
         } catch (error) {
-            console.warn('Could not load metadata:', error.message);
+            this.log('Could not load metadata:', error.message);
         }
     }
 
     // 정적 JSON에서 포스트 로드
     async loadFromStaticJSON() {
+        this.log('Starting loadFromStaticJSON');
+        
         try {
-            // 메인 포스트 파일 시도
+            this.log('Attempting to fetch /data/posts.json');
             const response = await fetch('/data/posts.json');
+            
+            this.log('Response status:', response.status, response.statusText);
+            
             if (!response.ok) {
-                throw new Error(`Failed to load posts.json: ${response.status}`);
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
             }
             
             const posts = await response.json();
+            this.log('JSON parsed successfully, posts count:', posts.length);
+            
             if (!Array.isArray(posts)) {
-                throw new Error('Invalid posts data format');
+                throw new Error('Posts data is not an array');
             }
             
             return posts;
             
         } catch (error) {
-            console.error('Error loading main posts JSON:', error);
+            this.error('Error loading main posts JSON:', error);
+            this.log('Trying yearly JSON files as fallback');
             
             // 연도별 파일들을 시도
             return await this.loadFromYearlyJSON();
@@ -98,30 +139,36 @@ class MarkdownParser {
             
             for (const year of years) {
                 try {
+                    this.log(`Attempting to load posts for ${year}`);
                     const response = await fetch(`/data/posts_${year}.json`);
                     if (response.ok) {
                         const yearPosts = await response.json();
                         if (Array.isArray(yearPosts)) {
                             allPosts.push(...yearPosts);
-                            console.log(`Loaded ${yearPosts.length} posts from ${year}`);
+                            this.log(`Loaded ${yearPosts.length} posts from ${year}`);
                         }
+                    } else {
+                        this.log(`Failed to load ${year}:`, response.status);
                     }
                 } catch (error) {
-                    console.warn(`Could not load posts for ${year}:`, error.message);
+                    this.log(`Error loading posts for ${year}:`, error.message);
                 }
             }
             
+            this.log(`Total posts from yearly files: ${allPosts.length}`);
             return allPosts;
             
         } catch (error) {
-            console.error('Error loading yearly JSON files:', error);
+            this.error('Error loading yearly JSON files:', error);
             return [];
         }
     }
 
     // 포스트 데이터 처리
     processPosts(postsData) {
-        postsData.forEach(postData => {
+        this.log(`Processing ${postsData.length} posts`);
+        
+        postsData.forEach((postData, index) => {
             try {
                 // 데이터 구조 정규화
                 const post = {
@@ -152,7 +199,7 @@ class MarkdownParser {
                 this.posts.push(post);
                 
             } catch (error) {
-                console.warn('Error processing post:', postData.title || 'Unknown', error);
+                this.error(`Error processing post ${index}:`, postData.title || 'Unknown', error);
             }
         });
 
@@ -162,6 +209,8 @@ class MarkdownParser {
             const dateB = new Date(b.frontmatter.date || '1970-01-01');
             return dateB - dateA;
         });
+        
+        this.log(`Successfully processed ${this.posts.length} posts`);
     }
 
     // 샘플 포스트 로드 (fallback용)
@@ -481,6 +530,255 @@ LIFO(Last In First Out)와 FIFO(First In First Out) 개념을 이해해야 합�
         this.isLoaded = false;
         this.loadingPromise = null;
         return this.loadPosts();
+    }
+
+    // 응급 fallback 데이터 (절대 실패하지 않음)
+    async loadEmergencyData() {
+        this.log('Loading emergency fallback data');
+        
+        const emergencyPosts = [
+            {
+                id: 'emergency-post-1',
+                slug: 'emergency-post-1',
+                frontmatter: {
+                    title: '블로그 시스템 테스트 포스트',
+                    date: '2025-01-01',
+                    author: 'nodove',
+                    categories: ['System'],
+                    tags: ['Test', 'Emergency'],
+                    excerpt: '이 포스트는 블로그 시스템이 정상 작동하는지 확인하기 위한 테스트 포스트입니다.',
+                    readTime: '1분'
+                },
+                content: `# 블로그 시스템 테스트
+
+이 포스트는 응급 fallback 데이터입니다. 
+
+만약 이 포스트가 보인다면:
+- JSON 데이터 로딩에 실패했거나
+- 서버 연결에 문제가 있을 수 있습니다.
+
+## 문제 해결 방법
+
+1. 브라우저 개발자 도구의 콘솔을 확인하세요
+2. 네트워크 탭에서 실패한 요청을 확인하세요
+3. \`/data/posts.json\` 파일이 접근 가능한지 확인하세요
+
+정상적인 포스트들이 로드되면 이 메시지는 사라집니다.`,
+                url: '/post/emergency-post-1',
+                year: 2025
+            }
+        ];
+
+        emergencyPosts.forEach(post => {
+            if (post.frontmatter.categories) {
+                post.frontmatter.categories.forEach(cat => this.categories.add(cat));
+            }
+            if (post.frontmatter.tags) {
+                post.frontmatter.tags.forEach(tag => this.tags.add(tag));
+            }
+            this.posts.push(post);
+        });
+
+        this.log(`Loaded ${emergencyPosts.length} emergency posts`);
+    }
+
+    // 샘플 포스트 로드 (fallback용)
+    async loadSamplePosts() {
+        this.log('Loading sample posts as fallback');
+        
+        const samplePosts = [
+            {
+                id: 'react-nextjs-modern-web-development',
+                slug: 'react-nextjs-modern-web-development',
+                frontmatter: {
+                    title: 'React와 Next.js로 모던 웹 개발하기',
+                    date: '2025-01-20',
+                    author: 'nodove',
+                    categories: ['Web Development'],
+                    tags: ['React', 'Next.js', 'JavaScript', 'Frontend'],
+                    excerpt: '최신 React 기능과 Next.js의 장점을 활용한 웹 개발 방법론을 소개합니다.',
+                    readTime: '5분'
+                },
+                content: `# React와 Next.js로 모던 웹 개발하기
+
+## 소개
+
+React와 Next.js는 현대 웹 개발에서 가장 인기 있는 기술 스택 중 하나입니다. 이 글에서는 두 기술의 장점과 실제 프로젝트에서의 활용 방법을 알아보겠습니다.
+
+## React의 핵심 기능
+
+### 1. Hooks
+React Hooks는 함수형 컴포넌트에서 상태 관리와 생명주기를 다룰 수 있게 해줍니다.
+
+\`\`\`javascript
+import { useState, useEffect } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+  
+  useEffect(() => {
+    document.title = \`Count: \${count}\`;
+  }, [count]);
+  
+  return (
+    <div>
+      <p>현재 카운트: {count}</p>
+      <button onClick={() => setCount(count + 1)}>
+        증가
+      </button>
+    </div>
+  );
+}
+\`\`\`
+
+### 2. 컴포넌트 재사용성
+React의 컴포넌트 기반 아키텍처는 코드의 재사용성을 크게 향상시킵니다.
+
+## Next.js의 장점
+
+### 1. 서버 사이드 렌더링 (SSR)
+Next.js는 기본적으로 SSR을 지원하여 SEO와 초기 로딩 성능을 개선합니다.
+
+### 2. 파일 기반 라우팅
+폴더 구조를 통해 자동으로 라우팅이 설정되어 개발 편의성이 높습니다.
+
+## 실제 프로젝트 적용
+
+실제 프로젝트에서 React와 Next.js를 함께 사용하면:
+- 빠른 개발 속도
+- 우수한 성능
+- SEO 최적화
+- 확장 가능한 구조
+
+를 얻을 수 있습니다.
+
+## 결론
+
+React와 Next.js는 모던 웹 개발의 표준이 되었습니다. 두 기술을 잘 활용하면 사용자 경험과 개발자 경험 모두를 향상시킬 수 있습니다.`,
+                url: '/post/react-nextjs-modern-web-development',
+                year: 2025
+            },
+            {
+                id: 'python-ai-chatbot-development',
+                slug: 'python-ai-chatbot-development',
+                frontmatter: {
+                    title: 'Python으로 AI 챗봇 만들기',
+                    date: '2025-01-15',
+                    author: 'nodove',
+                    categories: ['AI/ML'],
+                    tags: ['Python', 'AI', 'Chatbot', 'OpenAI'],
+                    excerpt: 'OpenAI API를 활용하여 실용적인 AI 챗봇을 구현하는 과정을 단계별로 설명합니다.',
+                    readTime: '8분'
+                },
+                content: `# Python으로 AI 챗봇 만들기
+
+## 개요
+
+이 튜토리얼에서는 Python과 OpenAI API를 사용하여 간단하지만 효과적인 AI 챗봇을 만드는 방법을 알아보겠습니다.
+
+## 필요한 라이브러리 설치
+
+\`\`\`bash
+pip install openai
+pip install python-dotenv
+pip install flask
+\`\`\`
+
+## 기본 챗봇 구현
+
+### 1. 환경 설정
+
+\`\`\`python
+import openai
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+openai.api_key = os.getenv('OPENAI_API_KEY')
+\`\`\`
+
+### 2. 기본 대화 기능
+
+\`\`\`python
+def chat_with_ai(message, conversation_history=[]):
+    conversation_history.append({"role": "user", "content": message})
+    
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=conversation_history,
+        max_tokens=500,
+        temperature=0.7
+    )
+    
+    ai_response = response.choices[0].message.content
+    conversation_history.append({"role": "assistant", "content": ai_response})
+    
+    return ai_response, conversation_history
+\`\`\`
+
+## 결론
+
+Python과 OpenAI API를 활용하면 강력한 AI 챗봇을 쉽게 구현할 수 있습니다.`,
+                url: '/post/python-ai-chatbot-development',
+                year: 2025
+            },
+            {
+                id: 'algorithm-fundamentals',
+                slug: 'algorithm-fundamentals',
+                frontmatter: {
+                    title: '알고리즘 기초와 코딩 테스트 준비',
+                    date: '2024-12-20',
+                    author: 'nodove',
+                    categories: ['Algorithm'],
+                    tags: ['Algorithm', 'Coding Test', 'Data Structure'],
+                    excerpt: '코딩 테스트와 알고리즘 문제 해결을 위한 기본 개념과 접근 방법을 설명합니다.',
+                    readTime: '10분'
+                },
+                content: `# 알고리즘 기초와 코딩 테스트 준비
+
+## 기본 자료구조
+
+### 배열과 리스트
+배열과 리스트는 가장 기본적인 자료구조입니다.
+
+### 스택과 큐
+LIFO(Last In First Out)와 FIFO(First In First Out) 개념을 이해해야 합니다.
+
+## 정렬 알고리즘
+
+### 버블 정렬
+가장 간단하지만 비효율적인 정렬 방법입니다.
+
+### 퀵 정렬
+분할 정복을 이용한 효율적인 정렬 알고리즘입니다.
+
+## 검색 알고리즘
+
+### 이진 검색
+정렬된 배열에서 효율적으로 원소를 찾는 방법입니다.
+
+## 결론
+
+꾸준한 연습과 체계적인 학습이 알고리즘 실력 향상의 핵심입니다.`,
+                url: '/post/algorithm-fundamentals',
+                year: 2024
+            }
+        ];
+
+        // Process sample posts
+        samplePosts.forEach(post => {
+            // Add to categories and tags
+            if (post.frontmatter.categories) {
+                post.frontmatter.categories.forEach(cat => this.categories.add(cat));
+            }
+            if (post.frontmatter.tags) {
+                post.frontmatter.tags.forEach(tag => this.tags.add(tag));
+            }
+            
+            this.posts.push(post);
+        });
+
+        this.log(`Loaded ${samplePosts.length} sample posts`);
     }
 }
 

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .debug { background: #f0f0f0; padding: 10px; margin: 10px 0; border-left: 4px solid #007acc; }
+        .error { background: #ffebee; border-left-color: #f44336; }
+        .success { background: #e8f5e8; border-left-color: #4caf50; }
+        .post { background: white; border: 1px solid #ddd; margin: 10px 0; padding: 15px; }
+    </style>
+</head>
+<body>
+    <h1>nodove 블로그 디버그 테스트</h1>
+    
+    <div id="debug-log"></div>
+    
+    <h2>로드된 포스트들</h2>
+    <div id="posts-container"></div>
+    
+    <script>
+        // 디버그 로그 함수
+        function debugLog(message, type = 'debug') {
+            const log = document.getElementById('debug-log');
+            const div = document.createElement('div');
+            div.className = `debug ${type}`;
+            div.innerHTML = `<strong>${new Date().toLocaleTimeString()}</strong>: ${message}`;
+            log.appendChild(div);
+            console.log(`[${type.toUpperCase()}] ${message}`);
+        }
+
+        debugLog('페이지 로드 시작');
+        
+        // 마크다운 파서를 직접 만들어서 테스트
+        class TestMarkdownParser {
+            constructor() {
+                this.posts = [];
+                this.debugMode = true;
+            }
+
+            log(message) {
+                debugLog(`[Parser] ${message}`);
+            }
+
+            async loadSamplePosts() {
+                this.log('샘플 포스트 로딩 시작');
+                
+                const samplePosts = [
+                    {
+                        id: 'test-post-1',
+                        slug: 'test-post-1',
+                        frontmatter: {
+                            title: '테스트 포스트 1',
+                            date: '2025-01-01',
+                            author: 'nodove',
+                            categories: ['Test'],
+                            tags: ['Debug', 'Test'],
+                            excerpt: '이것은 테스트 포스트입니다.',
+                            readTime: '1분'
+                        },
+                        content: '# 테스트 포스트\n\n이것은 테스트용 포스트입니다.',
+                        url: '/post/test-post-1',
+                        year: 2025
+                    },
+                    {
+                        id: 'test-post-2',
+                        slug: 'test-post-2',
+                        frontmatter: {
+                            title: '테스트 포스트 2',
+                            date: '2024-12-31',
+                            author: 'nodove',
+                            categories: ['Test'],
+                            tags: ['Debug', 'Test'],
+                            excerpt: '이것은 두 번째 테스트 포스트입니다.',
+                            readTime: '2분'
+                        },
+                        content: '# 두 번째 테스트 포스트\n\n이것도 테스트용 포스트입니다.',
+                        url: '/post/test-post-2',
+                        year: 2024
+                    }
+                ];
+
+                this.posts = samplePosts;
+                this.log(`${this.posts.length}개 샘플 포스트 로딩 완료`);
+                return this.posts;
+            }
+
+            async loadPosts() {
+                this.log('포스트 로딩 시작');
+                
+                try {
+                    // JSON 파일 로딩 시도
+                    const response = await fetch('/data/posts.json');
+                    this.log(`JSON 응답 상태: ${response.status} ${response.statusText}`);
+                    
+                    if (response.ok) {
+                        const posts = await response.json();
+                        this.log(`JSON에서 ${posts.length}개 포스트 발견`);
+                        this.posts = posts;
+                        return this.posts;
+                    } else {
+                        throw new Error(`HTTP ${response.status}`);
+                    }
+                } catch (error) {
+                    this.log(`JSON 로딩 실패: ${error.message}`);
+                    this.log('샘플 데이터로 fallback');
+                    return await this.loadSamplePosts();
+                }
+            }
+
+            renderPosts() {
+                const container = document.getElementById('posts-container');
+                container.innerHTML = '';
+                
+                if (this.posts.length === 0) {
+                    container.innerHTML = '<p>포스트가 없습니다.</p>';
+                    return;
+                }
+
+                this.posts.forEach(post => {
+                    const postElement = document.createElement('div');
+                    postElement.className = 'post';
+                    postElement.innerHTML = `
+                        <h3>${post.frontmatter?.title || post.title || '제목 없음'}</h3>
+                        <p><strong>날짜:</strong> ${post.frontmatter?.date || post.date || '날짜 없음'}</p>
+                        <p><strong>작성자:</strong> ${post.frontmatter?.author || post.author || '작성자 없음'}</p>
+                        <p><strong>요약:</strong> ${post.frontmatter?.excerpt || post.excerpt || '요약 없음'}</p>
+                        <p><strong>태그:</strong> ${(post.frontmatter?.tags || post.tags || []).join(', ') || '태그 없음'}</p>
+                    `;
+                    container.appendChild(postElement);
+                });
+                
+                this.log(`${this.posts.length}개 포스트 렌더링 완료`);
+            }
+        }
+
+        // 테스트 실행
+        async function runTest() {
+            try {
+                debugLog('테스트 시작', 'debug');
+                
+                const parser = new TestMarkdownParser();
+                await parser.loadPosts();
+                
+                debugLog(`총 ${parser.posts.length}개 포스트 로드됨`, 'success');
+                
+                parser.renderPosts();
+                
+            } catch (error) {
+                debugLog(`테스트 실패: ${error.message}`, 'error');
+                console.error('Test error:', error);
+            }
+        }
+
+        // 페이지 로드 완료 후 테스트 실행
+        document.addEventListener('DOMContentLoaded', runTest);
+    </script>
+</body>
+</html>

@@ -165,20 +165,40 @@ class Router {
     }
 
     loadHomePage() {
+        console.log('[Router] Loading home page...');
+        
+        // 마크다운 파서와 포스트가 로드되었는지 확인
+        if (!window.markdownParser) {
+            console.error('[Router] Markdown parser not available');
+            const container = document.getElementById('recent-posts-grid');
+            container.innerHTML = '<p class="no-posts">포스트를 로딩 중입니다...</p>';
+            return;
+        }
+        
         // Load recent posts for home page
         const posts = window.markdownParser.getRecentPosts(6);
+        console.log(`[Router] Found ${posts.length} recent posts`);
+        
         const container = document.getElementById('recent-posts-grid');
         container.innerHTML = '';
         
         if (posts.length === 0) {
-            container.innerHTML = '<p class="no-posts">아직 포스트가 없습니다.</p>';
+            console.log('[Router] No posts available, showing message');
+            container.innerHTML = '<p class="no-posts">아직 포스트가 없습니다. 브라우저 콘솔을 확인해주세요.</p>';
             return;
         }
         
-        posts.forEach(post => {
-            const postCard = this.createPostCard(post);
-            container.appendChild(postCard);
+        posts.forEach((post, index) => {
+            console.log(`[Router] Creating card for post ${index + 1}: ${post.frontmatter?.title || post.title || 'Unknown'}`);
+            try {
+                const postCard = this.createPostCard(post);
+                container.appendChild(postCard);
+            } catch (error) {
+                console.error(`[Router] Error creating post card for post ${index}:`, error);
+            }
         });
+        
+        console.log('[Router] Home page loaded successfully');
     }
 
     loadPostsPage() {
@@ -341,29 +361,61 @@ class Router {
     }
 
     createPostCard(post) {
-        const card = document.createElement('div');
-        card.className = 'post-card animate-on-scroll';
-        card.innerHTML = `
-            <div class="post-meta">
-                <span class="post-date">${window.markdownParser.formatDate(post.frontmatter.date)}</span>
-                <span class="post-separator">•</span>
-                <span class="post-read-time">${post.frontmatter.readTime}</span>
-                <span class="post-separator">•</span>
-                <span class="post-category">${post.frontmatter.category}</span>
-            </div>
-            <h3 class="post-title">${post.frontmatter.title}</h3>
-            <p class="post-excerpt">${post.frontmatter.excerpt || ''}</p>
-            <div class="post-tags">
-                ${post.frontmatter.tags && post.frontmatter.tags.length > 0 ? 
-                    post.frontmatter.tags.map(tag => 
-                        `<span class="tag-small" onclick="window.router.navigate('/posts?tag=${encodeURIComponent(tag)}')">${tag}</span>`
-                    ).join('') : 
-                    ''
-                }
-            </div>
-            <a href="/post/${post.slug}" class="read-more" data-route="/post/${post.slug}">더 읽기 →</a>
-        `;
-        return card;
+        console.log('[Router] Creating post card for:', post);
+        
+        try {
+            // 안전한 데이터 접근
+            const frontmatter = post.frontmatter || {};
+            const title = frontmatter.title || post.title || '제목 없음';
+            const date = frontmatter.date || post.date || '날짜 없음';
+            const readTime = frontmatter.readTime || post.readTime || '읽기 시간 없음';
+            const categories = frontmatter.categories || post.categories || [];
+            const category = Array.isArray(categories) && categories.length > 0 ? categories[0] : (frontmatter.category || post.category || '카테고리 없음');
+            const excerpt = frontmatter.excerpt || post.excerpt || '요약이 없습니다.';
+            const tags = frontmatter.tags || post.tags || [];
+            const slug = post.slug || post.id || 'unknown';
+            
+            const card = document.createElement('div');
+            card.className = 'post-card animate-on-scroll';
+            card.innerHTML = `
+                <div class="post-meta">
+                    <span class="post-date">${window.markdownParser ? window.markdownParser.formatDate(date) : date}</span>
+                    <span class="post-separator">•</span>
+                    <span class="post-read-time">${readTime}</span>
+                    <span class="post-separator">•</span>
+                    <span class="post-category">${category}</span>
+                </div>
+                <h3 class="post-title">${title}</h3>
+                <p class="post-excerpt">${excerpt}</p>
+                <div class="post-tags">
+                    ${Array.isArray(tags) && tags.length > 0 ? 
+                        tags.map(tag => 
+                            `<span class="tag-small" onclick="window.router.navigate('/posts?tag=${encodeURIComponent(tag)}')">${tag}</span>`
+                        ).join('') : 
+                        ''
+                    }
+                </div>
+                <a href="/post/${slug}" class="read-more" data-route="/post/${slug}">더 읽기 →</a>
+            `;
+            
+            console.log('[Router] Post card created successfully');
+            return card;
+            
+        } catch (error) {
+            console.error('[Router] Error in createPostCard:', error);
+            
+            // 응급 fallback 카드
+            const card = document.createElement('div');
+            card.className = 'post-card animate-on-scroll';
+            card.innerHTML = `
+                <div class="post-meta">
+                    <span class="post-date">날짜 오류</span>
+                </div>
+                <h3 class="post-title">포스트 로딩 오류</h3>
+                <p class="post-excerpt">이 포스트를 로드하는 중 오류가 발생했습니다.</p>
+            `;
+            return card;
+        }
     }
 
     createProjectCard(project) {
@@ -481,4 +533,5 @@ class Router {
 }
 
 // Global router instance
-window.router = new Router();
+// Router class definition
+// 인스턴스는 main.js에서 초기화됩니다
